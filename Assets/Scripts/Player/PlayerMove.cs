@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class PlayerMove
@@ -10,10 +8,8 @@ public class PlayerMove
 
     private CharacterController _controller = default;
     private Transform _trans = default;
-
     private Vector3 _moveDir = Vector3.zero;
-    private float _hol = 0f;
-    private float _ver = 0f;
+    private readonly float _gravity = 20f;
 
     public void Init(CharacterController con, Transform trans)
     {
@@ -23,29 +19,26 @@ public class PlayerMove
 
     public void Update()
     {
-        _hol = Input.GetAxisRaw("Horizontal");
-        _ver = Input.GetAxisRaw("Vertical");
+        float hol = Input.GetAxisRaw("Horizontal");
+        float ver = Input.GetAxisRaw("Vertical");
 
-        //接地判定
+        //接地中なら
         if (_controller.isGrounded)
         {
-            _moveDir.z = _ver * _moveSpeed;
+            //移動の入力
+            _moveDir = new Vector3(hol, 0f, ver) * _moveSpeed;
+            _trans.Rotate(0f, hol, 0f);
 
-            _trans.Rotate(0f, _hol * _moveSpeed, 0f);
+            //ローカル座標をワールド座標に変換する
+            _moveDir = _trans.TransformDirection(_moveDir);
 
             if (Input.GetButtonDown("Jump"))
             {
                 _moveDir.y = _jumpPower;
             }
         }
-        _moveDir.y -= 20f * Time.deltaTime;
-
-        Vector3 globaldir = _trans.TransformDirection(_moveDir);
-        _controller.Move(globaldir * Time.deltaTime);
-
-        if (_controller.isGrounded)
-        {
-            _moveDir.y = 0;
-        }
+        //CharacterController.Move()には重力がないため動的にかける
+        _moveDir.y -= _gravity * Time.deltaTime;
+        _controller.Move(_moveDir * Time.deltaTime);
     }
 }

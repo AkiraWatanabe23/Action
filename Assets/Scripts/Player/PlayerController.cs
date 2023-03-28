@@ -5,8 +5,13 @@ public class PlayerController : MonoBehaviour
     [Header("Player Status")]
     [SerializeField] private PlayerMove _movement = new();
     [SerializeField] private PlayerHealth _health = new();
+    [SerializeField] private PlayerAttack _attack = new();
 
     private CharacterController _controller = default;
+
+    public PlayerMove Move { get => _movement; protected set => _movement = value; }
+    public PlayerHealth Health { get => _health; protected set => _health = value; }
+    public PlayerAttack Attack { get => _attack; protected set => _attack = value; }
 
     private void Awake()
     {
@@ -14,6 +19,7 @@ public class PlayerController : MonoBehaviour
 
         _movement.Init(_controller, transform);
         _health.Init();
+        _attack.Init();
     }
 
     private void Update()

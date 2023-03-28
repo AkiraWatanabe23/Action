@@ -1,4 +1,4 @@
 ﻿public interface IDamage
 {
-    public void Damege(int value);
+    public void ReceiveDamege(int value);
 }

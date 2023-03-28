@@ -12,8 +12,13 @@ public class PlayerHealth : IDamage
 
     }
 
-    public void Damege(int value)
+    public void ReceiveDamege(int value)
     {
         _hp -= value;
+
+        if (_hp <= 0)
+        {
+            //‚â‚ç‚ê‚½
+        }
     }
 }
