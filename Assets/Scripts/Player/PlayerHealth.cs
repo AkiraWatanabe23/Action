@@ -9,6 +9,7 @@ public class PlayerHealth : IDamage
 
     private int _maxHp = 100;
 
+    public int HP { get => _hp; set => _hp = value; }
     public int MaxHp { get => _maxHp; protected set => _maxHp = value; }
 
     public void Init()

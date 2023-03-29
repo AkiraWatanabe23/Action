@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Banzan.Lib.Utility;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -25,5 +26,11 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         _movement.Update();
+    }
+
+    [EnumAction(typeof(AttackType))]
+    public void SwitchWeapon(int type)
+    {
+        _attack.SwitchWeapon(type);
     }
 }

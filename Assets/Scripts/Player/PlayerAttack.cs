@@ -4,6 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerAttack
 {
+    [Tooltip("武器の種類")]
     [SerializeField] private AttackType _type = AttackType.Sword;
 
     private Transform _trans = default;
@@ -47,11 +48,11 @@ public class PlayerAttack
         //パラメータの変更
         if (attack == AttackType.Sword)
         {
-
+            _type = AttackType.Sword;
         }
         else if (attack == AttackType.Gun)
         {
-
+            _type = AttackType.Gun;
         }
     }
 
