@@ -14,6 +14,7 @@ public class PlayerAttack
 
     public AttackType Type { get => _type; set => _type = value; }
     public int SkillGauge { get => _skillGauge; set => _skillGauge = value; }
+    public int MaxGauge { get => _maxGauge; protected set => _maxGauge = value; }
 
     public void Init(Transform trans)
     {
