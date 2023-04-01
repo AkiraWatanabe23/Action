@@ -9,6 +9,7 @@ public class PlayerMove
     private CharacterController _controller = default;
     private Transform _trans = default;
     private Vector3 _moveDir = Vector3.zero;
+    private Vector3 _beforeDir = Vector3.zero;
     private readonly float _gravity = 20f;
 
     public void Init(CharacterController con, Transform trans)
@@ -27,10 +28,11 @@ public class PlayerMove
         {
             //移動の入力
             _moveDir = new Vector3(hol, 0f, ver) * _moveSpeed;
+            //_moveDir.z = ver * _moveSpeed;
             _trans.Rotate(0f, hol, 0f);
 
-            //ローカル座標をワールド座標に変換する
-            _moveDir = _trans.TransformDirection(_moveDir);
+            _moveDir = Vector3.Lerp(_beforeDir, _moveDir, _moveSpeed * Time.deltaTime);
+            _beforeDir = _moveDir;
 
             if (Input.GetButtonDown("Jump"))
             {
@@ -39,6 +41,9 @@ public class PlayerMove
         }
         //CharacterController.Move()には重力がないため動的にかける
         _moveDir.y -= _gravity * Time.deltaTime;
-        _controller.Move(_moveDir * Time.deltaTime);
+
+        //ローカル座標をワールド座標に変換する
+        Vector3 dir = _trans.TransformDirection(_moveDir);
+        _controller.Move(dir * Time.deltaTime);
     }
 }
