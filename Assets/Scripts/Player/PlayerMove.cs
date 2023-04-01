@@ -27,9 +27,15 @@ public class PlayerMove
         if (_controller.isGrounded)
         {
             //移動の入力
-            _moveDir = new Vector3(hol, 0f, ver) * _moveSpeed;
-            //_moveDir.z = ver * _moveSpeed;
+            _moveDir.x = hol;
+            _moveDir.z = ver * _moveSpeed;
             _trans.Rotate(0f, hol, 0f);
+
+            if (ver < 0f)
+            {
+                //後ろ方向の入力があった場合
+                _trans.rotation = Quaternion.Euler(0f, 180f, 0f);
+            }
 
             _moveDir = Vector3.Lerp(_beforeDir, _moveDir, _moveSpeed * Time.deltaTime);
             _beforeDir = _moveDir;
