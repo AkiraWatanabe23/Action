@@ -26,6 +26,7 @@ public class PlayerAttack
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            Debug.DrawRay(_trans.position, _trans.forward, Color.green, 10f);
             //攻撃
             if (Physics.Raycast(_trans.position, _trans.forward, out RaycastHit hit))
             {

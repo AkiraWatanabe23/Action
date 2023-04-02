@@ -30,6 +30,9 @@ public class PlayerUI : MonoBehaviour
 
     private void Update()
     {
-        
+        _statusText[0].text
+            = $"{_player.Health.HP} / {_player.Health.MaxHp}";
+        _statusText[1].text
+            = $"{_player.Attack.SkillGauge} / {_player.Attack.MaxGauge}";
     }
 }
