@@ -1,11 +1,11 @@
-﻿using Banzan.Lib.Utility;
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class PlayerAttack
 {
     [Tooltip("武器の種類")]
-    [SerializeField] private AttackType _type = AttackType.Sword;
+    [SerializeField] private WeaponType _weapon = WeaponType.Sword;
+    [SerializeField] private AttackType _attack = AttackType.Normal;
 
     private Transform _trans = default;
     private int _skillGauge = 0;
@@ -13,7 +13,8 @@ public class PlayerAttack
     /// <summary> 攻撃力 </summary>
     private int _attackValue = 10;
 
-    public AttackType Type { get => _type; set => _type = value; }
+    public WeaponType Weapon { get => _weapon; set => _weapon = value; }
+    public AttackType Attack { get => _attack; set => _attack = value; }
     public int SkillGauge { get => _skillGauge; set => _skillGauge = value; }
     public int MaxGauge { get => _maxGauge; protected set => _maxGauge = value; }
 
@@ -41,19 +42,18 @@ public class PlayerAttack
     }
 
     /// <summary> 武器の切り替え </summary>
-    [EnumAction(typeof(AttackType))]
-    public void SwitchWeapon(int type)
+    public void SwitchWeapon()
     {
-        var attack = (AttackType)type;
+        var attack = _weapon;
 
         //パラメータの変更
-        if (attack == AttackType.Sword)
+        if (attack == WeaponType.Sword)
         {
-            _type = AttackType.Sword;
+            _weapon = WeaponType.Gun;
         }
-        else if (attack == AttackType.Gun)
+        else if (attack == WeaponType.Gun)
         {
-            _type = AttackType.Gun;
+            _weapon = WeaponType.Sword;
         }
     }
 
@@ -75,8 +75,16 @@ public class PlayerAttack
     }
 }
 
-public enum AttackType
+/// <summary> 武器の種類 </summary>
+public enum WeaponType
 {
     Sword,
     Gun,
+}
+
+/// <summary> 攻撃の形式(通常か、スキルを使うか) </summary>
+public enum AttackType
+{
+    Normal,
+    Skill,
 }
