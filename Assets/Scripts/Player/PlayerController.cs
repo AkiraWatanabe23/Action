@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         _movement.Update();
+        _attack.Update();
     }
 
     public void SwitchWeapon()

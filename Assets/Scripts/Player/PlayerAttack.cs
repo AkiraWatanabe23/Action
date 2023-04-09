@@ -25,11 +25,11 @@ public class PlayerAttack
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(0))
         {
             Debug.DrawRay(_trans.position, _trans.forward, Color.green, 10f);
-            //攻撃
-            if (Physics.Raycast(_trans.position, _trans.forward, out RaycastHit hit))
+            //攻撃(引数の値は仮)
+            if (Physics.Raycast(_trans.position, _trans.forward, out RaycastHit hit, 20f))
             {
                 if (hit.collider.gameObject.TryGetComponent(out EnemyController enemy))
                 {
@@ -70,7 +70,7 @@ public class PlayerAttack
         }
         else
         {
-            Debug.Log("ゲージが溜まりました");
+            Debug.Log("ゲージは最大です");
         }
     }
 }

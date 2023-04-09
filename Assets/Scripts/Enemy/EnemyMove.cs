@@ -8,14 +8,20 @@ public class EnemyMove
     [SerializeField] private EnemyState _state = EnemyState.Wait;
 
     private NavMeshAgent _agent = default;
+    private float _dist = 1f;
+    private bool _isRunning = false;
 
     public void Init(NavMeshAgent agent)
     {
         _agent = agent;
+
+        _dist = _agent.stoppingDistance;
     }
 
     public void Update()
     {
+        SettingState();
+
         switch (_state)
         {
             case EnemyState.Wait:
@@ -33,14 +39,23 @@ public class EnemyMove
         }
     }
 
+    private void SettingState()
+    {
+        if (_isRunning)
+        {
+            //ステートを実行中だったら何もしない
+            return;
+        }
+    }
+
     private void Wait()
     {
-        //その場で待機
+        //その場で待機(動かずにPlayerを探す)
     }
 
     private void Search()
     {
-        //Playerを探索
+        //Playerを探索(ステージを移動)
     }
 
     private void Chase()
