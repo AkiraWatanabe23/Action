@@ -12,7 +12,7 @@ public class PlayerUI : MonoBehaviour
 
     private void Awake()
     {
-        _player = GameObject.Find("Player").GetComponent<PlayerController>();
+        _player = gameObject.transform.GetComponentInParent<PlayerController>();
     }
 
     private void Start()
