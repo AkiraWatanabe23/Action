@@ -4,18 +4,21 @@ using UnityEngine.AI;
 [System.Serializable]
 public class EnemyMove
 {
+    [SerializeField] private Transform _muzzle = default;
+    [Range(1f, 30f)]
+    [SerializeField] private float _raycastDistance = 1f;
+    [SerializeField] private int _attackValue = 10;
     [SerializeField] private MoveType _type = MoveType.Normal;
     [SerializeField] private EnemyState _state = EnemyState.Wait;
 
     private NavMeshAgent _agent = default;
-    private float _dist = 1f;
+    private float _attackInterval = 5f;
+    private float _attackTimer = 0f;
     private bool _isRunning = false;
 
     public void Init(NavMeshAgent agent)
     {
         _agent = agent;
-
-        _dist = _agent.stoppingDistance;
     }
 
     public void Update()
@@ -46,6 +49,8 @@ public class EnemyMove
             //ステートを実行中だったら何もしない
             return;
         }
+
+
     }
 
     private void Wait()
@@ -61,11 +66,28 @@ public class EnemyMove
     private void Chase()
     {
         //Playerを追従
+
+        //追跡中に一定時間経ったら攻撃
+        _attackTimer += Time.deltaTime;
+        if (_attackTimer > _attackInterval)
+        {
+            _state = EnemyState.Attack;
+            _attackTimer = 0f;
+        }
     }
 
     private void Attack()
     {
         //攻撃
+        if (Physics.Raycast(_muzzle.position, _muzzle.forward, out RaycastHit hit, _raycastDistance))
+        {
+            if (hit.collider.gameObject.TryGetComponent(out PlayerController player))
+            {
+                player.Health.ReceiveDamege(_attackValue);
+            }
+        }
+
+        _isRunning = false;
     }
 }
 
