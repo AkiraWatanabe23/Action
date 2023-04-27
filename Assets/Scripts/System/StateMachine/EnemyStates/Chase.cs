@@ -10,11 +10,17 @@ public class Chase : EnemyStateBase
 
     public override void OnUpdate(Enemy owner)
     {
-        throw new System.NotImplementedException();
+
     }
 
     public override void OnExit(Enemy owner)
     {
         Debug.Log("exit chase state");
+    }
+
+    /// <summary> 移動 </summary>
+    public override void Movement(Enemy owner)
+    {
+
     }
 }
