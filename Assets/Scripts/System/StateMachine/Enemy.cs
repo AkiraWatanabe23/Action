@@ -1,19 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private EnemyStateBase _currentState = default;
+    [SerializeField] private EnemyData _data = default;
+    [SerializeField] private SearchPlayer _search = new();
+    [SerializeField] private Chase _chase = new();
+    [SerializeField] private Attack _attack = new();
+    [SerializeField] private Damage _damage = new();
+    [SerializeField] private Dead _dead = new();
 
-    private readonly SearchPlayer _search = new();
-    private readonly Chase _chase = new();
-    private readonly Attack _attack = new();
-    private readonly Damage _damage = new();
-    private readonly Dead _dead = new();
+    private EnemyStateBase _currentState = default;
+
+    private float _sqrDistance = 0f;
+
+    public EnemyData Data => _data;
+    public float SqrDistance => _sqrDistance;
 
     private void Start()
     {
+        _sqrDistance = _data.SearchDistance * _data.SearchDistance;
+
         _currentState = _search;
         _search.OnStart(this);
     }
@@ -21,13 +27,6 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         _currentState.OnUpdate(this);
-    }
-
-    private void SwitchState(EnemyStates nextState)
-    {
-        _currentState.OnExit(this);
-        _currentState = GetState(nextState);
-        _currentState.OnStart(this);
     }
 
     private EnemyStateBase GetState(EnemyStates state)
@@ -50,7 +49,14 @@ public class Enemy : MonoBehaviour
         return null;
     }
 
-    private enum EnemyStates
+    public void SwitchState(EnemyStates nextState)
+    {
+        _currentState.OnExit(this);
+        _currentState = GetState(nextState);
+        _currentState.OnStart(this);
+    }
+
+    public enum EnemyStates
     {
         Search,
         Chase,
