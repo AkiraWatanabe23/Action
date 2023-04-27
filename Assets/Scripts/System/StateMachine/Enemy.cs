@@ -4,104 +4,55 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private EnemyStates _currentState = EnemyStates.Idle;
+    [SerializeField] private EnemyStateBase _currentState = default;
 
-    private EnemyStates _nextState = EnemyStates.Idle;
-
-    private readonly Idle _idle = new();
-    private readonly Move _move = new();
+    private readonly SearchPlayer _search = new();
+    private readonly Chase _chase = new();
     private readonly Attack _attack = new();
     private readonly Damage _damage = new();
     private readonly Dead _dead = new();
 
     private void Start()
     {
-        _idle.OnStart();
+        _currentState = _search;
+        _search.OnStart(this);
     }
 
     private void Update()
     {
-        //各ステートのUpdate処理
-        switch (_currentState)
-        {
-            case EnemyStates.Idle:
-                _idle.OnUpdate();
-                break;
-            case EnemyStates.Move:
-                _move.OnUpdate();
-                break;
-            case EnemyStates.Chase:
-                break;
-            case EnemyStates.Attack:
-                _attack.OnUpdate();
-                break;
-            case EnemyStates.Damege:
-                _damage.OnUpdate();
-                break;
-            case EnemyStates.Dead:
-                _dead.OnUpdate();
-                break;
-        }
-
-        //ステート切り替え時
-        if (_currentState != _nextState)
-        {
-            //終了処理
-            switch (_currentState)
-            {
-                case EnemyStates.Idle:
-                    _idle.OnExit();
-                    break;
-                case EnemyStates.Move:
-                    _move.OnExit();
-                    break;
-                case EnemyStates.Chase:
-                    break;
-                case EnemyStates.Attack:
-                    _attack.OnExit();
-                    break;
-                case EnemyStates.Damege:
-                    _damage.OnExit();
-                    break;
-                case EnemyStates.Dead:
-                    _dead.OnExit();
-                    break;
-            }
-        }
-
-        //ステートを遷移→遷移先のステートのstart処理
-        _currentState = _nextState;
-        switch (_currentState)
-        {
-            case EnemyStates.Idle:
-                _idle.OnStart();
-                break;
-            case EnemyStates.Move:
-                _move.OnStart();
-                break;
-            case EnemyStates.Chase:
-                break;
-            case EnemyStates.Attack:
-                _attack.OnStart();
-                break;
-            case EnemyStates.Damege:
-                _damage.OnStart();
-                break;
-            case EnemyStates.Dead:
-                _dead.OnStart();
-                break;
-        }
+        _currentState.OnUpdate(this);
     }
 
-    private void SwitchState(EnemyStates state)
+    private void SwitchState(EnemyStates nextState)
     {
-        _nextState = state;
+        _currentState.OnExit(this);
+        _currentState = GetState(nextState);
+        _currentState.OnStart(this);
+    }
+
+    private EnemyStateBase GetState(EnemyStates state)
+    {
+        switch (state)
+        {
+            case EnemyStates.Search:
+                return _search;
+            case EnemyStates.Chase:
+                return _chase;
+            case EnemyStates.Attack:
+                return _attack;
+            case EnemyStates.Damege:
+                return _damage;
+            case EnemyStates.Dead:
+                return _dead;
+        }
+
+        Debug.LogWarning("no state");
+        return null;
     }
 
     private enum EnemyStates
     {
-        Idle,
-        Move,
+        Search,
         Chase,
         Attack,
         Damege,

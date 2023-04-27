@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public abstract class EnemyStateBase : MonoBehaviour
+public abstract class EnemyStateBase
 {
-    public abstract void OnStart();
-    public abstract void OnUpdate();
-    public abstract void OnExit();
+    public abstract void OnStart(Enemy owner);
+    public abstract void OnUpdate(Enemy owner);
+    public abstract void OnExit(Enemy owner);
 }
