@@ -6,7 +6,7 @@ public class UIManager : MonoBehaviour
 {
     private void Awake()
     {
-
+        //参照を取得する
     }
 
     private void Start()
