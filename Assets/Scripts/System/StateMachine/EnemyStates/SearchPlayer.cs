@@ -3,13 +3,19 @@
 [System.Serializable]
 public class SearchPlayer : EnemyStateBase
 {
-    [Tooltip("シーン上のPlayer(アタッチしてください)")]
-    [SerializeField] private GameObject _player = default;
-
     private int _posIndex = 0;
+    private float _stopping = 0f;
+
+    private bool _isSwitch = false;
 
     public override void OnStart(Enemy owner)
     {
+        //最初の目的地を設定
+        _posIndex = SetDestinationIndex(owner);
+        owner.Agent.SetDestination(owner.WanderPos[_posIndex].position);
+
+        _stopping = owner.Agent.stoppingDistance;
+
         Debug.Log("start search state");
     }
 
@@ -24,32 +30,36 @@ public class SearchPlayer : EnemyStateBase
         Debug.Log("exit search state");
     }
 
-    /// <summary> 移動 </summary>
     public override void Movement(Enemy owner)
     {
-        if (Mathf.ReferenceEquals(
-            (owner.gameObject.transform.position - owner.Data.WanderingPos[_posIndex].position).sqrMagnitude, 0))
+        var sqrMag
+            = Vector3.SqrMagnitude(owner.gameObject.transform.position - owner.WanderPos[_posIndex].position);
+
+        if (sqrMag < _stopping * _stopping)
         {
-            //目的地に到着したら次の目的地を設定
-            var index = SetDestination(owner);
+            if (!_isSwitch)
+            {
+                _isSwitch = true;
+                //目的地に到着したら次の目的地を設定
+                _posIndex = SetDestinationIndex(owner);
+                Debug.Log("switch");
+            }
         }
-        else
-        {
-            //到着していなかったら目的地に向かう
-        }
+        owner.Agent.SetDestination(owner.WanderPos[_posIndex].position);
     }
 
     /// <summary> 次の目的地のインデックスを取得 </summary>
-    private int SetDestination(Enemy owner)
+    private int SetDestinationIndex(Enemy owner)
     {
-        int index = Random.Range(0, owner.Data.WanderingPos.Count);
+        int index = Random.Range(0, owner.WanderPos.Count);
 
         if (index == _posIndex)
         {
             //同じ場所を選んだら、選び直し
-            return SetDestination(owner);
+            return SetDestinationIndex(owner);
         }
 
+        _isSwitch = false;
         return index;
     }
 
@@ -57,7 +67,7 @@ public class SearchPlayer : EnemyStateBase
     private void Search(Enemy owner)
     {
         //playerが探索範囲内に入ったら追う
-        var dir = _player.transform.position - owner.gameObject.transform.position;
+        var dir = owner.Player.transform.position - owner.gameObject.transform.position;
         var dist = dir.sqrMagnitude;
 
         //cos(θ/2)
@@ -65,7 +75,7 @@ public class SearchPlayer : EnemyStateBase
 
         //内積を取得する
         var innerProduct
-            = Vector3.Dot(owner.gameObject.transform.forward, _player.transform.position.normalized);
+            = Vector3.Dot(owner.gameObject.transform.forward, owner.Player.transform.position.normalized);
 
         //視界に入っていて、距離が範囲内なら
         if (innerProduct > cosHalf && dist < owner.SqrDistance)

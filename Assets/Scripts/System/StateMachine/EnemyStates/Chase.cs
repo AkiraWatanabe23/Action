@@ -10,7 +10,7 @@ public class Chase : EnemyStateBase
 
     public override void OnUpdate(Enemy owner)
     {
-
+        owner.Agent.SetDestination(owner.Player.transform.position);
     }
 
     public override void OnExit(Enemy owner)
