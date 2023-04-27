@@ -354,7 +354,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Idle
+  m_Text: Search
 --- !u!222 &335745551
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -545,7 +545,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 100
+  m_Spacing: 20
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -786,7 +786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd93746ffbef39746bf7f8a8b0599e82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentState: 0
+  _data: {fileID: 11400000, guid: fef1e2989c510064086ffd3aded5517a, type: 2}
 --- !u!1 &702520945
 GameObject:
   m_ObjectHideFlags: 0
