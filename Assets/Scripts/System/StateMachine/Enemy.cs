@@ -1,13 +1,10 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private EnemyData _data = default;
-    [SerializeField] private WanderingRange _wandering = default;
-    [SerializeField] private GameObject _wanderPosPrefab = default;
     [Tooltip("シーン上のPlayer(アタッチしてください)")]
     [SerializeField] private GameObject _player = default;
 
@@ -17,33 +14,27 @@ public class Enemy : MonoBehaviour
     private readonly Damage _damage = new();
     private readonly Dead _dead = new();
 
+    private WanderingRange _wandering = default;
     private EnemyStateBase _currentState = default;
     private NavMeshAgent _agent = default;
-
-    private List<Transform> _wanderPos = new();
 
     private float _sqrDistance = 0f;
 
     public EnemyData Data => _data;
+    public WanderingRange Wandering => _wandering;
     public GameObject Player => _player;
     public NavMeshAgent Agent => _agent;
-    public List<Transform> WanderPos => _wanderPos;
     public float SqrDistance => _sqrDistance;
 
     private void Start()
     {
+        //初期設定
+        _wandering = GetComponent<WanderingRange>();
         _agent = GetComponent<NavMeshAgent>();
 
         _sqrDistance = _data.SearchDistance * _data.SearchDistance;
 
-        for (int i = 0; i < _data.WanderPosCount; i++)
-        {
-            var pos = Instantiate(_wanderPosPrefab);
-            pos.transform.SetParent(_wandering.gameObject.transform);
-
-            _wanderPos.Add(pos.transform);
-        }
-
+        //初期ステートを設定
         _currentState = _search;
         _search.OnStart(this);
     }

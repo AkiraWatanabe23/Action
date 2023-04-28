@@ -6,13 +6,11 @@ public class SearchPlayer : EnemyStateBase
     private int _posIndex = 0;
     private float _stopping = 0f;
 
-    private bool _isSwitch = false;
-
     public override void OnStart(Enemy owner)
     {
-        //最初の目的地を設定
+        //ステート開始時の目的地を設定
         _posIndex = SetDestinationIndex(owner);
-        owner.Agent.SetDestination(owner.WanderPos[_posIndex].position);
+        owner.Agent.SetDestination(owner.Wandering.WanderingPos[_posIndex].position);
 
         _stopping = owner.Agent.stoppingDistance;
 
@@ -21,8 +19,11 @@ public class SearchPlayer : EnemyStateBase
 
     public override void OnUpdate(Enemy owner)
     {
-        Search(owner);
-        Movement(owner);
+        if (owner.Wandering.IsMove)
+        {
+            Search(owner);
+            Movement(owner);
+        }
     }
 
     public override void OnExit(Enemy owner)
@@ -30,28 +31,25 @@ public class SearchPlayer : EnemyStateBase
         Debug.Log("exit search state");
     }
 
+    /// <summary> 移動 </summary>
     public override void Movement(Enemy owner)
     {
         var sqrMag
-            = Vector3.SqrMagnitude(owner.gameObject.transform.position - owner.WanderPos[_posIndex].position);
+            = Vector3.SqrMagnitude(owner.gameObject.transform.position - owner.Wandering.WanderingPos[_posIndex].position);
 
         if (sqrMag < _stopping * _stopping)
         {
-            if (!_isSwitch)
-            {
-                _isSwitch = true;
-                //目的地に到着したら次の目的地を設定
-                _posIndex = SetDestinationIndex(owner);
-                Debug.Log("switch");
-            }
+            //目的地に到着したら次の目的地を設定
+            _posIndex = SetDestinationIndex(owner);
+            Debug.Log("switch");
         }
-        owner.Agent.SetDestination(owner.WanderPos[_posIndex].position);
+        owner.Agent.SetDestination(owner.Wandering.WanderingPos[_posIndex].position);
     }
 
     /// <summary> 次の目的地のインデックスを取得 </summary>
     private int SetDestinationIndex(Enemy owner)
     {
-        int index = Random.Range(0, owner.WanderPos.Count);
+        int index = Random.Range(0, owner.Wandering.WanderingPos.Length);
 
         if (index == _posIndex)
         {
@@ -59,7 +57,6 @@ public class SearchPlayer : EnemyStateBase
             return SetDestinationIndex(owner);
         }
 
-        _isSwitch = false;
         return index;
     }
 
@@ -77,7 +74,7 @@ public class SearchPlayer : EnemyStateBase
         var innerProduct
             = Vector3.Dot(owner.gameObject.transform.forward, owner.Player.transform.position.normalized);
 
-        //視界に入っていて、距離が範囲内なら
+        //視界に入っていて、距離が範囲内ならPlayerの追跡に切り替わる
         if (innerProduct > cosHalf && dist < owner.SqrDistance)
         {
             Debug.Log("find player");

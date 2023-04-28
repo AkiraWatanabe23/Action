@@ -10,7 +10,10 @@ public class Chase : EnemyStateBase
 
     public override void OnUpdate(Enemy owner)
     {
-        owner.Agent.SetDestination(owner.Player.transform.position);
+        if (owner.Wandering.IsMove)
+        {
+            Movement(owner);
+        }
     }
 
     public override void OnExit(Enemy owner)
@@ -21,6 +24,9 @@ public class Chase : EnemyStateBase
     /// <summary> 移動 </summary>
     public override void Movement(Enemy owner)
     {
+        owner.Agent.SetDestination(owner.Player.transform.position);
 
+        //TODO：Playerとの距離がある程度まで縮まったら攻撃に遷移
+        //                                  離れたらSearchに戻る
     }
 }
