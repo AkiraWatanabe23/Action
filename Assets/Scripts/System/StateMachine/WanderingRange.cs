@@ -15,7 +15,7 @@ public class WanderingRange : MonoBehaviour
     [Header("Debug")]
     [Tooltip("true...円内、false...球内")]
     [SerializeField] private bool _isCircle = false;
-    [Tooltip("移動するか")]
+    [Tooltip("Enemyが徘徊を行うか")]
     [SerializeField] private bool _isMove = false;
 
     private SphereCollider _collider = default;
@@ -27,7 +27,7 @@ public class WanderingRange : MonoBehaviour
     private void Awake()
     {
         _collider = _pos.GetComponent<SphereCollider>();
-        _collider.radius = _radius;
+        _collider.radius = _radius * 2;
         _collider.isTrigger = true;
 
         _wanderingPos = new Transform[_posCount];
