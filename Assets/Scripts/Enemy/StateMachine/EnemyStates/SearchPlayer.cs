@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 [System.Serializable]
 public class SearchPlayer : EnemyStateBase
@@ -8,20 +9,39 @@ public class SearchPlayer : EnemyStateBase
 
     private int _posIndex = 0;
 
+    #region EnemyControllerの参照を避けるための変数
+    private EnemyData _data = default;
+    private NavMeshAgent _agent = default;
+    private WanderingRange _wandering = default;
+    private GameObject _player = default;
+    private GameObject _enemy = default;
+    private float _sqrDistance = 1f;
+    #endregion
+
+    public void Init(EnemyData data, NavMeshAgent agent, WanderingRange wandering, GameObject player, GameObject enemy, float distance)
+    {
+        _data = data;
+        _agent = agent;
+        _wandering = wandering;
+        _player = player;
+        _enemy = enemy;
+        _sqrDistance = distance;
+    }
+
     public override void OnStart(EnemyStateMachine owner)
     {
         //ステート開始時の目的地を設定
         _posIndex = SetDestinationIndex(owner);
-        owner.Agent.SetDestination(owner.Wandering.WanderingPos[_posIndex].position);
+        _agent.SetDestination(_wandering.WanderingPos[_posIndex].position);
 
-        owner.Agent.stoppingDistance = _stopping;
+        _agent.stoppingDistance = _stopping;
 
         Debug.Log("start search state");
     }
 
     public override void OnUpdate(EnemyStateMachine owner)
     {
-        if (owner.Wandering.IsMove)
+        if (_wandering.IsMove)
         {
             Search(owner);
             Movement(owner);
@@ -37,7 +57,7 @@ public class SearchPlayer : EnemyStateBase
     public override void Movement(EnemyStateMachine owner)
     {
         var sqrMag
-            = Vector3.SqrMagnitude(owner.gameObject.transform.position - owner.Wandering.WanderingPos[_posIndex].position);
+            = Vector3.SqrMagnitude(_enemy.transform.position - _wandering.WanderingPos[_posIndex].position);
 
         if (sqrMag < _stopping * _stopping)
         {
@@ -45,13 +65,13 @@ public class SearchPlayer : EnemyStateBase
             _posIndex = SetDestinationIndex(owner);
             Debug.Log("switch");
         }
-        owner.Agent.SetDestination(owner.Wandering.WanderingPos[_posIndex].position);
+        _agent.SetDestination(_wandering.WanderingPos[_posIndex].position);
     }
 
     /// <summary> 次の目的地のインデックスを取得 </summary>
     private int SetDestinationIndex(EnemyStateMachine owner)
     {
-        int index = Random.Range(0, owner.Wandering.WanderingPos.Length);
+        int index = Random.Range(0, _wandering.WanderingPos.Length);
 
         if (index == _posIndex)
         {
@@ -65,18 +85,18 @@ public class SearchPlayer : EnemyStateBase
     /// <summary> Playerを探す </summary>
     private void Search(EnemyStateMachine owner)
     {
-        var dir = owner.Player.transform.position - owner.gameObject.transform.position;
+        var dir = _player.transform.position - _enemy.transform.position;
         var dist = dir.sqrMagnitude;
 
         //cos(θ/2)
-        var cosHalf = Mathf.Cos(owner.Data.SearchAngle / 2 * Mathf.Deg2Rad);
+        var cosHalf = Mathf.Cos(_data.SearchAngle / 2 * Mathf.Deg2Rad);
 
         //内積を取得する
         var innerProduct
-            = Vector3.Dot(owner.gameObject.transform.forward, owner.Player.transform.position.normalized);
+            = Vector3.Dot(_enemy.transform.forward, _player.transform.position.normalized);
 
         //視界に入っていて、距離が範囲内ならPlayerの追跡に切り替わる
-        if (innerProduct > cosHalf && dist < owner.SqrDistance)
+        if (innerProduct > cosHalf && dist < _sqrDistance)
         {
             Debug.Log("find player");
             owner.SwitchState(EnemyStateMachine.EnemyStates.Chase);

@@ -746,11 +746,12 @@ MonoBehaviour:
   _data: {fileID: 11400000, guid: fef1e2989c510064086ffd3aded5517a, type: 2}
   _player: {fileID: 648797506}
   _wandering: {fileID: 1274373024}
-  _search:
-    _stopping: 3
-  _chase:
-    _attackDistance: 1
-    _returnDistance: 1
+  _stateMachine:
+    _search:
+      _stopping: 1
+    _chase:
+      _attackDistance: 1
+      _returnDistance: 1
 --- !u!195 &695658861
 NavMeshAgent:
   m_ObjectHideFlags: 0

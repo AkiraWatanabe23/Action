@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
@@ -27,7 +28,8 @@ public class EnemyController : MonoBehaviour, IDamage
 
         _sqrDistance = _data.SearchDistance * _data.SearchDistance;
 
-        _stateMachine.InitStatus();
+        _stateMachine.InitStatus(
+            _data, _agent, _wandering, _player, gameObject, _sqrDistance);
     }
 
     private void Update()

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 [System.Serializable]
 public class Chase : EnemyStateBase
@@ -10,13 +11,19 @@ public class Chase : EnemyStateBase
     [Range(1f, 10f)]
     [SerializeField] private float _returnDistance = 1f;
 
-    public bool Init(Transform a, Transform b)
+    #region EnemyControllerの参照を避けるための変数
+    private NavMeshAgent _agent = default;
+    private WanderingRange _wandering = default;
+    private GameObject _player = default;
+    private GameObject _enemy = default;
+    #endregion
+
+    public void Init(NavMeshAgent agent, WanderingRange wandering, GameObject player, GameObject enemy)
     {
-        if ((a.position.x - b.position.x) < 0)
-        {
-            return true;
-        }
-        return false;
+        _agent = agent;
+        _wandering = wandering;
+        _player = player;
+        _enemy = enemy;
     }
 
     public override void OnStart(EnemyStateMachine owner)
@@ -26,7 +33,7 @@ public class Chase : EnemyStateBase
 
     public override void OnUpdate(EnemyStateMachine owner)
     {
-        if (owner.Wandering.IsMove)
+        if (_wandering.IsMove)
         {
             Movement(owner);
         }
@@ -40,20 +47,20 @@ public class Chase : EnemyStateBase
     /// <summary> 移動 </summary>
     public override void Movement(EnemyStateMachine owner)
     {
-        owner.Agent.SetDestination(owner.Player.transform.position);
+        _agent.SetDestination(_player.transform.position);
 
         var sqrMag
-            = Vector3.SqrMagnitude(owner.gameObject.transform.position - owner.Player.transform.position);
+            = Vector3.SqrMagnitude(_enemy.transform.position - _player.transform.position);
 
         if (sqrMag < _attackDistance * _attackDistance)
         {
-            //TODO：Playerとの距離がある程度まで縮まったら攻撃に遷移
+            //Playerとの距離がある程度まで縮まったら攻撃に遷移
             owner.SwitchState(EnemyStateMachine.EnemyStates.Attack);
         }
 
         if (sqrMag > _returnDistance * _returnDistance)
         {
-            //TODO：Playerとの距離がある程度まで離れたらSearchに戻る
+            //Playerとの距離がある程度まで離れたらSearchに戻る
             owner.SwitchState(EnemyStateMachine.EnemyStates.Search);
         }
     }
