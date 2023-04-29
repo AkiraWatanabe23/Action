@@ -3,8 +3,10 @@
 [System.Serializable]
 public class SearchPlayer : EnemyStateBase
 {
+    [Tooltip("NavMeshAgent.stoppingDistance")]
+    [SerializeField] private float _stopping = 1f;
+
     private int _posIndex = 0;
-    private float _stopping = 0f;
 
     public override void OnStart(Enemy owner)
     {
@@ -12,7 +14,7 @@ public class SearchPlayer : EnemyStateBase
         _posIndex = SetDestinationIndex(owner);
         owner.Agent.SetDestination(owner.Wandering.WanderingPos[_posIndex].position);
 
-        _stopping = owner.Agent.stoppingDistance;
+        owner.Agent.stoppingDistance = _stopping;
 
         Debug.Log("start search state");
     }
@@ -63,7 +65,6 @@ public class SearchPlayer : EnemyStateBase
     /// <summary> Playerを探す </summary>
     private void Search(Enemy owner)
     {
-        //playerが探索範囲内に入ったら追う
         var dir = owner.Player.transform.position - owner.gameObject.transform.position;
         var dist = dir.sqrMagnitude;
 

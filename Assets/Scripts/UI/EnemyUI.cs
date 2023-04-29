@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary> EnemyのUIを管理する
-///           注意点：EnemyCanvasの設定を「RenderMode...WorldSpace」に変更 </summary>
+/// <summary> EnemyのUIを管理する </summary>
 public class EnemyUI : MonoBehaviour
 {
     [SerializeField] private Slider _hpSlider = default;
@@ -21,21 +20,31 @@ public class EnemyUI : MonoBehaviour
         _enemyCanvas.renderMode = RenderMode.WorldSpace;
     }
 
+    private void OnEnable()
+    {
+        _enemy.Wandering.SetCanvas += CanvasSetting;
+    }
+
+    private void OnDisable()
+    {
+        _enemy.Wandering.SetCanvas -= CanvasSetting;
+    }
+
     private void Start()
     {
         //Sliderの初期設定
         _hpSlider.minValue = 0;
+        //maxValueの設定
     }
 
     private void Update()
     {
-        if (_enemy.Wandering.IsMove)
-        {
-            _enemyCanvas.gameObject.SetActive(true);
-        }
-        else
-        {
-            _enemyCanvas.gameObject.SetActive(false);
-        }
+
+    }
+
+    /// <summary> 徘徊中のみCanvasを表示する </summary>
+    public void CanvasSetting(bool set)
+    {
+        _enemyCanvas.gameObject.SetActive(set);
     }
 }

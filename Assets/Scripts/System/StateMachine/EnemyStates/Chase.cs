@@ -3,6 +3,13 @@
 [System.Serializable]
 public class Chase : EnemyStateBase
 {
+    [Tooltip("Playerに攻撃をする距離")]
+    [Range(1f, 10f)]
+    [SerializeField] private float _attackDistance = 1f;
+    [Tooltip("追跡から徘徊に戻る距離")]
+    [Range(1f, 10f)]
+    [SerializeField] private float _returnDistance = 1f;
+
     public override void OnStart(Enemy owner)
     {
         Debug.Log("start chase state");
@@ -26,7 +33,19 @@ public class Chase : EnemyStateBase
     {
         owner.Agent.SetDestination(owner.Player.transform.position);
 
-        //TODO：Playerとの距離がある程度まで縮まったら攻撃に遷移
-        //                                  離れたらSearchに戻る
+        var sqrMag
+            = Vector3.SqrMagnitude(owner.gameObject.transform.position - owner.Player.transform.position);
+
+        if (sqrMag < _attackDistance * _attackDistance)
+        {
+            //TODO：Playerとの距離がある程度まで縮まったら攻撃に遷移
+            owner.SwitchState(Enemy.EnemyStates.Attack);
+        }
+
+        if (sqrMag > _returnDistance * _returnDistance)
+        {
+            //TODO：Playerとの距離がある程度まで離れたらSearchに戻る
+            owner.SwitchState(Enemy.EnemyStates.Search);
+        }
     }
 }

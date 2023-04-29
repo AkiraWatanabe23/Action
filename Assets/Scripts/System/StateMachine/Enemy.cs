@@ -7,14 +7,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EnemyData _data = default;
     [Tooltip("シーン上のPlayer(アタッチしてください)")]
     [SerializeField] private GameObject _player = default;
+    [SerializeField] private WanderingRange _wandering = default;
 
-    private readonly SearchPlayer _search = new();
-    private readonly Chase _chase = new();
-    private readonly Attack _attack = new();
-    private readonly Damage _damage = new();
-    private readonly Dead _dead = new();
+    [SerializeField] private SearchPlayer _search = new();
+    [SerializeField] private Chase _chase = new();
+    [SerializeField] private Attack _attack = new();
+    [SerializeField] private Damage _damage = new();
+    [SerializeField] private Dead _dead = new();
 
-    private WanderingRange _wandering = default;
     private EnemyStateBase _currentState = default;
     private NavMeshAgent _agent = default;
 
@@ -29,7 +29,6 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         //初期設定
-        _wandering = GetComponent<WanderingRange>();
         _agent = GetComponent<NavMeshAgent>();
 
         _sqrDistance = _data.SearchDistance * _data.SearchDistance;

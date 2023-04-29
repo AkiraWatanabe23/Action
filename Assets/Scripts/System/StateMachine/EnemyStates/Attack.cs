@@ -10,9 +10,10 @@ public class Attack : EnemyStateBase
 
     public override void OnUpdate(Enemy owner)
     {
-        //todo : 攻撃処理
+        //todo：攻撃処理(animation再生、ダメージ処理)
 
-        //animation再生、ダメージ処理
+        //攻撃したら徘徊に戻る
+        owner.SwitchState(Enemy.EnemyStates.Search);
     }
 
     public override void OnExit(Enemy owner)
