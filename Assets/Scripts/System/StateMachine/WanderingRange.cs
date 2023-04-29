@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+/// <summary> 指定した半径の円内のランダムな位置にオブジェクトを生成する </summary>
 public class WanderingRange : MonoBehaviour
 {
     [SerializeField] GameObject _pos = default;
@@ -33,7 +34,7 @@ public class WanderingRange : MonoBehaviour
 
         if (_isCircle)
         {
-            //指定した半径の円内のランダムな位置にオブジェクトを生成する(xz平面)
+            //xz平面(円内)
             for (int i = 0; i < _posCount; i++)
             {
                 var circlePos = _radius * Random.insideUnitCircle;
@@ -46,7 +47,7 @@ public class WanderingRange : MonoBehaviour
         }
         else
         {
-            //3D空間(球内)に生成
+            //3D空間(球内)
             for (int i = 0; i < _posCount; i++)
             {
                 var spawnPos = _radius * Random.insideUnitSphere + transform.position;
