@@ -8,7 +8,7 @@ public class SearchPlayer : EnemyStateBase
 
     private int _posIndex = 0;
 
-    public override void OnStart(Enemy owner)
+    public override void OnStart(EnemyStateMachine owner)
     {
         //ステート開始時の目的地を設定
         _posIndex = SetDestinationIndex(owner);
@@ -19,7 +19,7 @@ public class SearchPlayer : EnemyStateBase
         Debug.Log("start search state");
     }
 
-    public override void OnUpdate(Enemy owner)
+    public override void OnUpdate(EnemyStateMachine owner)
     {
         if (owner.Wandering.IsMove)
         {
@@ -28,13 +28,13 @@ public class SearchPlayer : EnemyStateBase
         }
     }
 
-    public override void OnExit(Enemy owner)
+    public override void OnExit(EnemyStateMachine owner)
     {
         Debug.Log("exit search state");
     }
 
     /// <summary> 移動 </summary>
-    public override void Movement(Enemy owner)
+    public override void Movement(EnemyStateMachine owner)
     {
         var sqrMag
             = Vector3.SqrMagnitude(owner.gameObject.transform.position - owner.Wandering.WanderingPos[_posIndex].position);
@@ -49,7 +49,7 @@ public class SearchPlayer : EnemyStateBase
     }
 
     /// <summary> 次の目的地のインデックスを取得 </summary>
-    private int SetDestinationIndex(Enemy owner)
+    private int SetDestinationIndex(EnemyStateMachine owner)
     {
         int index = Random.Range(0, owner.Wandering.WanderingPos.Length);
 
@@ -63,7 +63,7 @@ public class SearchPlayer : EnemyStateBase
     }
 
     /// <summary> Playerを探す </summary>
-    private void Search(Enemy owner)
+    private void Search(EnemyStateMachine owner)
     {
         var dir = owner.Player.transform.position - owner.gameObject.transform.position;
         var dist = dir.sqrMagnitude;
@@ -79,7 +79,7 @@ public class SearchPlayer : EnemyStateBase
         if (innerProduct > cosHalf && dist < owner.SqrDistance)
         {
             Debug.Log("find player");
-            owner.SwitchState(Enemy.EnemyStates.Chase);
+            owner.SwitchState(EnemyStateMachine.EnemyStates.Chase);
         }
     }
 }

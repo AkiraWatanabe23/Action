@@ -10,12 +10,21 @@ public class Chase : EnemyStateBase
     [Range(1f, 10f)]
     [SerializeField] private float _returnDistance = 1f;
 
-    public override void OnStart(Enemy owner)
+    public bool Init(Transform a, Transform b)
+    {
+        if ((a.position.x - b.position.x) < 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public override void OnStart(EnemyStateMachine owner)
     {
         Debug.Log("start chase state");
     }
 
-    public override void OnUpdate(Enemy owner)
+    public override void OnUpdate(EnemyStateMachine owner)
     {
         if (owner.Wandering.IsMove)
         {
@@ -23,13 +32,13 @@ public class Chase : EnemyStateBase
         }
     }
 
-    public override void OnExit(Enemy owner)
+    public override void OnExit(EnemyStateMachine owner)
     {
         Debug.Log("exit chase state");
     }
 
     /// <summary> 移動 </summary>
-    public override void Movement(Enemy owner)
+    public override void Movement(EnemyStateMachine owner)
     {
         owner.Agent.SetDestination(owner.Player.transform.position);
 
@@ -39,13 +48,13 @@ public class Chase : EnemyStateBase
         if (sqrMag < _attackDistance * _attackDistance)
         {
             //TODO：Playerとの距離がある程度まで縮まったら攻撃に遷移
-            owner.SwitchState(Enemy.EnemyStates.Attack);
+            owner.SwitchState(EnemyStateMachine.EnemyStates.Attack);
         }
 
         if (sqrMag > _returnDistance * _returnDistance)
         {
             //TODO：Playerとの距離がある程度まで離れたらSearchに戻る
-            owner.SwitchState(Enemy.EnemyStates.Search);
+            owner.SwitchState(EnemyStateMachine.EnemyStates.Search);
         }
     }
 }

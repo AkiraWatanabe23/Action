@@ -1,14 +1,9 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
-public class Enemy : MonoBehaviour
+[System.Serializable]
+public class EnemyStateMachine
 {
-    [SerializeField] private EnemyData _data = default;
-    [Tooltip("シーン上のPlayer(アタッチしてください)")]
-    [SerializeField] private GameObject _player = default;
-    [SerializeField] private WanderingRange _wandering = default;
-
+    [Header("State一覧")]
     [SerializeField] private SearchPlayer _search = new();
     [SerializeField] private Chase _chase = new();
     [SerializeField] private Attack _attack = new();
@@ -16,34 +11,21 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Dead _dead = new();
 
     private EnemyStateBase _currentState = default;
-    private NavMeshAgent _agent = default;
 
-    private float _sqrDistance = 0f;
-
-    public EnemyData Data => _data;
-    public WanderingRange Wandering => _wandering;
-    public GameObject Player => _player;
-    public NavMeshAgent Agent => _agent;
-    public float SqrDistance => _sqrDistance;
-
-    private void Start()
+    public void InitStatus()
     {
-        //初期設定
-        _agent = GetComponent<NavMeshAgent>();
-
-        _sqrDistance = _data.SearchDistance * _data.SearchDistance;
-
-        //初期ステートを設定
+        //各値の初期化
+        //初期ステートを設定、実行
         _currentState = _search;
         _search.OnStart(this);
     }
 
-    private void Update()
+    public void Update()
     {
         _currentState.OnUpdate(this);
     }
 
-    private EnemyStateBase GetState(EnemyStates state)
+    public EnemyStateBase GetState(EnemyStates state)
     {
         switch (state)
         {
