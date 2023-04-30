@@ -13,8 +13,6 @@ public class EnemyStateMachine
 
     private EnemyStateBase _currentState = default;
 
-    public Damage Damage => _damage;
-
     public void InitStatus(
         EnemyData data, NavMeshAgent agent, WanderingRange wandering, GameObject player, GameObject enemy, float distance, int hp)
     {

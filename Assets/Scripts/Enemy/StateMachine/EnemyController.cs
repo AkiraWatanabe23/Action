@@ -2,7 +2,7 @@
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IDamage
 {
     [SerializeField] private EnemyData _data = default;
     [Tooltip("シーン上のPlayer(アタッチしてください)")]
@@ -36,5 +36,11 @@ public class EnemyController : MonoBehaviour
     private void Update()
     {
         _stateMachine.Update();
+    }
+
+    public void ReceiveDamege(int value)
+    {
+        _hp -= value;
+        //フラグを立て、ステートを切り替える
     }
 }
