@@ -6,10 +6,10 @@ public class Chase : EnemyStateBase
 {
     [Tooltip("Playerに攻撃をする距離")]
     [Range(1f, 10f)]
-    [SerializeField] private float _attackDistance = 1f;
+    [SerializeField] private float _attackDist = 1f;
     [Tooltip("追跡から徘徊に戻る距離")]
     [Range(1f, 10f)]
-    [SerializeField] private float _returnDistance = 1f;
+    [SerializeField] private float _returnDist = 1f;
 
     #region EnemyControllerの参照を避けるための変数
     private NavMeshAgent _agent = default;
@@ -47,18 +47,20 @@ public class Chase : EnemyStateBase
     /// <summary> 移動 </summary>
     public override void Movement(EnemyStateMachine owner)
     {
+        //TODO：Animation
+
         _agent.SetDestination(_player.transform.position);
 
         var sqrMag
             = Vector3.SqrMagnitude(_enemy.transform.position - _player.transform.position);
 
-        if (sqrMag < _attackDistance * _attackDistance)
+        if (sqrMag < _attackDist * _attackDist)
         {
             //Playerとの距離がある程度まで縮まったら攻撃に遷移
             owner.SwitchState(EnemyStateMachine.EnemyStates.Attack);
         }
 
-        if (sqrMag > _returnDistance * _returnDistance)
+        if (sqrMag > _returnDist * _returnDist)
         {
             //Playerとの距離がある程度まで離れたらSearchに戻る
             owner.SwitchState(EnemyStateMachine.EnemyStates.Search);

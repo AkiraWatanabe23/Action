@@ -4,12 +4,12 @@ using UnityEngine;
 /// <summary> 指定した半径の円内のランダムな位置にオブジェクトを生成する </summary>
 public class WanderingRange : MonoBehaviour
 {
-    [Tooltip("半径")]
+    [Tooltip("生成円の半径")]
     [Range(10f, 40f)]
     [SerializeField] private float _radius = 30f;
     [Tooltip("いくつのposを作るか")]
     [SerializeField] private int _posCount = 10;
-    [Tooltip("徘徊する箇所のプレハブ")]
+    [Tooltip("徘徊する地点のプレハブ")]
     [SerializeField] private GameObject _wanderPrefab = default;
 
     [Header("Debug")]
@@ -18,21 +18,19 @@ public class WanderingRange : MonoBehaviour
     [Tooltip("Enemyが徘徊を行うか")]
     [SerializeField] private bool _isMove = false;
 
-    private SphereCollider _posCollider = default;
     private Transform[] _wanderingPos = default;
 
     public event Action<bool> SetCanvas = default;
 
-    public float Radius => _radius;
     public bool IsMove => _isMove;
     public Transform[] WanderingPos => _wanderingPos;
 
     private void Awake()
     {
-        _posCollider = GetComponent<SphereCollider>();
+        var posCollider = GetComponent<SphereCollider>();
 
-        _posCollider.radius = _radius * 2;
-        _posCollider.isTrigger = true;
+        posCollider.radius = _radius * 2;
+        posCollider.isTrigger = true;
 
         _wanderingPos = new Transform[_posCount];
 
@@ -46,7 +44,7 @@ public class WanderingRange : MonoBehaviour
 
                 var pos = Instantiate(_wanderPrefab, spawnPos, Quaternion.identity);
                 _wanderingPos[i] = pos.transform;
-                pos.transform.SetParent(_posCollider.transform);
+                pos.transform.SetParent(posCollider.transform);
             }
         }
         else
@@ -58,7 +56,7 @@ public class WanderingRange : MonoBehaviour
 
                 var pos = Instantiate(_wanderPrefab, spawnPos, Quaternion.identity);
                 _wanderingPos[i] = pos.transform;
-                pos.transform.SetParent(_posCollider.transform);
+                pos.transform.SetParent(posCollider.transform);
             }
         }
     }

@@ -56,6 +56,8 @@ public class SearchPlayer : EnemyStateBase
     /// <summary> 移動 </summary>
     public override void Movement(EnemyStateMachine owner)
     {
+        //TODO：Animation
+
         var sqrMag
             = Vector3.SqrMagnitude(_enemy.transform.position - _wandering.WanderingPos[_posIndex].position);
 

@@ -3,6 +3,13 @@
 [System.Serializable]
 public class Damage : EnemyStateBase, IDamage
 {
+    private int _hp = 100;
+
+    public void Init(int hp)
+    {
+        _hp = hp;
+    }
+
     public override void OnStart(EnemyStateMachine owner)
     {
         Debug.Log("start damage state");
@@ -10,8 +17,7 @@ public class Damage : EnemyStateBase, IDamage
 
     public override void OnUpdate(EnemyStateMachine owner)
     {
-        //todo : ダメージ処理
-        ReceiveDamege(10);
+
     }
 
     public override void OnExit(EnemyStateMachine owner)
@@ -21,6 +27,6 @@ public class Damage : EnemyStateBase, IDamage
 
     public void ReceiveDamege(int value)
     {
-        throw new System.NotImplementedException();
+        _hp -= value;
     }
 }

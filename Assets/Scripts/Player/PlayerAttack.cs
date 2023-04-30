@@ -33,7 +33,8 @@ public class PlayerAttack
             {
                 if (hit.collider.gameObject.TryGetComponent(out EnemyController enemy))
                 {
-                    enemy.ReceiveDamege(_attackValue);
+                    //この部分の参照をあとで修正
+                    enemy.StateMachine.Damage.ReceiveDamege(_attackValue);
                     GaugeUp(_attackValue / 10);
                     Debug.Log("こうげき");
                 }

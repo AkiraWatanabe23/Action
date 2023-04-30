@@ -14,9 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SearchAngle: 60
   SearchDistance: 5
-  WanderingPos: {fileID: 0}
-  SearchRadius: 5
-  HP: 0
-  MaxHP: 0
-  MoveSpeed: 0
-  AttackValue: 0
+  HP: 100
+  MaxHP: 100
+  MoveSpeed: 5
+  AttackValue: 20

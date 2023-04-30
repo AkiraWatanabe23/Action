@@ -8,10 +8,6 @@ public class EnemyData : ScriptableObject
     public float SearchAngle;
     [Tooltip("視界の距離")]
     public float SearchDistance;
-    [Tooltip("徘徊する場所の中心点")]
-    public Transform WanderingPos;
-    [Tooltip("Enemyが徘徊する円周の半径")]
-    public int SearchRadius;
 
     [Header("ステータス一覧")]
     public int HP;

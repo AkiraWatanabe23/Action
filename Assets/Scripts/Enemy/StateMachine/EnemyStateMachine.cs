@@ -13,11 +13,16 @@ public class EnemyStateMachine
 
     private EnemyStateBase _currentState = default;
 
-    public void InitStatus(EnemyData data, NavMeshAgent agent, WanderingRange wandering, GameObject player, GameObject enemy, float distance)
+    public Damage Damage => _damage;
+
+    public void InitStatus(
+        EnemyData data, NavMeshAgent agent, WanderingRange wandering, GameObject player, GameObject enemy, float distance, int hp)
     {
         //各値の初期化
         _search.Init(data, agent, wandering, player, enemy, distance);
         _chase.Init(agent, wandering, player, enemy);
+        _attack.Init(data, enemy);
+        _damage.Init(hp);
 
         //初期ステートを設定、実行
         _currentState = _search;
