@@ -3,6 +3,8 @@
 [System.Serializable]
 public class Damage : EnemyStateBase
 {
+    private Animator _anim = default;
+
     public void Init()
     {
 
@@ -15,7 +17,10 @@ public class Damage : EnemyStateBase
 
     public override void OnUpdate(EnemyStateMachine owner)
     {
-
+        if (_anim)
+        {
+            //被ダメージAnimation
+        }
     }
 
     public override void OnExit(EnemyStateMachine owner)

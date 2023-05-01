@@ -8,6 +8,7 @@ public class SearchPlayer : EnemyStateBase
     [SerializeField] private float _stopping = 1f;
 
     private int _posIndex = 0;
+    private Animator _anim = default;
 
     #region EnemyControllerの参照を避けるための変数
     private EnemyData _data = default;
@@ -56,7 +57,10 @@ public class SearchPlayer : EnemyStateBase
     /// <summary> 移動 </summary>
     public override void Movement(EnemyStateMachine owner)
     {
-        //TODO：Animation
+        if (_anim)
+        {
+            //歩行Animation
+        }
 
         var sqrMag
             = Vector3.SqrMagnitude(_enemy.transform.position - _wandering.WanderingPos[_posIndex].position);

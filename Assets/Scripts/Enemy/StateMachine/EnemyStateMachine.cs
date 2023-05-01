@@ -20,7 +20,7 @@ public class EnemyStateMachine
         _search.Init(data, agent, wandering, player, enemy, distance);
         _chase.Init(agent, wandering, player, enemy);
         _attack.Init(data, enemy);
-        _damage.Init(hp);
+        _damage.Init();
 
         //初期ステートを設定、実行
         _currentState = _search;

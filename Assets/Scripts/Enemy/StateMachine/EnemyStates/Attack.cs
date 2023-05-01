@@ -6,8 +6,12 @@ public class Attack : EnemyStateBase
     [SerializeField] private int _attackValue = 10;
     [SerializeField] private float _rayDist = 1f;
 
+    private Animator _anim = default;
+
+    #region EnemyController‚ÌQÆ‚ğ”ğ‚¯‚é‚½‚ß‚Ì•Ï”
     private EnemyData _data = default;
     private GameObject _enemy = default;
+    #endregion
 
     public void Init(EnemyData data, GameObject enemy)
     {
@@ -27,7 +31,10 @@ public class Attack : EnemyStateBase
         {
             if (hit.collider.gameObject.TryGetComponent(out PlayerController player))
             {
-                //TODOFAnimation
+                if (_anim)
+                {
+                    //UŒ‚Animation
+                }
                 player.Health.ReceiveDamege(_data.AttackValue);
             }
         }

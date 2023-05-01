@@ -3,6 +3,8 @@
 [System.Serializable]
 public class Dead : EnemyStateBase
 {
+    private Animator _anim = default;
+
     public override void OnStart(EnemyStateMachine owner)
     {
         Debug.Log("start dead state");
@@ -10,7 +12,10 @@ public class Dead : EnemyStateBase
 
     public override void OnUpdate(EnemyStateMachine owner)
     {
-        throw new System.NotImplementedException();
+        if (_anim)
+        {
+            //倒れる感じのAnimation
+        }
     }
 
     public override void OnExit(EnemyStateMachine owner)

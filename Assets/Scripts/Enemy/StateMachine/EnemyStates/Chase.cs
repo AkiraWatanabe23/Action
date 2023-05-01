@@ -11,6 +11,8 @@ public class Chase : EnemyStateBase
     [Range(1f, 10f)]
     [SerializeField] private float _returnDist = 1f;
 
+    private Animator _anim = default;
+
     #region EnemyControllerの参照を避けるための変数
     private NavMeshAgent _agent = default;
     private WanderingRange _wandering = default;
@@ -47,7 +49,10 @@ public class Chase : EnemyStateBase
     /// <summary> 移動 </summary>
     public override void Movement(EnemyStateMachine owner)
     {
-        //TODO：Animation
+        if (_anim)
+        {
+            //移動Animation
+        }
 
         _agent.SetDestination(_player.transform.position);
 

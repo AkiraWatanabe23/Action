@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour, IDamage
     [SerializeField] private EnemyStateMachine _stateMachine = new();
 
     private NavMeshAgent _agent = default;
-    private Animator _anim = default;
+    //private Animator _anim = default;
     private int _hp = 100;
     private float _sqrDistance = 1f;
 
