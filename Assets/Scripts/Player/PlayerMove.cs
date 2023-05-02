@@ -34,7 +34,9 @@ public class PlayerMove
             if (ver < 0f)
             {
                 //後ろ方向の入力があった場合
-                _trans.rotation = Quaternion.Euler(0f, 180f, 0f);
+                //_trans.rotation = Quaternion.Euler(0f, 180f, 0f);
+                float angle = Vector3.SignedAngle(_trans.forward, _moveDir.normalized, _trans.up);
+                _trans.Rotate(0f, angle, 0f);
             }
 
             _moveDir = Vector3.Lerp(_beforeDir, _moveDir, _moveSpeed * Time.deltaTime);

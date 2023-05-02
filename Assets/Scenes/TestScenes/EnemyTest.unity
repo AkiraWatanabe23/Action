@@ -513,19 +513,43 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 523797653, guid: a649396dbbe59e744ac440b5e14bdc5b, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.24
       objectReference: {fileID: 0}
     - target: {fileID: 523797653, guid: a649396dbbe59e744ac440b5e14bdc5b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1142065075, guid: a649396dbbe59e744ac440b5e14bdc5b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1142065075, guid: a649396dbbe59e744ac440b5e14bdc5b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1142065075, guid: a649396dbbe59e744ac440b5e14bdc5b, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651361155, guid: a649396dbbe59e744ac440b5e14bdc5b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651361155, guid: a649396dbbe59e744ac440b5e14bdc5b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651361155, guid: a649396dbbe59e744ac440b5e14bdc5b, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.24
       objectReference: {fileID: 0}
     - target: {fileID: 1811464779, guid: a649396dbbe59e744ac440b5e14bdc5b, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1811464779, guid: a649396dbbe59e744ac440b5e14bdc5b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1620415567313297486, guid: a649396dbbe59e744ac440b5e14bdc5b, type: 3}
       propertyPath: m_RootOrder
@@ -574,6 +598,10 @@ PrefabInstance:
     - target: {fileID: 1620415567313297522, guid: a649396dbbe59e744ac440b5e14bdc5b, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620415567313297522, guid: a649396dbbe59e744ac440b5e14bdc5b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a649396dbbe59e744ac440b5e14bdc5b, type: 3}
@@ -729,7 +757,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7068eb22f58dce448a4517d81e2b77bd, type: 2}
+  - {fileID: 2100000, guid: 22c369e4ef40fd24cbb9e80d68c356ca, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
