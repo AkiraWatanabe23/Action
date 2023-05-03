@@ -32,7 +32,7 @@ public class EnemyStateMachine
         _currentState.OnUpdate(this);
     }
 
-    public EnemyStateBase GetState(EnemyStates state)
+    private EnemyStateBase GetState(EnemyStates state)
     {
         switch (state)
         {

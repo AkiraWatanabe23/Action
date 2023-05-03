@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     private static GameManager _instance = default;
 
+    public bool IsGameStart => _isGameStart;
     public float Timer { get => _timer; set => _timer = value; }
 
     public static GameManager Instance => _instance;
@@ -54,9 +55,9 @@ public class GameManager : MonoBehaviour
         _isGameStart = true;
     }
 
-    public void EnemySpawn(int count, GameObject enemy, GameObject positions)
+    public void EnemySpawn(GameObject enemy, GameObject positions)
     {
-        for (int i = 0; i < count; i++)
+        for (int i = 0; i < positions.transform.childCount; i++)
         {
             var e =
                 Instantiate(enemy, positions.transform.GetChild(i).transform.position, Quaternion.identity);
