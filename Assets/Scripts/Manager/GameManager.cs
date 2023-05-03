@@ -2,7 +2,9 @@
 
 public class GameManager : MonoBehaviour
 {
-    private bool _isGameStart = false;
+    [Header("Debug")]
+    [SerializeField] private bool _isGameStart = false;
+
     private float _timer = 100f;
 
     private static GameManager _instance = default;
@@ -31,10 +33,13 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        _timer -= Time.deltaTime;
-        if (_timer < 0)
+        if (_isGameStart)
         {
-            //GameOver
+            _timer -= Time.deltaTime;
+            if (_timer < 0)
+            {
+                //GameOver
+            }
         }
     }
 
@@ -47,5 +52,19 @@ public class GameManager : MonoBehaviour
     public void GameStart()
     {
         _isGameStart = true;
+    }
+
+    public void EnemySpawn(int count, GameObject enemy, GameObject positions)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            var e =
+                Instantiate(enemy, positions.transform.GetChild(i).transform.position, Quaternion.identity);
+
+            if (e.TryGetComponent(out EnemyController controller))
+            {
+                controller.Wandering = positions.transform.GetChild(i).GetComponent<WanderingRange>();
+            }
+        }
     }
 }

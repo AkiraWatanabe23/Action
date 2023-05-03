@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour, IDamage
     private float _sqrDistance = 1f;
 
     public EnemyData Data => _data;
-    public WanderingRange Wandering => _wandering;
+    public WanderingRange Wandering { get => _wandering; set => _wandering = value; }
     public EnemyStateMachine StateMachine => _stateMachine;
 
     private void Start()
@@ -41,6 +41,6 @@ public class EnemyController : MonoBehaviour, IDamage
     public void ReceiveDamege(int value)
     {
         _hp -= value;
-        //フラグを立て、ステートを切り替える
+        _stateMachine.SwitchState(EnemyStateMachine.EnemyStates.Damege);
     }
 }

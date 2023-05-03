@@ -21,6 +21,8 @@ public class Damage : EnemyStateBase
         {
             //被ダメージAnimation
         }
+
+        owner.SwitchState(EnemyStateMachine.EnemyStates.Search);
     }
 
     public override void OnExit(EnemyStateMachine owner)

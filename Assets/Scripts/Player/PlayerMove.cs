@@ -9,7 +9,6 @@ public class PlayerMove
     private CharacterController _controller = default;
     private Transform _trans = default;
     private Vector3 _moveDir = Vector3.zero;
-    private Vector3 _beforeDir = Vector3.zero;
     private readonly float _gravity = 20f;
 
     public void Init(CharacterController con, Transform trans)
@@ -35,12 +34,15 @@ public class PlayerMove
             {
                 //後ろ方向の入力があった場合
                 //_trans.rotation = Quaternion.Euler(0f, 180f, 0f);
-                float angle = Vector3.SignedAngle(_trans.forward, _moveDir.normalized, _trans.up);
-                _trans.Rotate(0f, angle, 0f);
+
+                var angle = _trans.eulerAngles.y;
+                Quaternion rot = Quaternion.AngleAxis(angle, Vector3.up);
+
+                _moveDir = rot * Vector3.forward * _moveSpeed * -1;
             }
 
-            _moveDir = Vector3.Lerp(_beforeDir, _moveDir, _moveSpeed * Time.deltaTime);
-            _beforeDir = _moveDir;
+            //_moveDir = Vector3.Lerp(_beforeDir, _moveDir, _moveSpeed * Time.deltaTime);
+            //_beforeDir = _moveDir;
 
             if (Input.GetButtonDown("Jump"))
             {
