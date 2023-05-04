@@ -54,25 +54,17 @@ public class PlayerMove
         _hol = Input.GetAxisRaw("Horizontal");
         _ver = Input.GetAxisRaw("Vertical");
 
-        //移動の入力
-        _moveDir = new Vector3(_hol, _moveDir.y, _ver);
-        _moveDir = _trans.TransformDirection(_moveDir);
-        _moveDir *= _moveSpeed;
+        _trans.Rotate(0f, _hol * _rotateSpeed, 0f);
 
+        if (_controller.isGrounded)
+        {
+            _moveDir = new Vector3(_hol, 0f, _ver);
+            _moveDir = _trans.TransformDirection(_moveDir);
+            _moveDir *= _moveSpeed;
+        }
+        _moveDir.y -= _gravity * Time.deltaTime;
         _controller.Move(_moveDir * Time.deltaTime);
 
-        if (_hol != 0f)
-        {
-            float dir = Mathf.Sign(_hol);
-            _targetRot += dir * 90.0f;
-            //_trans.Rotate(Vector3.up, dir * _rotateSpeed * Time.deltaTime);
-
-            _targetRot = Mathf.Repeat(_targetRot, 360.0f);
-        }
-        
-        float currentRotation = _trans.eulerAngles.y;
-        float rotation = Mathf.MoveTowardsAngle(currentRotation, _targetRot, _rotateSpeed * Time.deltaTime);
-        _trans.eulerAngles = new Vector3(0, rotation, 0);
 
         //接地中なら
         //if (_controller.isGrounded)
