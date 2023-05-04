@@ -4,6 +4,8 @@ namespace Constants
 {
     public static class Consts
     {
+        public const int CLEAR_KILL_COUNT = 10;
+
         public static readonly Dictionary<SceneNames, string> Scenes = new()
         {
             [SceneNames.TITLE_SCENE] = "Title",
