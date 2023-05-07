@@ -661,7 +661,8 @@ GameObject:
   - component: {fileID: 1543539020}
   - component: {fileID: 1543539019}
   - component: {fileID: 1543539024}
-  - component: {fileID: 1543539023}
+  - component: {fileID: 1543539025}
+  - component: {fileID: 1543539026}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -678,7 +679,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1543539018}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
@@ -741,7 +742,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1543539018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 5.78, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -749,22 +750,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1543539023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1543539018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 014ce170fa5386346a7203c6a45e816e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  verRot: {fileID: 963194228}
-  horRot: {fileID: 1543539022}
-  moveSpeed: 5
-  jumpPower: 5
 --- !u!143 &1543539024
 CharacterController:
   m_ObjectHideFlags: 0
@@ -783,6 +768,44 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1543539025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543539018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb866023031850428491530e8c4d769, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gravity: 9.8
+  _rotationSpeed: 600
+  _maxSurfaceSpeed: 10
+  _maxDimensionalSpeed: 20
+  _moveSpeed: 5
+  _jumpPower: 15
+  _decreaseSpeed: 5
+--- !u!114 &1543539026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1543539018}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af1a5e596ff68e34fad263d103ac7060, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gravity: 9.8
+  _rotationSpeed: 600
+  _maxHorizontalSpeed: 10
+  _maxVerticalSpeed: 30
+  _moveSpeed: 1
+  _jumpPower: 12
+  _decreaceSpeed: 1
 --- !u!1 &1565019083
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,8 +896,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565019083}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -5, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalPosition: {x: 0.6654, y: -5, z: 2.307}
+  m_LocalScale: {x: 40.758747, y: 5, z: 49.18732}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

@@ -3,7 +3,7 @@
 [System.Serializable]
 public class PlayerAnimation
 {
-    [Header("Animationの各パラメータ")]
+    [Header("各Animationのパラメータ")]
     [SerializeField] private float _move = 1f;
 
     //各Animationを関数にまとめる

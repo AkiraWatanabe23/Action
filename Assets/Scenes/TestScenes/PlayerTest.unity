@@ -495,8 +495,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1620415567313297480, guid: a649396dbbe59e744ac440b5e14bdc5b, type: 3}
+      propertyPath: _movement._jumpPower
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620415567313297480, guid: a649396dbbe59e744ac440b5e14bdc5b, type: 3}
       propertyPath: _movement._rotateSpeed
-      value: 20
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620415567313297480, guid: a649396dbbe59e744ac440b5e14bdc5b, type: 3}
+      propertyPath: _movement._decreaseSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620415567313297480, guid: a649396dbbe59e744ac440b5e14bdc5b, type: 3}
+      propertyPath: _movement._maxSurfaceSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620415567313297480, guid: a649396dbbe59e744ac440b5e14bdc5b, type: 3}
+      propertyPath: _movement._maxDimensionalSpeed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1620415567313297483, guid: a649396dbbe59e744ac440b5e14bdc5b, type: 3}
       propertyPath: m_Enabled
