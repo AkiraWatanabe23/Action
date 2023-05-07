@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UsefulPhysics;
 
 [System.Serializable]
 public class PlayerMove
@@ -20,13 +21,16 @@ public class PlayerMove
     [SerializeField] private float _maxDimensionalSpeed = 0f;
     [Tooltip("減速値")]
     [SerializeField] private float _decreaseSpeed = 1f;
+    [SerializeField] private Overlaps _overlap = default;
+    [Tooltip("OverlapSphereのoffset(Playerの中心からどれくらいずらすか)")]
+    [SerializeField] private Vector3 _overlapOffset = Vector3.zero;
 
     private CharacterController _controller = default;
     private Transform _trans = default;
     private Rigidbody _rb = default;
 
-    private float _currentHol = 0f;
-    private float _currentVer = 0f;
+    private float _currentHolSpeed = 0f;
+    private float _currentVerSpeed = 0f;
 
     private Vector3 _moveDir = Vector3.zero;
     private Quaternion _targetRotation = default;
@@ -63,34 +67,34 @@ public class PlayerMove
     {
         // 垂直方向の制御
         // 接地してなければ落下する
-        if (!CheckGrounded())
+        if (!_overlap.OverlapSphere(_trans.position + _overlapOffset))
         {
-            _currentVer -= _gravity * Time.deltaTime;
-            if (_currentVer < -_maxDimensionalSpeed)
+            _currentVerSpeed -= _gravity * Time.deltaTime;
+            if (_currentVerSpeed < -_maxDimensionalSpeed)
             {
-                _currentVer = -_maxDimensionalSpeed;
+                _currentVerSpeed = -_maxDimensionalSpeed;
             }
         }
         // 接地している かつ ジャンプ入力があればジャンプする。
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            _currentVer = _jumpPower;
+            _currentVerSpeed = _jumpPower;
         }
         // 接地していれば速度は垂直速度は0。
         else
         {
-            _currentVer = 0f;
+            _currentVerSpeed = 0f;
         }
 
         // 水平方向の制御
         if (input.sqrMagnitude > 0.3f)
         {
             // 入力がある限り加速する
-            _currentHol += _moveSpeed * Time.deltaTime;
+            _currentHolSpeed += _moveSpeed * Time.deltaTime;
 
-            if (_currentHol > _maxSurfaceSpeed)
+            if (_currentHolSpeed > _maxSurfaceSpeed)
             {
-                _currentHol = _maxSurfaceSpeed;
+                _currentHolSpeed = _maxSurfaceSpeed;
             }
 
             // 入力方向を保存する
@@ -107,17 +111,17 @@ public class PlayerMove
         // 入力がなければ減速する
         else
         {
-            _currentHol -=
+            _currentHolSpeed -=
                 _decreaseSpeed * Time.deltaTime;
 
-            if (_currentHol < 0f)
+            if (_currentHolSpeed < 0f)
             {
-                _currentHol = 0f;
+                _currentHolSpeed = 0f;
             }
         }
         // 結果の割り当て
-        Vector3 moveSpeed = _moveDir.normalized * _currentHol * Time.deltaTime;
-        moveSpeed.y = _currentVer * Time.deltaTime;
+        Vector3 moveSpeed = _moveDir.normalized * _currentHolSpeed * Time.deltaTime;
+        moveSpeed.y = _currentVerSpeed * Time.deltaTime;
 
         _controller.Move(moveSpeed);
     }
@@ -144,17 +148,6 @@ public class PlayerMove
 
             _trans.rotation = Quaternion.Slerp(_trans.rotation, _targetRotation, _rotateSpeed * Time.fixedDeltaTime);
         }
-    }
-
-    private bool CheckGrounded()
-    {
-        if (_controller.isGrounded)
-        {
-            return true;
-        }
-
-        //TODO：判定が緩いため、今後修正
-        return Physics.Raycast(_trans.position, Vector3.down, 1f);
     }
 }
 
