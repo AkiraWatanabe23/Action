@@ -5,11 +5,10 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour, IDamage
 {
     [SerializeField] private EnemyData _data = default;
-    [Tooltip("シーン上のPlayer(アタッチしてください)")]
-    [SerializeField] private GameObject _player = default;
     [SerializeField] private WanderingRange _wandering = default;
     [SerializeField] private EnemyStateMachine _stateMachine = new();
 
+    private GameObject _player = default;
     private NavMeshAgent _agent = default;
     //private Animator _anim = default;
     private int _hp = 100;
@@ -18,6 +17,7 @@ public class EnemyController : MonoBehaviour, IDamage
     public EnemyData Data => _data;
     public WanderingRange Wandering { get => _wandering; set => _wandering = value; }
     public EnemyStateMachine StateMachine => _stateMachine;
+    public GameObject Player { get => _player; set => _player = value; }
 
     private void Start()
     {

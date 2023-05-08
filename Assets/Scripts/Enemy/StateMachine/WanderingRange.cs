@@ -20,9 +20,9 @@ public class WanderingRange : MonoBehaviour
 
     private Transform[] _wanderingPos = default;
 
-    public event Action<bool> SetCanvas = default;
+    public Action<bool> SetCanvas = default;
 
-    public bool IsMove => _isMove;
+    public bool IsMove { get => _isMove; set => _isMove = value; }
     public Transform[] WanderingPos => _wanderingPos;
 
     private void Awake()
@@ -58,26 +58,6 @@ public class WanderingRange : MonoBehaviour
                 _wanderingPos[i] = pos.transform;
                 pos.transform.SetParent(posCollider.transform);
             }
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.TryGetComponent(out PlayerController player))
-        {
-            //Playerが自分の徘徊範囲内に入ってきたら動く
-            _isMove = true;
-            SetCanvas?.Invoke(_isMove);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.TryGetComponent(out PlayerController player))
-        {
-            //出たらやめる
-            _isMove = false;
-            SetCanvas?.Invoke(_isMove);
         }
     }
 }
