@@ -16,22 +16,23 @@ public class PlayerAnimation
 
     public void AnimIdle(bool play)
     {
-        _anim.SetBool("Idle", play);
+        _anim.SetBool("IsIdle", play);
     }
 
-    public void AnimMove()
+    public void AnimMove(bool move)
     {
+        _anim.SetBool("IsMove", move);
         _anim.SetFloat("Move", _move);
     }
 
-    public void AnimAttack()
+    public void AnimAttack(bool attack)
     {
-
+        _anim.SetBool("IsAttack", attack);
     }
 
-    public void AnimDamaged()
+    public void AnimDamaged(bool damage)
     {
-
+        _anim.SetBool("IsDamage", damage);
     }
 
     public void AnimDead()

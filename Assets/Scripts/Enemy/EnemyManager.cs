@@ -11,7 +11,7 @@ public class EnemyManager : MonoBehaviour
 
     private float _timer = 0f;
 
-    private void Start()
+    private void Awake()
     {
         for (int i = 0; i < transform.childCount; i++)
         {

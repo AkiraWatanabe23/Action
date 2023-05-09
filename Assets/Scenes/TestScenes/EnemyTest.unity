@@ -605,9 +605,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a649396dbbe59e744ac440b5e14bdc5b, type: 3}
---- !u!1 &648797506 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1620415567313297522, guid: a649396dbbe59e744ac440b5e14bdc5b, type: 3}
+--- !u!4 &648797506 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1620415567313297486, guid: a649396dbbe59e744ac440b5e14bdc5b, type: 3}
   m_PrefabInstance: {fileID: 648797505}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &664119915
@@ -1392,7 +1392,7 @@ MonoBehaviour:
   _enemies: []
   _player: {fileID: 648797506}
   _sqrValue: 2
-  _searchInterval: 1
+  _searchInterval: 0.5
 --- !u!1 &1988438876
 GameObject:
   m_ObjectHideFlags: 0

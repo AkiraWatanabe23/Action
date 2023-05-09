@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerAnimation _animation = new();
 
     private CharacterController _controller = default;
-    private Rigidbody _rb = default;
     private Animator _anim = default;
 
     public PlayerMove Move { get => _movement; protected set => _movement = value; }
@@ -21,17 +20,9 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
-        _rb = GetComponent<Rigidbody>();
-        //_anim = GetComponent<Animator>();
+        //_anim = transform.GetChild(0).GetComponent<Animator>();
 
-        if (_movement.MoveType == MoveType.Chara)
-        {
-            _movement.Init(_controller, transform);
-        }
-        else if (_movement.MoveType == MoveType.Rigid)
-        {
-            _movement.Init(transform, _rb);
-        }
+        _movement.Init(_controller, transform);
         _health.Init();
         _attack.Init(transform);
         //_animation.Init(_anim);
@@ -39,19 +30,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (_movement.MoveType == MoveType.Chara)
-        {
-            _movement.Update();
-        }
+        _movement.Update();
         _attack.Update();
-    }
-
-    private void FixedUpdate()
-    {
-        if (_movement.MoveType == MoveType.Rigid)
-        {
-            _movement.FixedUpdate();
-        }
     }
 
     public void SwitchWeapon()

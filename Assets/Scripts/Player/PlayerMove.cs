@@ -4,9 +4,6 @@ using UsefulPhysics;
 [System.Serializable]
 public class PlayerMove
 {
-    [Tooltip("移動方式")]
-    [SerializeField] private MoveType _moveType = MoveType.Chara;
-
     [Header("移動系パラメータ")]
     [SerializeField] private float _moveSpeed = 1f;
     [SerializeField] private float _jumpPower = 1f;
@@ -27,15 +24,12 @@ public class PlayerMove
 
     private CharacterController _controller = default;
     private Transform _transform = default;
-    private Rigidbody _rb = default;
 
     private float _currentHolSpeed = 0f;
     private float _currentVerSpeed = 0f;
 
     private Vector3 _moveDir = Vector3.zero;
     private Quaternion _targetRotation = default;
-
-    public MoveType MoveType => _moveType;
 
     public void Init(CharacterController con, Transform transform)
     {
@@ -45,22 +39,9 @@ public class PlayerMove
         _targetRotation = _transform.rotation;
     }
 
-    public void Init(Transform trans, Rigidbody rigidbody)
-    {
-        _transform = trans;
-        _rb = rigidbody;
-
-        _targetRotation = _transform.rotation;
-    }
-
     public void Update()
     {
         CharaMove(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
-    }
-
-    public void FixedUpdate()
-    {
-        RigidMove();
     }
 
     private void CharaMove(Vector2 input)
@@ -125,34 +106,4 @@ public class PlayerMove
 
         _controller.Move(moveSpeed);
     }
-
-    private void RigidMove()
-    {
-        float hol = Input.GetAxisRaw("Horizontal");
-        float ver = Input.GetAxisRaw("Vertical");
-
-        if (!_rb.isKinematic)
-        {
-            if (Input.GetButtonDown("Jump"))
-            {
-                _rb.AddForce(Vector3.up * _jumpPower, ForceMode.Impulse);
-            }
-
-            _moveDir = new Vector3(hol, _rb.velocity.y, ver);
-
-            if (_moveDir.magnitude > 0.1f)
-            {
-                _targetRotation = Quaternion.LookRotation(_moveDir);
-                _rb.MovePosition(_rb.position + _moveDir.normalized * _moveSpeed * Time.fixedDeltaTime);
-            }
-
-            _transform.rotation = Quaternion.Slerp(_transform.rotation, _targetRotation, _rotateSpeed * Time.fixedDeltaTime);
-        }
-    }
-}
-
-public enum MoveType
-{
-    Chara,
-    Rigid,
 }

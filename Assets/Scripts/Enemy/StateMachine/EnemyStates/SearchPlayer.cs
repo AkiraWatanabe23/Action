@@ -69,7 +69,7 @@ public class SearchPlayer : EnemyStateBase
         {
             //目的地に到着したら次の目的地を設定
             _posIndex = SetDestinationIndex(owner);
-            Debug.Log("switch");
+            Debug.Log("Change Destination");
         }
         _agent.SetDestination(_wandering.WanderingPos[_posIndex].position);
     }
