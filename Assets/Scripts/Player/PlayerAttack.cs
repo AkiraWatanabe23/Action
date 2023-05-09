@@ -7,7 +7,7 @@ public class PlayerAttack
     [SerializeField] private WeaponType _weapon = WeaponType.Sword;
     [SerializeField] private AttackType _attack = AttackType.Normal;
 
-    private Transform _trans = default;
+    private Transform _transform = default;
     private int _skillGauge = 0;
     private int _maxGauge = 50;
     /// <summary> 攻撃力 </summary>
@@ -20,16 +20,16 @@ public class PlayerAttack
 
     public void Init(Transform trans)
     {
-        _trans = trans;
+        _transform = trans;
     }
 
     public void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.DrawRay(_trans.position, _trans.forward, Color.green, 10f);
+            Debug.DrawRay(_transform.position, _transform.forward, Color.green, 10f);
             //攻撃(引数の値は仮)
-            if (Physics.Raycast(_trans.position, _trans.forward, out RaycastHit hit, 20f))
+            if (Physics.Raycast(_transform.position, _transform.forward, out RaycastHit hit, 20f))
             {
                 if (hit.collider.gameObject.TryGetComponent(out EnemyController enemy))
                 {

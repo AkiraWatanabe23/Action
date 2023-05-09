@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private List<EnemyController> _enemies = new();
-    [SerializeField] private GameObject _player = default;
+    [SerializeField] private Transform _player = default;
 
     [SerializeField] private float _sqrValue = 2f;
     [SerializeField] private float _searchInterval = 1f;
@@ -45,7 +45,7 @@ public class EnemyManager : MonoBehaviour
             foreach (var enemy in _enemies)
             {
                 //一定距離以内で探索開始
-                if ((enemy.transform.position - _player.transform.position).sqrMagnitude > _sqrValue)
+                if ((enemy.transform.position - _player.position).sqrMagnitude > _sqrValue)
                 {
                     //追跡開始処理
                     enemy.Wandering.IsMove = true;

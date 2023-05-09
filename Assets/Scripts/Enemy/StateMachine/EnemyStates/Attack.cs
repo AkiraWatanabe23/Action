@@ -10,10 +10,10 @@ public class Attack : EnemyStateBase
 
     #region EnemyController‚ÌQÆ‚ğ”ğ‚¯‚é‚½‚ß‚Ì•Ï”
     private EnemyData _data = default;
-    private GameObject _enemy = default;
+    private Transform _enemy = default;
     #endregion
 
-    public void Init(EnemyData data, GameObject enemy)
+    public void Init(EnemyData data, Transform enemy)
     {
         _data = data;
         _enemy = enemy;
@@ -27,7 +27,7 @@ public class Attack : EnemyStateBase
     public override void OnUpdate(EnemyStateMachine owner)
     {
         //UŒ‚ˆ—
-        if (Physics.Raycast(_enemy.transform.position, _enemy.transform.forward, out RaycastHit hit, _rayDist))
+        if (Physics.Raycast(_enemy.position, _enemy.forward, out RaycastHit hit, _rayDist))
         {
             if (hit.collider.gameObject.TryGetComponent(out PlayerController player))
             {

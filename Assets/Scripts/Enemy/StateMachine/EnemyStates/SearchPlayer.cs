@@ -14,12 +14,12 @@ public class SearchPlayer : EnemyStateBase
     private EnemyData _data = default;
     private NavMeshAgent _agent = default;
     private WanderingRange _wandering = default;
-    private GameObject _player = default;
-    private GameObject _enemy = default;
+    private Transform _player = default;
+    private Transform _enemy = default;
     private float _sqrDistance = 1f;
     #endregion
 
-    public void Init(EnemyData data, NavMeshAgent agent, WanderingRange wandering, GameObject player, GameObject enemy, float distance)
+    public void Init(EnemyData data, NavMeshAgent agent, WanderingRange wandering, Transform player, Transform enemy, float distance)
     {
         _data = data;
         _agent = agent;
@@ -63,7 +63,7 @@ public class SearchPlayer : EnemyStateBase
         }
 
         var sqrMag
-            = Vector3.SqrMagnitude(_enemy.transform.position - _wandering.WanderingPos[_posIndex].position);
+            = Vector3.SqrMagnitude(_enemy.position - _wandering.WanderingPos[_posIndex].position);
 
         if (sqrMag < _stopping * _stopping)
         {
@@ -91,7 +91,7 @@ public class SearchPlayer : EnemyStateBase
     /// <summary> Playerを探す </summary>
     private void Search(EnemyStateMachine owner)
     {
-        var dir = _player.transform.position - _enemy.transform.position;
+        var dir = _player.position - _enemy.position;
         var dist = dir.sqrMagnitude;
 
         //cos(θ/2)
@@ -99,7 +99,7 @@ public class SearchPlayer : EnemyStateBase
 
         //内積を取得する
         var innerProduct
-            = Vector3.Dot(_enemy.transform.forward, _player.transform.position.normalized);
+            = Vector3.Dot(_enemy.forward, _player.position.normalized);
 
         //視界に入っていて、距離が範囲内ならPlayerの追跡に切り替わる
         if (innerProduct > cosHalf && dist < _sqrDistance)

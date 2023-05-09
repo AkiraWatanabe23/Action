@@ -14,7 +14,7 @@ public class EnemyStateMachine
     private EnemyStateBase _currentState = default;
 
     public void InitStatus(
-        EnemyData data, NavMeshAgent agent, WanderingRange wandering, GameObject player, GameObject enemy, float distance, int hp)
+        EnemyData data, NavMeshAgent agent, WanderingRange wandering, Transform player, Transform enemy, float distance, int hp)
     {
         //各値の初期化
         _search.Init(data, agent, wandering, player, enemy, distance);

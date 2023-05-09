@@ -26,7 +26,7 @@ public class PlayerMove
     [SerializeField] private Vector3 _overlapOffset = Vector3.zero;
 
     private CharacterController _controller = default;
-    private Transform _trans = default;
+    private Transform _transform = default;
     private Rigidbody _rb = default;
 
     private float _currentHolSpeed = 0f;
@@ -37,20 +37,20 @@ public class PlayerMove
 
     public MoveType MoveType => _moveType;
 
-    public void Init(CharacterController con, Transform trans)
+    public void Init(CharacterController con, Transform transform)
     {
         _controller = con;
-        _trans = trans;
+        _transform = transform;
 
-        _targetRotation = _trans.rotation;
+        _targetRotation = _transform.rotation;
     }
 
     public void Init(Transform trans, Rigidbody rigidbody)
     {
-        _trans = trans;
+        _transform = trans;
         _rb = rigidbody;
 
-        _targetRotation = _trans.rotation;
+        _targetRotation = _transform.rotation;
     }
 
     public void Update()
@@ -67,7 +67,7 @@ public class PlayerMove
     {
         // 垂直方向の制御
         // 接地してなければ落下する
-        if (!_overlap.OverlapSphere(_trans.position + _overlapOffset))
+        if (!_overlap.OverlapSphere(_transform.position + _overlapOffset))
         {
             _currentVerSpeed -= _gravity * Time.deltaTime;
             if (_currentVerSpeed < -_maxDimensionalSpeed)
@@ -106,7 +106,7 @@ public class PlayerMove
             _targetRotation = Quaternion.LookRotation(_moveDir, Vector3.up);
             _targetRotation.x = 0f;
             _targetRotation.z = 0f;
-            _trans.rotation = Quaternion.RotateTowards(_trans.rotation, _targetRotation, _rotateSpeed * Time.deltaTime);
+            _transform.rotation = Quaternion.RotateTowards(_transform.rotation, _targetRotation, _rotateSpeed * Time.deltaTime);
         }
         // 入力がなければ減速する
         else
@@ -146,7 +146,7 @@ public class PlayerMove
                 _rb.MovePosition(_rb.position + _moveDir.normalized * _moveSpeed * Time.fixedDeltaTime);
             }
 
-            _trans.rotation = Quaternion.Slerp(_trans.rotation, _targetRotation, _rotateSpeed * Time.fixedDeltaTime);
+            _transform.rotation = Quaternion.Slerp(_transform.rotation, _targetRotation, _rotateSpeed * Time.fixedDeltaTime);
         }
     }
 }

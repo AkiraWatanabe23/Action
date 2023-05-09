@@ -16,11 +16,11 @@ public class Chase : EnemyStateBase
     #region EnemyControllerの参照を避けるための変数
     private NavMeshAgent _agent = default;
     private WanderingRange _wandering = default;
-    private GameObject _player = default;
-    private GameObject _enemy = default;
+    private Transform _player = default;
+    private Transform _enemy = default;
     #endregion
 
-    public void Init(NavMeshAgent agent, WanderingRange wandering, GameObject player, GameObject enemy)
+    public void Init(NavMeshAgent agent, WanderingRange wandering, Transform player, Transform enemy)
     {
         _agent = agent;
         _wandering = wandering;
@@ -54,10 +54,10 @@ public class Chase : EnemyStateBase
             //移動Animation
         }
 
-        _agent.SetDestination(_player.transform.position);
+        _agent.SetDestination(_player.position);
 
         var sqrMag
-            = Vector3.SqrMagnitude(_enemy.transform.position - _player.transform.position);
+            = Vector3.SqrMagnitude(_enemy.position - _player.position);
 
         if (sqrMag < _attackDist * _attackDist)
         {

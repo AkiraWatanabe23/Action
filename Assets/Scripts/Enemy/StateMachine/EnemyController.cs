@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour, IDamage
     [SerializeField] private WanderingRange _wandering = default;
     [SerializeField] private EnemyStateMachine _stateMachine = new();
 
-    private GameObject _player = default;
+    private Transform _player = default;
     private NavMeshAgent _agent = default;
     //private Animator _anim = default;
     private int _hp = 100;
@@ -17,7 +17,7 @@ public class EnemyController : MonoBehaviour, IDamage
     public EnemyData Data => _data;
     public WanderingRange Wandering { get => _wandering; set => _wandering = value; }
     public EnemyStateMachine StateMachine => _stateMachine;
-    public GameObject Player { get => _player; set => _player = value; }
+    public Transform Player { get => _player; set => _player = value; }
 
     private void Start()
     {
@@ -30,7 +30,7 @@ public class EnemyController : MonoBehaviour, IDamage
         _sqrDistance = _data.SearchDistance * _data.SearchDistance;
 
         _stateMachine.InitStatus(
-            _data, _agent, _wandering, _player, gameObject, _sqrDistance, _hp);
+            _data, _agent, _wandering, _player, transform, _sqrDistance, _hp);
     }
 
     private void Update()
