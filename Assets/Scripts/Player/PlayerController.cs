@@ -20,12 +20,12 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
-        //_anim = transform.GetChild(0).GetComponent<Animator>();
+        _anim = transform.GetChild(0).GetComponent<Animator>();
 
-        _movement.Init(_controller, transform);
+        _movement.Init(_controller, transform, _animation);
         _health.Init();
-        _attack.Init(transform);
-        //_animation.Init(_anim);
+        _attack.Init(transform, _animation);
+        _animation.Init(_anim);
     }
 
     private void Update()

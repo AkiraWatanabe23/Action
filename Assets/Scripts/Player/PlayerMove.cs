@@ -24,6 +24,7 @@ public class PlayerMove
 
     private CharacterController _controller = default;
     private Transform _transform = default;
+    private PlayerAnimation _animation = default;
 
     private float _currentHolSpeed = 0f;
     private float _currentVerSpeed = 0f;
@@ -31,10 +32,11 @@ public class PlayerMove
     private Vector3 _moveDir = Vector3.zero;
     private Quaternion _targetRotation = default;
 
-    public void Init(CharacterController con, Transform transform)
+    public void Init(CharacterController con, Transform transform, PlayerAnimation animation)
     {
         _controller = con;
         _transform = transform;
+        _animation = animation;
 
         _targetRotation = _transform.rotation;
     }

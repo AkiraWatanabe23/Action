@@ -8,6 +8,8 @@ public class PlayerAttack
     [SerializeField] private AttackType _attack = AttackType.Normal;
 
     private Transform _transform = default;
+    private PlayerAnimation _animation = default;
+
     private int _skillGauge = 0;
     private int _maxGauge = 50;
     /// <summary> 攻撃力 </summary>
@@ -18,9 +20,10 @@ public class PlayerAttack
     public int SkillGauge { get => _skillGauge; set => _skillGauge = value; }
     public int MaxGauge { get => _maxGauge; protected set => _maxGauge = value; }
 
-    public void Init(Transform trans)
+    public void Init(Transform trans, PlayerAnimation animation)
     {
         _transform = trans;
+        _animation = animation;
     }
 
     public void Update()
