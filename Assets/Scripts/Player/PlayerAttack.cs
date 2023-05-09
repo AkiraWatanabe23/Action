@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Constants;
+using UnityEngine;
 
 [System.Serializable]
 public class PlayerAttack
@@ -30,6 +31,8 @@ public class PlayerAttack
     {
         if (Input.GetMouseButtonDown(0))
         {
+            _animation.ChangeAnimation(Consts.ANIM_MOVE);
+
             Debug.DrawRay(_transform.position, _transform.forward, Color.green, 10f);
             //攻撃(引数の値は仮)
             if (Physics.Raycast(_transform.position, _transform.forward, out RaycastHit hit, 20f))
@@ -41,6 +44,8 @@ public class PlayerAttack
                     Debug.Log("こうげき");
                 }
             }
+
+            _animation.ChangeAnimation(Consts.ANIM_IDLE);
         }
     }
 

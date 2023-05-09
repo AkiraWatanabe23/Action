@@ -1,18 +1,16 @@
-﻿using UnityEngine;
+﻿using Constants;
+using UnityEngine;
 
 [System.Serializable]
 public class PlayerAnimation
 {
     [SerializeField] private AnimationClip[] _clips = default;
-
-    [SerializeField] private string _animName = "";
     [Header("各Animationのパラメータ")]
     [SerializeField] private float _move = 1f;
 
+    private string _animName = "";
     //各Animationを関数にまとめる
     private Animator _anim = default;
-
-    public Animator Anim => _anim;
 
     public void Init(Animator anim)
     {
@@ -36,13 +34,13 @@ public class PlayerAnimation
 
     public void ChangeAnimation(string newAnimationName)
     {
-        if (_animName == "Move")
+        if (_animName == Consts.ANIM_MOVE)
         {
             _anim.SetFloat("MoveValue", 0);
         }
         _animName = newAnimationName;
 
-        if (newAnimationName == "Move")
+        if (newAnimationName == Consts.ANIM_MOVE)
         {
             _anim.SetFloat("MoveValue", _move);
         }
