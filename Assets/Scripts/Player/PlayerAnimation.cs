@@ -1,12 +1,10 @@
-﻿using Constants;
+﻿using System;
 using UnityEngine;
 
-[System.Serializable]
+[Serializable]
 public class PlayerAnimation
 {
     [SerializeField] private AnimationClip[] _clips = default;
-    [Header("各Animationのパラメータ")]
-    [SerializeField] private float _move = 1f;
 
     private string _animName = "";
     //各Animationを関数にまとめる
@@ -18,10 +16,7 @@ public class PlayerAnimation
 
         //Animationの各ステート名を取得
         _clips = _anim.runtimeAnimatorController.animationClips;
-        for (int i = 0; i < _clips.Length; i++)
-        {
-            Debug.Log(_clips[i].name);
-        }
+        Array.ForEach(_clips, clip => Debug.Log(clip.name));
 
         Setup();
     }
@@ -34,16 +29,9 @@ public class PlayerAnimation
 
     public void ChangeAnimation(string newAnimationName)
     {
-        if (_animName == Consts.ANIM_MOVE)
-        {
-            _anim.SetFloat("MoveValue", 0);
-        }
+        _anim.SetBool(_animName, false);
         _animName = newAnimationName;
 
-        if (newAnimationName == Consts.ANIM_MOVE)
-        {
-            _anim.SetFloat("MoveValue", _move);
-        }
         _anim.SetBool(_animName, true);
     }
 }

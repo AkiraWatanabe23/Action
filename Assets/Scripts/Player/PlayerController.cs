@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
     public PlayerMove Move { get => _movement; protected set => _movement = value; }
     public PlayerHealth Health { get => _health; protected set => _health = value; }
     public PlayerAttack Attack { get => _attack; protected set => _attack = value; }
-    public PlayerAnimation Animation { get => _animation; protected set => _animation = value; }
 
     private void Awake()
     {
@@ -23,7 +22,7 @@ public class PlayerController : MonoBehaviour
         _anim = transform.GetChild(0).GetComponent<Animator>();
 
         _movement.Init(_controller, transform, _animation);
-        _health.Init();
+        _health.Init(_animation);
         _attack.Init(transform, _animation);
         _animation.Init(_anim);
     }
