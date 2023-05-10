@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Constants;
+using System;
 using UnityEngine;
 
 [Serializable]
@@ -23,7 +24,9 @@ public class PlayerAnimation
 
     private void Setup()
     {
-        _animName = _clips[0].name;
+        Array.ForEach(_clips, clip => _anim.SetBool(clip.name, false));
+
+        _animName = Consts.ANIM_IDLE;
         _anim.SetBool(_animName, true);
     }
 

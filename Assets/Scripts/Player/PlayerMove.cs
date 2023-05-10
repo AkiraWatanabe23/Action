@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Constants;
+using UnityEngine;
 using UsefulPhysics;
 
 [System.Serializable]
@@ -62,6 +63,8 @@ public class PlayerMove
         else if (Input.GetKeyDown(KeyCode.Space))
         {
             _currentVerSpeed = _jumpPower;
+
+            //_animation.ChangeAnimation(Consts.ANIM_JUMP);
         }
         // 接地していれば速度は垂直速度は0。
         else
@@ -100,11 +103,14 @@ public class PlayerMove
             if (_currentHolSpeed < 0f)
             {
                 _currentHolSpeed = 0f;
+                //_animation.ChangeAnimation(Consts.ANIM_IDLE);
             }
         }
         // 結果の割り当て
         Vector3 moveSpeed = _moveDir.normalized * _currentHolSpeed * Time.deltaTime;
         moveSpeed.y = _currentVerSpeed * Time.deltaTime;
+
+        //_animation.ChangeAnimation(Consts.ANIM_MOVE);
 
         _controller.Move(moveSpeed);
     }
