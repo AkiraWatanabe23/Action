@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     private CharacterController _controller = default;
     private Animator _anim = default;
 
-    public PlayerMove Move { get => _movement; protected set => _movement = value; }
     public PlayerHealth Health { get => _health; protected set => _health = value; }
     public PlayerAttack Attack { get => _attack; protected set => _attack = value; }
 

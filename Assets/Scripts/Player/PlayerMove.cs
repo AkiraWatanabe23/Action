@@ -67,7 +67,7 @@ public class PlayerMove
             Debug.Log("jump");
 
             _currentDimensionalSpeed = _jumpPower;
-            _animation.ChangeAnimation(Consts.ANIM_JUMP);
+            _animation.ChangeAnimToJump();
         }
         // 接地していれば速度は垂直速度は0。
         else
@@ -97,7 +97,7 @@ public class PlayerMove
             _targetRotation.z = 0f;
             _transform.rotation = Quaternion.RotateTowards(_transform.rotation, _targetRotation, _rotateSpeed * Time.deltaTime);
 
-            _animation.ChangeAnimation(Consts.ANIM_MOVE, false);
+            _animation.ChangeAnimToMove();
         }
         // 入力がなければ減速する
         else
@@ -110,7 +110,7 @@ public class PlayerMove
                 _currentSurfaceSpeed = 0f;
             }
 
-            _animation.ChangeAnimation(Consts.ANIM_MOVE, true);
+            _animation.ChangeAnimToMove();
         }
         // 結果の割り当て
         Vector3 moveSpeed = _moveDir.normalized * _currentSurfaceSpeed * Time.deltaTime;

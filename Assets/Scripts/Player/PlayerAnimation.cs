@@ -25,7 +25,7 @@ public class PlayerAnimation
 
         //Animationの各ステート名を取得
         _clips = _anim.runtimeAnimatorController.animationClips;
-        Array.ForEach(_clips, clip => Debug.Log(clip.name));
+        //Array.ForEach(_clips, clip => Debug.Log(clip.name));
 
         Setup();
     }
@@ -37,35 +37,43 @@ public class PlayerAnimation
         _animName = Consts.ANIM_IDLE;
     }
 
-    public void ChangeAnimation(string newAnimationName)
+    public void ChangeAnimToIdle()
     {
-        if (newAnimationName == Consts.ANIM_MOVE)
+        if (_animName == Consts.ANIM_MOVE)
         {
+            if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            {
+
+            }
+
             _anim.SetFloat("MoveValue", _currentSurfaceSpeed / _maxSurfaceSpeed);
+            return;
         }
 
-        _anim.SetBool(_animName, false);
-        _animName = newAnimationName;
+        _animName = Consts.ANIM_IDLE;
+    }
 
+    public void ChangeAnimToMove()
+    {
+        _currentSurfaceSpeed = _move.CurrentSuefaceSpeed;
+
+        //_animName = Consts.ANIM_MOVE;
+        _anim.SetFloat("MoveValue", _currentSurfaceSpeed / _maxSurfaceSpeed);
+    }
+
+    public void ChangeAnimToJump()
+    {
+        _anim.SetBool(_animName, false);
+
+        _animName = Consts.ANIM_JUMP;
         _anim.SetBool(_animName, true);
     }
 
-    /// <summary> MoveAnimation用 </summary>
-    public void ChangeAnimation(string newAnimationName, bool isDecreace)
+    public void ChangeAnimToAttack()
     {
-        _currentSurfaceSpeed = _move.CurrentSuefaceSpeed;
-        if (!isDecreace)
-        {
-            ChangeAnimation(newAnimationName);
-        }
-        else
-        {
-            _anim.SetFloat("MoveValue", _currentSurfaceSpeed / _maxSurfaceSpeed);
+        _anim.SetBool(_animName, false);
 
-            if (_currentSurfaceSpeed / _maxSurfaceSpeed < 0.1f)
-            {
-                ChangeAnimation(Consts.ANIM_IDLE);
-            }
-        }
+        _animName = Consts.ANIM_ATTACK;
+        _anim.SetBool(_animName, true);
     }
 }

@@ -1,4 +1,3 @@
-using Constants;
 using UnityEngine;
 
 [System.Serializable]
@@ -19,16 +18,12 @@ public class PlayerHealth : IDamage
 
     public void ReceiveDamege(int value)
     {
-        _animation.ChangeAnimation(Consts.ANIM_DAMAGE);
-
         _hp -= value;
 
         if (_hp <= 0)
         {
             //‚â‚ç‚ê‚½
-            _animation.ChangeAnimation(Consts.ANIM_DEAD);
             return;
         }
-        _animation.ChangeAnimation(Consts.ANIM_IDLE);
     }
 }
