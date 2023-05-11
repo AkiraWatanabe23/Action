@@ -37,4 +37,9 @@ public class PlayerController : MonoBehaviour
     {
         _attack.SwitchWeapon();
     }
+
+    private void OnDrawGizmosSelected()
+    {
+        _movement.Overlap.OnDrawGizmos(transform);
+    }
 }

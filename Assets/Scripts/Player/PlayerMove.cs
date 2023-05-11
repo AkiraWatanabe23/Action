@@ -20,8 +20,6 @@ public class PlayerMove
     [Tooltip("減速値")]
     [SerializeField] private float _decreaseSpeed = 1f;
     [SerializeField] private Overlaps _overlap = default;
-    [Tooltip("OverlapSphereのoffset(Playerの中心からどれくらいずらすか)")]
-    [SerializeField] private Vector3 _overlapOffset = Vector3.zero;
 
     private CharacterController _controller = default;
     private Transform _transform = default;
@@ -34,6 +32,7 @@ public class PlayerMove
     private Quaternion _targetRotation = default;
 
     public float MaxSurfaceSpeed => _maxSurfaceSpeed;
+    public Overlaps Overlap => _overlap;
     public float CurrentSuefaceSpeed => _currentSurfaceSpeed;
 
     public void Init(CharacterController con, Transform transform, PlayerAnimation animation)
@@ -54,7 +53,7 @@ public class PlayerMove
     {
         // y軸方向の制御
         // 接地してなければ落下する
-        if (!_overlap.OverlapSphere(_transform.position + _overlapOffset))
+        if (!_overlap.IsHitBySphere(_transform))
         {
             _currentDimensionalSpeed -= _gravity * Time.deltaTime;
             if (_currentDimensionalSpeed < -_maxDimensionalSpeed)
@@ -65,6 +64,8 @@ public class PlayerMove
         // 接地している かつ ジャンプ入力があればジャンプする。
         else if (Input.GetKeyDown(KeyCode.Space))
         {
+            Debug.Log("jump");
+
             _currentDimensionalSpeed = _jumpPower;
             _animation.ChangeAnimation(Consts.ANIM_JUMP);
         }

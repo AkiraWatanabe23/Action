@@ -35,7 +35,6 @@ public class PlayerAnimation
         Array.ForEach(_clips, clip => _anim.SetBool(clip.name, false));
 
         _animName = Consts.ANIM_IDLE;
-        //_anim.SetBool(_animName, true);
     }
 
     public void ChangeAnimation(string newAnimationName)
@@ -51,6 +50,7 @@ public class PlayerAnimation
         _anim.SetBool(_animName, true);
     }
 
+    /// <summary> MoveAnimation用 </summary>
     public void ChangeAnimation(string newAnimationName, bool isDecreace)
     {
         _currentSurfaceSpeed = _move.CurrentSuefaceSpeed;

@@ -362,18 +362,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movement:
     _moveSpeed: 5
-    _jumpPower: 50
+    _jumpPower: 5
     _rotateSpeed: 600
     _gravity: 9.8
     _maxSurfaceSpeed: 5
     _maxDimensionalSpeed: 5
     _decreaseSpeed: 5
     _overlap:
-      _radius: 1
+      _overlapOffset: {x: 0, y: 0.15, z: 0}
+      _radius: 0.2
       _layer:
         serializedVersion: 2
-        m_Bits: 0
-    _overlapOffset: {x: 0, y: -0.5, z: 0}
+        m_Bits: 512
+      _isDrawGizmo: 1
+      _hitColor: {r: 1, g: 0, b: 0, a: 1}
+      _noHitColor: {r: 0, g: 0, b: 1, a: 1}
   _health:
     _hp: 100
   _attack:
