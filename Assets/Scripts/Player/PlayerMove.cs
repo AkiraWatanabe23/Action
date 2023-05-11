@@ -27,11 +27,14 @@ public class PlayerMove
     private Transform _transform = default;
     private PlayerAnimation _animation = default;
 
-    private float _currentHolSpeed = 0f;
-    private float _currentVerSpeed = 0f;
+    private float _currentSurfaceSpeed = 0f;
+    private float _currentDimensionalSpeed = 0f;
 
     private Vector3 _moveDir = Vector3.zero;
     private Quaternion _targetRotation = default;
+
+    public float MaxSurfaceSpeed => _maxSurfaceSpeed;
+    public float CurrentSuefaceSpeed => _currentSurfaceSpeed;
 
     public void Init(CharacterController con, Transform transform, PlayerAnimation animation)
     {
@@ -49,38 +52,37 @@ public class PlayerMove
 
     private void CharaMove(Vector2 input)
     {
-        // 垂直方向の制御
+        // y軸方向の制御
         // 接地してなければ落下する
         if (!_overlap.OverlapSphere(_transform.position + _overlapOffset))
         {
-            _currentVerSpeed -= _gravity * Time.deltaTime;
-            if (_currentVerSpeed < -_maxDimensionalSpeed)
+            _currentDimensionalSpeed -= _gravity * Time.deltaTime;
+            if (_currentDimensionalSpeed < -_maxDimensionalSpeed)
             {
-                _currentVerSpeed = -_maxDimensionalSpeed;
+                _currentDimensionalSpeed = -_maxDimensionalSpeed;
             }
         }
         // 接地している かつ ジャンプ入力があればジャンプする。
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            _currentVerSpeed = _jumpPower;
-
-            //_animation.ChangeAnimation(Consts.ANIM_JUMP);
+            _currentDimensionalSpeed = _jumpPower;
+            _animation.ChangeAnimation(Consts.ANIM_JUMP);
         }
         // 接地していれば速度は垂直速度は0。
         else
         {
-            _currentVerSpeed = 0f;
+            _currentDimensionalSpeed = 0f;
         }
 
-        // 水平方向の制御
+        // xz平面方向の制御
         if (input.sqrMagnitude > 0.3f)
         {
             // 入力がある限り加速する
-            _currentHolSpeed += _moveSpeed * Time.deltaTime;
+            _currentSurfaceSpeed += _moveSpeed * Time.deltaTime;
 
-            if (_currentHolSpeed > _maxSurfaceSpeed)
+            if (_currentSurfaceSpeed > _maxSurfaceSpeed)
             {
-                _currentHolSpeed = _maxSurfaceSpeed;
+                _currentSurfaceSpeed = _maxSurfaceSpeed;
             }
 
             // 入力方向を保存する
@@ -93,24 +95,25 @@ public class PlayerMove
             _targetRotation.x = 0f;
             _targetRotation.z = 0f;
             _transform.rotation = Quaternion.RotateTowards(_transform.rotation, _targetRotation, _rotateSpeed * Time.deltaTime);
+
+            _animation.ChangeAnimation(Consts.ANIM_MOVE, false);
         }
         // 入力がなければ減速する
         else
         {
-            _currentHolSpeed -=
+            _currentSurfaceSpeed -=
                 _decreaseSpeed * Time.deltaTime;
 
-            if (_currentHolSpeed < 0f)
+            if (_currentSurfaceSpeed < 0f)
             {
-                _currentHolSpeed = 0f;
-                //_animation.ChangeAnimation(Consts.ANIM_IDLE);
+                _currentSurfaceSpeed = 0f;
             }
+
+            _animation.ChangeAnimation(Consts.ANIM_MOVE, true);
         }
         // 結果の割り当て
-        Vector3 moveSpeed = _moveDir.normalized * _currentHolSpeed * Time.deltaTime;
-        moveSpeed.y = _currentVerSpeed * Time.deltaTime;
-
-        //_animation.ChangeAnimation(Consts.ANIM_MOVE);
+        Vector3 moveSpeed = _moveDir.normalized * _currentSurfaceSpeed * Time.deltaTime;
+        moveSpeed.y = _currentDimensionalSpeed * Time.deltaTime;
 
         _controller.Move(moveSpeed);
     }

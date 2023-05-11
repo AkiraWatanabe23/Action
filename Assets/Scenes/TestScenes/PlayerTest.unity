@@ -361,8 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movement:
-    _moveType: 0
-    _moveSpeed: 3
+    _moveSpeed: 5
     _jumpPower: 50
     _rotateSpeed: 600
     _gravity: 9.8
@@ -381,7 +380,7 @@ MonoBehaviour:
     _weapon: 0
     _attack: 0
   _animation:
-    _move: 1
+    _clips: []
 --- !u!143 &484357003
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1938,6 +1937,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: adc020444f230b445a21f04c7f12aed5, type: 2}
+    - target: {fileID: 5717370821310611589, guid: d079cd0e6137a44b58864c3a91ad119a, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d079cd0e6137a44b58864c3a91ad119a, type: 3}
 --- !u!4 &1984788955 stripped

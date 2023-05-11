@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
         _movement.Init(_controller, transform, _animation);
         _health.Init(_animation);
         _attack.Init(transform, _animation);
-        _animation.Init(_anim);
+        _animation.Init(_anim, _movement);
     }
 
     private void Update()
