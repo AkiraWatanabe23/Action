@@ -10,7 +10,6 @@ public class EnemyData : ScriptableObject
     public float SearchDistance;
 
     [Header("ステータス一覧")]
-    public int HP;
     public int MaxHP;
     public int MoveSpeed;
     public int AttackValue;

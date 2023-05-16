@@ -24,7 +24,7 @@ public class PlayerAttack
     public void Init(Transform trans, PlayerAnimation animation)
     {
         _transform = trans;
-        _animation = animation;
+        //_animation = animation;
     }
 
     public void Update()

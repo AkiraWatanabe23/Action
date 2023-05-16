@@ -35,12 +35,12 @@ public class EnemyUI : MonoBehaviour
         //Sliderの初期設定
         _hpSlider.minValue = 0;
         _hpSlider.maxValue = _enemy.Data.MaxHP;
-        _hpSlider.value = _enemy.Data.HP;
+        _hpSlider.value = _enemy.HP;
     }
 
     private void Update()
     {
-        _hpSlider.value = _enemy.Data.HP;
+        _hpSlider.value = _enemy.HP;
     }
 
     /// <summary> 徘徊中のみCanvasを表示する </summary>

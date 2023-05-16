@@ -13,7 +13,7 @@ public class PlayerHealth : IDamage
 
     public void Init(PlayerAnimation animation)
     {
-        _animation = animation;
+        //_animation = animation;
     }
 
     public void ReceiveDamege(int value)

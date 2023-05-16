@@ -7,16 +7,17 @@ public class EnemyController : MonoBehaviour, IDamage
     [SerializeField] private EnemyData _data = default;
     [SerializeField] private WanderingRange _wandering = default;
     [SerializeField] private EnemyStateMachine _stateMachine = new();
+    [SerializeField] private int _hp = 100;
 
     private Transform _player = default;
     private NavMeshAgent _agent = default;
     //private Animator _anim = default;
-    private int _hp = 100;
     private float _sqrDistance = 1f;
 
     public EnemyData Data => _data;
     public WanderingRange Wandering { get => _wandering; set => _wandering = value; }
     public EnemyStateMachine StateMachine => _stateMachine;
+    public int HP { get => _hp; set => _hp = value; }
     public Transform Player { get => _player; set => _player = value; }
 
     private void Start()

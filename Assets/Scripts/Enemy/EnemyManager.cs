@@ -4,6 +4,10 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private List<EnemyController> _enemies = new();
+
+    [Tooltip("徘徊位置の親オブジェクト")]
+    [SerializeField] private Transform _wanders = default;
+    [SerializeField] private GameObject _enemyPrefab = default;
     [SerializeField] private Transform _player = default;
 
     [SerializeField] private float _sqrValue = 2f;
@@ -13,12 +17,9 @@ public class EnemyManager : MonoBehaviour
 
     private void Awake()
     {
-        for (int i = 0; i < transform.childCount; i++)
+        if (_enemyPrefab && _wanders)
         {
-            if (transform.GetChild(i).TryGetComponent(out EnemyController enemy))
-            {
-                _enemies.Add(enemy);
-            }
+            EnemySpawn();
         }
 
         if (_player)
@@ -35,6 +36,22 @@ public class EnemyManager : MonoBehaviour
         {
             SearchDitance();
             _timer = 0f;
+        }
+    }
+
+    private void EnemySpawn()
+    {
+        for (int i = 0; i < _wanders.childCount; i++)
+        {
+            var go = Instantiate(_enemyPrefab, _wanders.GetChild(i).position, Quaternion.identity);
+
+            go.transform.SetParent(transform);
+
+            if (go.TryGetComponent(out EnemyController enemy))
+            {
+                enemy.Wandering = _wanders.GetChild(i).GetComponent<WanderingRange>();
+                _enemies.Add(enemy);
+            }
         }
     }
 

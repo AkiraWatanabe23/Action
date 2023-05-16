@@ -39,7 +39,7 @@ public class PlayerMove
     {
         _controller = con;
         _transform = transform;
-        _animation = animation;
+        //_animation = animation;
 
         _targetRotation = _transform.rotation;
     }
