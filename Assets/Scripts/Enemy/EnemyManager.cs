@@ -62,18 +62,8 @@ public class EnemyManager : MonoBehaviour
             foreach (var enemy in _enemies)
             {
                 //一定距離以内で探索開始
-                if ((enemy.transform.position - _player.position).sqrMagnitude > _sqrValue)
-                {
-                    //追跡開始処理
-                    enemy.Wandering.IsMove = true;
-                    enemy.Wandering.SetCanvas?.Invoke(enemy.Wandering.IsMove);
-                }
-                else
-                {
-                    //追跡終了処理
-                    enemy.Wandering.IsMove = false;
-                    enemy.Wandering.SetCanvas?.Invoke(enemy.Wandering.IsMove);
-                }
+                enemy.Wandering.IsMove
+                    = (enemy.transform.position - _player.position).sqrMagnitude > _sqrValue;
             }
         }
     }

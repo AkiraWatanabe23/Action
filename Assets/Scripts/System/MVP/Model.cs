@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class Model
+﻿public class Model
 {
     private string _text = "Hello World!";
 

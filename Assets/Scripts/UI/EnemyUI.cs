@@ -20,16 +20,6 @@ public class EnemyUI : MonoBehaviour
         _enemyCanvas.renderMode = RenderMode.WorldSpace;
     }
 
-    private void OnEnable()
-    {
-        _enemy.Wandering.SetCanvas += CanvasSetting;
-    }
-
-    private void OnDisable()
-    {
-        _enemy.Wandering.SetCanvas -= CanvasSetting;
-    }
-
     private void Start()
     {
         //Sliderの初期設定
@@ -41,11 +31,5 @@ public class EnemyUI : MonoBehaviour
     private void Update()
     {
         _hpSlider.value = _enemy.HP;
-    }
-
-    /// <summary> 徘徊中のみCanvasを表示する </summary>
-    public void CanvasSetting(bool set)
-    {
-        _enemyCanvas.gameObject.SetActive(set);
     }
 }

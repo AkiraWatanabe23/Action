@@ -20,8 +20,6 @@ public class WanderingRange : MonoBehaviour
 
     private Transform[] _wanderingPos = default;
 
-    public Action<bool> SetCanvas = default;
-
     public bool IsMove { get => _isMove; set => _isMove = value; }
     public Transform[] WanderingPos => _wanderingPos;
 
