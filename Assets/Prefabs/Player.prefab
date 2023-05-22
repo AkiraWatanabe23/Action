@@ -1405,7 +1405,7 @@ GameObject:
   - component: {fileID: 1620415567313297484}
   - component: {fileID: 1620415567313297480}
   - component: {fileID: 1620415567313297483}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1495,13 +1495,27 @@ MonoBehaviour:
   _movement:
     _moveSpeed: 3
     _jumpPower: 10
+    _rotateSpeed: 600
+    _gravity: 9.8
+    _maxSurfaceSpeed: 0
+    _maxDimensionalSpeed: 0
+    _decreaseSpeed: 1
+    _overlap:
+      _overlapOffset: {x: 0, y: 0, z: 0}
+      _radius: 1
+      _layer:
+        serializedVersion: 2
+        m_Bits: 0
+      _isDrawGizmo: 1
+      _hitColor: {r: 1, g: 0, b: 0, a: 1}
+      _noHitColor: {r: 0, g: 0, b: 1, a: 1}
   _health:
     _hp: 100
   _attack:
     _weapon: 0
     _attack: 0
   _animation:
-    _move: 1
+    _clips: []
 --- !u!143 &1620415567313297483
 CharacterController:
   m_ObjectHideFlags: 0

@@ -29,6 +29,7 @@ public class Attack : EnemyStateBase
         //UŒ‚ˆ—
         if (Physics.Raycast(_enemy.position, _enemy.forward, out RaycastHit hit, _rayDist))
         {
+            //Player‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é(‰ü‘P—L)
             if (hit.collider.gameObject.TryGetComponent(out PlayerController player))
             {
                 if (_anim)
@@ -38,7 +39,6 @@ public class Attack : EnemyStateBase
                 player.Health.ReceiveDamege(_data.AttackValue);
             }
         }
-
         //UŒ‚‚µ‚½‚çœpœj‚É–ß‚é
         owner.SwitchState(EnemyStateMachine.EnemyStates.Search);
     }

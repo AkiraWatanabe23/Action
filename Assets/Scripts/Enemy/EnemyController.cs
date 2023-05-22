@@ -16,7 +16,6 @@ public class EnemyController : MonoBehaviour, IDamage
 
     public EnemyData Data => _data;
     public WanderingRange Wandering { get => _wandering; set => _wandering = value; }
-    public EnemyStateMachine StateMachine => _stateMachine;
     public int HP { get => _hp; set => _hp = value; }
     public Transform Player { get => _player; set => _player = value; }
 
@@ -42,6 +41,15 @@ public class EnemyController : MonoBehaviour, IDamage
     public void ReceiveDamege(int value)
     {
         _hp -= value;
-        _stateMachine.SwitchState(EnemyStateMachine.EnemyStates.Damege);
+
+        if (_hp <= 0)
+        {
+            //やられた
+            _stateMachine.SwitchState(EnemyStateMachine.EnemyStates.Dead);
+        }
+        else
+        {
+            _stateMachine.SwitchState(EnemyStateMachine.EnemyStates.Damege);
+        }
     }
 }

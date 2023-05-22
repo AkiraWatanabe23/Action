@@ -17,7 +17,7 @@ public class Dead : EnemyStateBase
             //倒れる感じのAnimation
         }
 
-        //Enemyを消す
+        //Enemyを消す(SetActive(false) or Destroy())
     }
 
     public override void OnExit(EnemyStateMachine owner)
