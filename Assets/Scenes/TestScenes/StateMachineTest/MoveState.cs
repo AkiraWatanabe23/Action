@@ -1,4 +1,5 @@
 ﻿using StateMachine;
+using UnityEngine;
 
 public class MoveState : EnemyStateTransition
 {
@@ -6,9 +7,9 @@ public class MoveState : EnemyStateTransition
 
     public MoveChildState MoveChild => _moveChild;
 
-    public override void OnStart(EnemyStates owner)
+    public override void OnEnter(EnemyStates owner)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Enter Move State");
     }
 
     public override void OnUpdate(EnemyStates owner)
@@ -18,7 +19,7 @@ public class MoveState : EnemyStateTransition
 
     public override void OnExit(EnemyStates owner)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Exit Move State");
     }
 
     public enum MoveChildState

@@ -1,4 +1,5 @@
 ﻿using StateMachine;
+using UnityEngine;
 
 public class ConductState : EnemyStateTransition
 {
@@ -6,9 +7,9 @@ public class ConductState : EnemyStateTransition
 
     public ConductChildState ConductChild => _conductChild;
 
-    public override void OnStart(EnemyStates owner)
+    public override void OnEnter(EnemyStates owner)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Enter Conduct State");
     }
 
     public override void OnUpdate(EnemyStates owner)
@@ -17,7 +18,7 @@ public class ConductState : EnemyStateTransition
     }
     public override void OnExit(EnemyStates owner)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Exit Conduct State");
     }
 
     public enum ConductChildState

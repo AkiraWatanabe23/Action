@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemyAttachment : MonoBehaviour
 {
-    private StateMachineRoot _root = default;
+    private StateMachineRoot _root = new();
 
     private void Start()
     {

@@ -2,8 +2,20 @@
 {
     public class StateMachineRoot
     {
-        private EnemyStates.BaseState _currentState = EnemyStates.BaseState.Idle;
+        private EnemyStateTransition _currentState = default;
 
-        public EnemyStates.BaseState CurrentState => _currentState;
+        //private EnemyStates.BaseState _currentState = EnemyStates.BaseState.Idle;
+
+        private IdleState _idle = new();
+        private MoveState _move = new();
+        private ConductState _conduct = new();
+
+        //public EnemyStates.BaseState CurrentState => _currentState;
+
+        public void Init()
+        {
+            //初期ステートの設定
+            _currentState = _idle;
+        }
     }
 }
