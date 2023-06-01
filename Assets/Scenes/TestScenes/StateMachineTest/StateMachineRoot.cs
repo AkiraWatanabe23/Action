@@ -6,12 +6,15 @@ namespace StateMachine
     {
         private StateTransitionBase _currentState = default;
 
+        //各親ステート
         private IdleState _idle = new();
         private MoveBaseState _move = new();
         private ConductState _conduct = new();
 
         public void Init()
         {
+            //ここで必要な値の初期化を行う
+
             //初期ステートの設定
             _currentState = _idle;
         }
@@ -21,15 +24,15 @@ namespace StateMachine
             _currentState.OnUpdate(this);
         }
 
-        private StateTransitionBase GetState(EnemyStates.BaseState state)
+        private StateTransitionBase GetState(BaseState state)
         {
             switch (state)
             {
-                case EnemyStates.BaseState.Idle:
+                case BaseState.Idle:
                     return _idle;
-                case EnemyStates.BaseState.Move:
+                case BaseState.Move:
                     return _move;
-                case EnemyStates.BaseState.Conduct:
+                case BaseState.Conduct:
                     return _conduct;
             }
 
@@ -37,11 +40,18 @@ namespace StateMachine
             return null;
         }
 
-        public void ChangeState(EnemyStates.BaseState nextState)
+        public void ChangeState(BaseState nextState)
         {
             _currentState.OnExit(this);
             _currentState = GetState(nextState);
             _currentState.OnEnter(this);
+        }
+
+        public enum BaseState
+        {
+            Idle,
+            Move,
+            Conduct
         }
     }
 }
