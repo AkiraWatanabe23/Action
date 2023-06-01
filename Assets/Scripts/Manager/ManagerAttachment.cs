@@ -7,9 +7,6 @@ public class ManagerAttachment : MonoBehaviour
     [SerializeField] private Text _timerText = default;
     [SerializeField] private Text _countText = default;
 
-    [SerializeField] private GameObject _enemyPrefab = default;
-    [SerializeField] private GameObject _wanderingPositions = default;
-
     private GameManager _gameManager = default;
     private UIManager _uiManager = default;
 
@@ -29,7 +26,6 @@ public class ManagerAttachment : MonoBehaviour
         if (_gameManager.IsGameStart)
         {
             _gameManager.Start();
-            _gameManager.EnemySpawn(_enemyPrefab, _wanderingPositions);
         }
     }
 

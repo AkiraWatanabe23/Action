@@ -4,14 +4,12 @@ public class GameManager : MonoBehaviour
 {
     [Header("Debug")]
     [SerializeField] private bool _isGameStart = false;
-    [SerializeField] private int _killCount = 0;
 
     private float _timer = 100f;
 
     private static GameManager _instance = default;
 
     public bool IsGameStart => _isGameStart;
-    public int KillCount => _killCount;
     public float Timer { get => _timer; set => _timer = value; }
 
     public static GameManager Instance => _instance;
@@ -55,19 +53,5 @@ public class GameManager : MonoBehaviour
     public void GameStart()
     {
         _isGameStart = true;
-    }
-
-    public void EnemySpawn(GameObject enemy, GameObject positions)
-    {
-        for (int i = 0; i < positions.transform.childCount; i++)
-        {
-            var e =
-                Instantiate(enemy, positions.transform.GetChild(i).transform.position, Quaternion.identity);
-
-            if (e.TryGetComponent(out EnemyController controller))
-            {
-                controller.Wandering = positions.transform.GetChild(i).GetComponent<WanderingRange>();
-            }
-        }
     }
 }

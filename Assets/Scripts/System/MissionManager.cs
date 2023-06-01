@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 public class MissionManager : MonoBehaviour
 {
@@ -8,11 +9,34 @@ public class MissionManager : MonoBehaviour
     private void Start()
     {
         _missions = new MissionState[_missionCount];
+
+        for (int i  = 0; i < _missionCount; i++)
+        {
+            _missions[i] = MissionState.UnChallenged;
+        }
     }
 
     private void Update()
     {
 
+    }
+
+    private void MissionStart(int index)
+    {
+        Debug.Log($"Mission{index} を開始します。");
+        _missions[index] = MissionState.Challenging;
+    }
+
+    private void MissionClear(int index)
+    {
+        Debug.Log($"Mission{index} をクリアしました。");
+        _missions[index] = MissionState.Cleared;
+
+        if (_missions.All(m => m == MissionState.Cleared))
+        {
+            //ミッション全部クリア
+            Debug.Log("全てのミッションをクリアしました。");
+        }
     }
 }
 
