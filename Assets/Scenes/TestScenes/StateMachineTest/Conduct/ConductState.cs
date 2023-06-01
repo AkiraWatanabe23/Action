@@ -1,22 +1,22 @@
 ﻿using StateMachine;
 using UnityEngine;
 
-public class ConductState : EnemyStateTransition
+public class ConductState : StateTransitionBase
 {
     private ConductChildState _conductChild = ConductChildState.Attack;
 
     public ConductChildState ConductChild => _conductChild;
 
-    public override void OnEnter(EnemyStates owner)
+    public override void OnEnter(StateMachineRoot owner)
     {
         Debug.Log("Enter Conduct State");
     }
 
-    public override void OnUpdate(EnemyStates owner)
+    public override void OnUpdate(StateMachineRoot owner)
     {
         throw new System.NotImplementedException();
     }
-    public override void OnExit(EnemyStates owner)
+    public override void OnExit(StateMachineRoot owner)
     {
         Debug.Log("Exit Conduct State");
     }

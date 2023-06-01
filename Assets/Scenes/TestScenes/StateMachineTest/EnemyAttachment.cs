@@ -7,11 +7,11 @@ public class EnemyAttachment : MonoBehaviour
 
     private void Start()
     {
-        
+        _root.Init();
     }
 
     private void Update()
     {
-        
+        _root.Update();
     }
 }
