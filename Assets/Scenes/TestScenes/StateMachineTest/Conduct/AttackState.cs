@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace StateMachine
 {
-    public class AttackState : State
+    public class AttackState : SubState
     {
         public override void OnEnter(StateMachineRoot owner)
         {

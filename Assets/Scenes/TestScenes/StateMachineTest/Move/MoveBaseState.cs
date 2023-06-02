@@ -6,6 +6,10 @@ namespace StateMachine
     {
         private MoveChildState _moveChild = MoveChildState.Search;
 
+        private SearchState _searchState = default;
+        private ChaseState _chaseState = default;
+        private RunAwayState _runAwayState = default;
+
         public MoveChildState MoveChild => _moveChild;
 
         public override void OnEnter(StateMachineRoot owner)

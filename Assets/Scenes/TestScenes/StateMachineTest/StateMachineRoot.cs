@@ -9,12 +9,12 @@ namespace StateMachine
         //各親ステート
         private IdleState _idle = new();
         private MoveBaseState _move = new();
-        private ConductState _conduct = new();
+        private ConductBaseState _conduct = new();
 
         public State CurrentState => _currentState;
         public IdleState Idle => _idle;
         public MoveBaseState Move => _move;
-        public ConductState Conduct => _conduct;
+        public ConductBaseState Conduct => _conduct;
 
         public void Init()
         {
@@ -40,7 +40,6 @@ namespace StateMachine
                 case BaseState.Conduct:
                     return _conduct;
             }
-
             Debug.LogError("No State");
             return null;
         }

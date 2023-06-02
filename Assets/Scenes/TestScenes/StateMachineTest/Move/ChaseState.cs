@@ -2,7 +2,7 @@
 
 namespace StateMachine
 {
-    public class ChaseState : State
+    public class ChaseState : SubState
     {
         public override void OnEnter(StateMachineRoot owner)
         {

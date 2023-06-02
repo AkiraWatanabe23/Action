@@ -2,9 +2,13 @@
 
 namespace StateMachine
 {
-    public class ConductState : State
+    public class ConductBaseState : State
     {
-        private ConductChildState _conductChild = ConductChildState.Attack;
+        private ConductChildState _conductChild = default;
+
+        private AttackState _attackState = default;
+        private DamageState _damageState = default;
+        private DeathState _deathState = default;
 
         public ConductChildState ConductChild => _conductChild;
 

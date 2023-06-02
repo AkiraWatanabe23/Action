@@ -2,7 +2,7 @@
 
 namespace StateMachine
 {
-    public class RunAwayState : State
+    public class RunAwayState : SubState
     {
         public override void OnEnter(StateMachineRoot owner)
         {
