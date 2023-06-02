@@ -54,6 +54,27 @@ public class SearchPlayer : EnemyStateBase
         Debug.Log("exit search state");
     }
 
+    /// <summary> Playerを探す </summary>
+    private void Search(EnemyStateMachine owner)
+    {
+        var dir = _player.position - _enemy.position;
+        var dist = dir.sqrMagnitude;
+
+        //cos(θ/2)
+        var cosHalf = Mathf.Cos(_data.SearchAngle / 2 * Mathf.Deg2Rad);
+
+        //内積を取得する
+        var innerProduct
+            = Vector3.Dot(_enemy.forward, _player.position.normalized);
+
+        //視界に入っていて、距離が範囲内ならPlayerの追跡に切り替わる
+        if (innerProduct > cosHalf && dist < _sqrDistance)
+        {
+            Debug.Log("find player");
+            owner.SwitchState(EnemyStateMachine.EnemyStates.Chase);
+        }
+    }
+
     /// <summary> 移動 </summary>
     public override void Movement(EnemyStateMachine owner)
     {
@@ -86,26 +107,5 @@ public class SearchPlayer : EnemyStateBase
         }
 
         return index;
-    }
-
-    /// <summary> Playerを探す </summary>
-    private void Search(EnemyStateMachine owner)
-    {
-        var dir = _player.position - _enemy.position;
-        var dist = dir.sqrMagnitude;
-
-        //cos(θ/2)
-        var cosHalf = Mathf.Cos(_data.SearchAngle / 2 * Mathf.Deg2Rad);
-
-        //内積を取得する
-        var innerProduct
-            = Vector3.Dot(_enemy.forward, _player.position.normalized);
-
-        //視界に入っていて、距離が範囲内ならPlayerの追跡に切り替わる
-        if (innerProduct > cosHalf && dist < _sqrDistance)
-        {
-            Debug.Log("find player");
-            owner.SwitchState(EnemyStateMachine.EnemyStates.Chase);
-        }
     }
 }
