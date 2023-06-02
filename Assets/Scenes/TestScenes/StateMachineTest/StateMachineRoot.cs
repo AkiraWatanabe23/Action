@@ -4,14 +4,14 @@ namespace StateMachine
 {
     public class StateMachineRoot
     {
-        private StateTransitionBase _currentState = default;
+        private State _currentState = default;
 
         //各親ステート
         private IdleState _idle = new();
         private MoveBaseState _move = new();
         private ConductState _conduct = new();
 
-        public StateTransitionBase CurrentState => _currentState;
+        public State CurrentState => _currentState;
         public IdleState Idle => _idle;
         public MoveBaseState Move => _move;
         public ConductState Conduct => _conduct;
@@ -29,7 +29,7 @@ namespace StateMachine
             _currentState.OnUpdate(this);
         }
 
-        private StateTransitionBase GetState(BaseState state)
+        private State GetState(BaseState state)
         {
             switch (state)
             {

@@ -2,7 +2,7 @@
 
 namespace StateMachine
 {
-    public class ConductState : StateTransitionBase
+    public class ConductState : State
     {
         private ConductChildState _conductChild = ConductChildState.Attack;
 

@@ -2,7 +2,7 @@
 
 namespace StateMachine
 {
-    public class IdleState : StateTransitionBase
+    public class IdleState : State
     {
         private bool _isChangeState = false;
 

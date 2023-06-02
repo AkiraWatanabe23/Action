@@ -2,7 +2,7 @@
 
 namespace StateMachine
 {
-    public class MoveBaseState : StateTransitionBase
+    public class MoveBaseState : State
     {
         private MoveChildState _moveChild = MoveChildState.Search;
 

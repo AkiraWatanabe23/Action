@@ -2,7 +2,7 @@
 
 namespace StateMachine
 {
-    public class SearchState : StateTransitionBase
+    public class SearchState : State
     {
         public override void OnEnter(StateMachineRoot owner)
         {
