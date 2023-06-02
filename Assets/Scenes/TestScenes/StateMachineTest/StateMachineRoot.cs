@@ -11,6 +11,11 @@ namespace StateMachine
         private MoveBaseState _move = new();
         private ConductState _conduct = new();
 
+        public StateTransitionBase CurrentState => _currentState;
+        public IdleState Idle => _idle;
+        public MoveBaseState Move => _move;
+        public ConductState Conduct => _conduct;
+
         public void Init()
         {
             //ここで必要な値の初期化を行う
