@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageState : MonoBehaviour
+namespace StateMachine
 {
-    // Start is called before the first frame update
-    void Start()
+    public class DamageState : StateTransitionBase
     {
-        
-    }
+        public override void OnEnter(StateMachineRoot owner)
+        {
+            Debug.Log("Enter Damage State");
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public override void OnUpdate(StateMachineRoot owner)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void OnExit(StateMachineRoot owner)
+        {
+            Debug.Log("Exit Damage State");
+        }
     }
 }

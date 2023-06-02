@@ -21,7 +21,7 @@ public class EnemyRange : MonoBehaviour
             //IdleStateの敵を起こす
             foreach (var enemy in _enemies)
             {
-                if (enemy == null) break;
+                if (enemy == null) continue;
 
                 var current = enemy.Root.CurrentState;
 
@@ -40,7 +40,7 @@ public class EnemyRange : MonoBehaviour
             //Move, ConductStateの敵を止める
             foreach (var enemy in _enemies)
             {
-                if (enemy == null) break;
+                if (enemy == null) continue;
 
                 var current = enemy.Root.CurrentState;
 

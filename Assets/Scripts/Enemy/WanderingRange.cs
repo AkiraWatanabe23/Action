@@ -32,7 +32,7 @@ public class WanderingRange : MonoBehaviour
     {
         var posCollider = GetComponent<SphereCollider>();
 
-        posCollider.radius = _radius * 2;
+        posCollider.radius = _radius;
         posCollider.isTrigger = true;
 
         _wanderingPos = new Transform[_posCount];

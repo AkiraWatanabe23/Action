@@ -1,20 +1,22 @@
-﻿using StateMachine;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class SearchState : StateTransitionBase
+namespace StateMachine
 {
-    public override void OnEnter(StateMachineRoot owner)
+    public class SearchState : StateTransitionBase
     {
-        Debug.Log("Enter Search State");
-    }
+        public override void OnEnter(StateMachineRoot owner)
+        {
+            Debug.Log("Enter Search State");
+        }
 
-    public override void OnUpdate(StateMachineRoot owner)
-    {
-        throw new System.NotImplementedException();
-    }
+        public override void OnUpdate(StateMachineRoot owner)
+        {
+            throw new System.NotImplementedException();
+        }
 
-    public override void OnExit(StateMachineRoot owner)
-    {
-        Debug.Log("Exit Search State");
+        public override void OnExit(StateMachineRoot owner)
+        {
+            Debug.Log("Exit Search State");
+        }
     }
 }

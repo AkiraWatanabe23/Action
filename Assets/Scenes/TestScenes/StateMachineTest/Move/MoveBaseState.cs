@@ -1,31 +1,33 @@
-﻿using StateMachine;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class MoveBaseState : StateTransitionBase
+namespace StateMachine
 {
-    private MoveChildState _moveChild = MoveChildState.Search;
-
-    public MoveChildState MoveChild => _moveChild;
-
-    public override void OnEnter(StateMachineRoot owner)
+    public class MoveBaseState : StateTransitionBase
     {
-        Debug.Log("Enter Move State");
-    }
+        private MoveChildState _moveChild = MoveChildState.Search;
 
-    public override void OnUpdate(StateMachineRoot owner)
-    {
-        throw new System.NotImplementedException();
-    }
+        public MoveChildState MoveChild => _moveChild;
 
-    public override void OnExit(StateMachineRoot owner)
-    {
-        Debug.Log("Exit Move State");
-    }
+        public override void OnEnter(StateMachineRoot owner)
+        {
+            Debug.Log("Enter Move State");
+        }
 
-    public enum MoveChildState
-    {
-        Search,
-        Chase,
-        RunAway
+        public override void OnUpdate(StateMachineRoot owner)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void OnExit(StateMachineRoot owner)
+        {
+            Debug.Log("Exit Move State");
+        }
+
+        public enum MoveChildState
+        {
+            Search,
+            Chase,
+            RunAway
+        }
     }
 }
