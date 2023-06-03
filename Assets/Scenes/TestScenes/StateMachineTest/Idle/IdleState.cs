@@ -1,18 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace StateMachine
 {
     public class IdleState : State
     {
         private bool _isChangeState = false;
-
-        public bool IsChangeState { get => _isChangeState; set => _isChangeState = value; }
-
-        public void Init()
-        {
-
-        }
 
         public override void OnEnter(StateMachineRoot owner)
         {
@@ -35,6 +27,11 @@ namespace StateMachine
         public override void OnExit(StateMachineRoot owner)
         {
             Debug.Log("Exit Idle State");
+        }
+
+        public void ExitIdle()
+        {
+            _isChangeState = true;
         }
     }
 }
