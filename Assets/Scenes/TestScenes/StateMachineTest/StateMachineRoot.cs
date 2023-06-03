@@ -6,6 +6,8 @@ namespace StateMachine
     {
         private State _currentState = default;
 
+        private BaseState _currentBaseState = default;
+
         public State CurrentState => _currentState;
 
         #region 各親ステート
@@ -43,6 +45,7 @@ namespace StateMachine
 
             //初期ステートの設定
             _currentState = _idle;
+            _currentBaseState = BaseState.Idle;
         }
 
         public void Update()
@@ -82,6 +85,8 @@ namespace StateMachine
             _currentState.OnExit(this);
             _currentState = GetState(nextState);
             _currentState.OnEnter(this);
+
+            _currentBaseState = nextState;
         }
 
         public void ChangeState(SubState nextState)
@@ -89,6 +94,20 @@ namespace StateMachine
             _currentState.OnExit(this);
             _currentState = GetState(nextState);
             _currentState.OnEnter(this);
+
+            switch (nextState)
+            {
+                case SubState.Search:
+                case SubState.Chase:
+                case SubState.Escape:
+                    _currentBaseState = BaseState.Move;
+                    break;
+                case SubState.Attack:
+                case SubState.Damage:
+                case SubState.Death:
+                    _currentBaseState = BaseState.Conduct;
+                    break;
+            }
         }
 
         public enum BaseState

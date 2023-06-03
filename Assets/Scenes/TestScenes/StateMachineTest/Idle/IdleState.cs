@@ -29,7 +29,7 @@ namespace StateMachine
             Debug.Log("Exit Idle State");
         }
 
-        public void ExitIdle()
+        public void TransitionFromIdle()
         {
             _isChangeState = true;
         }
