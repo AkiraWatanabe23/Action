@@ -20,8 +20,7 @@ namespace StateMachine
             if (_isChangeState)
             {
                 Debug.Log("Playerが範囲内に侵入しました");
-                owner.SelectSubState(StateMachineRoot.SubState.Search);
-                owner.ChangeState(StateMachineRoot.BaseState.Move);
+                owner.ChangeState(StateMachineRoot.SubState.Search);
             }
         }
 
