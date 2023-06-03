@@ -4,22 +4,20 @@ namespace StateMachine
 {
     public class ConductBaseState : State
     {
-        private StateFlag _flag = StateFlag.None;
-
         public override void OnEnter(StateMachineRoot owner)
         {
             Debug.Log("Enter Conduct State");
 
             //ここで子ステートへの遷移
-            switch (_flag)
+            switch (owner.NextSubState)
             {
-                case StateFlag.Attack:
+                case StateMachineRoot.SubState.Attack:
                     owner.ChangeSubState(StateMachineRoot.SubState.Attack);
                     break;
-                case StateFlag.Damage:
+                case StateMachineRoot.SubState.Damage:
                     owner.ChangeSubState(StateMachineRoot.SubState.Damage);
                     break;
-                case StateFlag.Death:
+                case StateMachineRoot.SubState.Death:
                     owner.ChangeSubState(StateMachineRoot.SubState.Death);
                     break;
             }
@@ -33,19 +31,6 @@ namespace StateMachine
         public override void OnExit(StateMachineRoot owner)
         {
             Debug.Log("Exit Conduct State");
-        }
-
-        public void SelectFlag(StateFlag flag)
-        {
-            _flag = flag;
-        }
-
-        public enum StateFlag
-        {
-            None,
-            Attack,
-            Damage,
-            Death,
         }
     }
 }

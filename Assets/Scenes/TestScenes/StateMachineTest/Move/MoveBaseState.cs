@@ -4,22 +4,20 @@ namespace StateMachine
 {
     public class MoveBaseState : State
     {
-        private StateFlag _flag = StateFlag.None;
-
         public override void OnEnter(StateMachineRoot owner)
         {
             Debug.Log("Enter Move State");
 
             //ここで子ステートへの遷移
-            switch (_flag)
+            switch (owner.NextSubState)
             {
-                case StateFlag.Search:
+                case StateMachineRoot.SubState.Search:
                     owner.ChangeSubState(StateMachineRoot.SubState.Search);
                     break;
-                case StateFlag.Chase:
+                case StateMachineRoot.SubState.Chase:
                     owner.ChangeSubState(StateMachineRoot.SubState.Chase);
                     break;
-                case StateFlag.Escape:
+                case StateMachineRoot.SubState.Escape:
                     owner.ChangeSubState(StateMachineRoot.SubState.Escape);
                     break;
             }
@@ -33,19 +31,6 @@ namespace StateMachine
         public override void OnExit(StateMachineRoot owner)
         {
             Debug.Log("Exit Move State");
-        }
-
-        public void SelectFlag(StateFlag flag)
-        {
-            _flag = flag;
-        }
-
-        public enum StateFlag
-        {
-            None,
-            Search,
-            Chase,
-            Escape,
         }
     }
 }

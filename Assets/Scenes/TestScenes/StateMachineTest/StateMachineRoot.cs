@@ -6,7 +6,10 @@ namespace StateMachine
     {
         private State _currentState = default;
 
+        private SubState _nextSubState = SubState.Search;
+
         public State CurrentState => _currentState;
+        public SubState NextSubState => _nextSubState;
 
         #region 各親ステート
         private IdleState _idle = new();
@@ -89,6 +92,11 @@ namespace StateMachine
             _currentState.OnExit(this);
             _currentState = GetState(nextState);
             _currentState.OnEnter(this);
+        }
+
+        public void SelectSubState(SubState nextSub)
+        {
+            _nextSubState = nextSub;
         }
 
         public enum BaseState
