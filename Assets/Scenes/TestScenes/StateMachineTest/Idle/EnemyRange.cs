@@ -8,6 +8,7 @@ public class EnemyRange : MonoBehaviour
     public void Init()
     {
         //この範囲内の敵をListに格納
+        //===============ここがなんか気になるので後で直す===============
         for (int i = 0; i < transform.childCount; i++)
         {
             _enemies.Add(transform.GetChild(i).GetComponent<EnemyAttachment>());
@@ -37,16 +38,16 @@ public class EnemyRange : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out PlayerController player))
         {
-            //Move, ConductStateの敵を止める
+            //Playerが範囲外に出たらIdleStateに戻る
             foreach (var enemy in _enemies)
             {
                 if (enemy == null) continue;
 
                 var current = enemy.Root.CurrentState;
 
-                if (current == enemy.Root.Idle)
+                if (current != enemy.Root.Idle)
                 {
-                    enemy.Root.Idle.IsChangeState = false;
+                    enemy.Root.ChangeState(StateMachine.StateMachineRoot.BaseState.Idle);
                 }
             }
         }

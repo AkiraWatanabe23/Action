@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace StateMachine
 {
@@ -7,6 +8,11 @@ namespace StateMachine
         private bool _isChangeState = false;
 
         public bool IsChangeState { get => _isChangeState; set => _isChangeState = value; }
+
+        public void Init()
+        {
+
+        }
 
         public override void OnEnter(StateMachineRoot owner)
         {
