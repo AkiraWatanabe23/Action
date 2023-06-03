@@ -2,11 +2,11 @@
 
 namespace StateMachine
 {
-    public class RunAwayState : SubState
+    public class EscapeState : SubState
     {
         public override void OnEnter(StateMachineRoot owner)
         {
-            Debug.Log("Enter RunAway State");
+            Debug.Log("Enter Escape State");
         }
 
         public override void OnUpdate(StateMachineRoot owner)
@@ -16,7 +16,7 @@ namespace StateMachine
 
         public override void OnExit(StateMachineRoot owner)
         {
-            Debug.Log("Exit RunAway State");
+            Debug.Log("Exit Escape State");
         }
     }
 }

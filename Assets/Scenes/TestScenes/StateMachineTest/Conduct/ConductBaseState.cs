@@ -4,17 +4,14 @@ namespace StateMachine
 {
     public class ConductBaseState : State
     {
-        private ConductChildState _conductChild = default;
-
-        private AttackState _attackState = default;
-        private DamageState _damageState = default;
-        private DeathState _deathState = default;
-
-        public ConductChildState ConductChild => _conductChild;
-
         public override void OnEnter(StateMachineRoot owner)
         {
             Debug.Log("Enter Conduct State");
+
+            //ここで子ステートへの遷移（条件を設定する）
+            owner.ChangeSubState(StateMachineRoot.SubState.Attack);
+            owner.ChangeSubState(StateMachineRoot.SubState.Damage);
+            owner.ChangeSubState(StateMachineRoot.SubState.Death);
         }
 
         public override void OnUpdate(StateMachineRoot owner)
@@ -25,13 +22,6 @@ namespace StateMachine
         public override void OnExit(StateMachineRoot owner)
         {
             Debug.Log("Exit Conduct State");
-        }
-
-        public enum ConductChildState
-        {
-            Attack,
-            Damage,
-            Death
         }
     }
 }
