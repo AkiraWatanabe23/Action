@@ -2,21 +2,14 @@
 
 namespace StateMachine
 {
-    public class MoveBaseState : State
+    /// <summary> 動き関連のステートの基底クラス </summary>
+    public class MoveBaseState
     {
-        public override void OnEnter(StateMachineRoot owner)
-        {
-            Debug.Log("Enter Move State");
-        }
+        private Transform _player = default;
 
-        public override void OnUpdate(StateMachineRoot owner)
+        public void Init(Transform player)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public override void OnExit(StateMachineRoot owner)
-        {
-            Debug.Log("Exit Move State");
+            _player = player;
         }
     }
 }

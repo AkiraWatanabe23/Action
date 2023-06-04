@@ -2,17 +2,22 @@
 
 namespace StateMachine
 {
-    public class IdleState : State
+    public class IdleState : IState
     {
         private bool _isChangeState = false;
 
-        public override void OnEnter(StateMachineRoot owner)
+        public void Init()
+        {
+
+        }
+
+        public void OnEnter(StateMachineRoot owner)
         {
             Debug.Log("Enter Idle State");
             _isChangeState = false;
         }
 
-        public override void OnUpdate(StateMachineRoot owner)
+        public void OnUpdate(StateMachineRoot owner)
         {
             //IdleState ... 基本的には何もしない
 
@@ -24,7 +29,7 @@ namespace StateMachine
             }
         }
 
-        public override void OnExit(StateMachineRoot owner)
+        public void OnExit(StateMachineRoot owner)
         {
             Debug.Log("Exit Idle State");
         }

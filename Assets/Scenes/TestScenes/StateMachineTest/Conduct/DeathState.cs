@@ -2,19 +2,19 @@ using UnityEngine;
 
 namespace StateMachine
 {
-    public class DeathState : SubState
+    public class DeathState : ConductBaseState, IState
     {
-        public override void OnEnter(StateMachineRoot owner)
+        public void OnEnter(StateMachineRoot owner)
         {
             Debug.Log("Enter Death State");
         }
 
-        public override void OnUpdate(StateMachineRoot owner)
+        public void OnUpdate(StateMachineRoot owner)
         {
             throw new System.NotImplementedException();
         }
 
-        public override void OnExit(StateMachineRoot owner)
+        public void OnExit(StateMachineRoot owner)
         {
             Debug.Log("Exit Death State");
         }

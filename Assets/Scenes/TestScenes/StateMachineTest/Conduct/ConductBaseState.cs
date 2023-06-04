@@ -2,21 +2,12 @@
 
 namespace StateMachine
 {
-    public class ConductBaseState : State
+    /// <summary> 行動関連のステートの基底クラス </summary>
+    public class ConductBaseState
     {
-        public override void OnEnter(StateMachineRoot owner)
+        public void Init()
         {
-            Debug.Log("Enter Conduct State");
-        }
 
-        public override void OnUpdate(StateMachineRoot owner)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void OnExit(StateMachineRoot owner)
-        {
-            Debug.Log("Exit Conduct State");
         }
     }
 }

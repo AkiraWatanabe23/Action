@@ -4,11 +4,9 @@ namespace StateMachine
 {
     public class StateMachineRoot
     {
-        private State _currentState = default;
+        private IState _currentState = default;
 
-        private BaseState _currentBaseState = default;
-
-        public State CurrentState => _currentState;
+        public IState CurrentState => _currentState;
 
         #region 各親ステート
         private IdleState _idle = new();
@@ -39,13 +37,17 @@ namespace StateMachine
         public DeathState Death => _death;
         #endregion
 
+        private Transform _player = default;
+
         public void Init()
         {
             //ここで必要な値の初期化を行う
+            _idle.Init();
+            _move.Init(_player);
+            _conduct.Init();
 
             //初期ステートの設定
             _currentState = _idle;
-            _currentBaseState = BaseState.Idle;
         }
 
         public void Update()
@@ -53,19 +55,19 @@ namespace StateMachine
             _currentState.OnUpdate(this);
         }
 
-        private State GetState(BaseState state)
+        private IState GetState(BaseState state)
         {
             switch (state)
             {
                 case BaseState.Idle:    return _idle;
-                case BaseState.Move:    return _move;
-                case BaseState.Conduct: return _conduct;
+                //case BaseState.Move:    return _move;
+                //case BaseState.Conduct: return _conduct;
             }
             Debug.LogError("No State");
             return null;
         }
 
-        private State GetState(SubState state)
+        private IState GetState(SubState state)
         {
             switch (state)
             {
@@ -85,8 +87,6 @@ namespace StateMachine
             _currentState.OnExit(this);
             _currentState = GetState(nextState);
             _currentState.OnEnter(this);
-
-            _currentBaseState = nextState;
         }
 
         public void ChangeState(SubState nextState)
@@ -94,20 +94,6 @@ namespace StateMachine
             _currentState.OnExit(this);
             _currentState = GetState(nextState);
             _currentState.OnEnter(this);
-
-            switch (nextState)
-            {
-                case SubState.Search:
-                case SubState.Chase:
-                case SubState.Escape:
-                    _currentBaseState = BaseState.Move;
-                    break;
-                case SubState.Attack:
-                case SubState.Damage:
-                case SubState.Death:
-                    _currentBaseState = BaseState.Conduct;
-                    break;
-            }
         }
 
         public enum BaseState
