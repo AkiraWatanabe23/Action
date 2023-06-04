@@ -7,6 +7,8 @@ namespace StateMachine
     {
         private Transform _player = default;
 
+        public Transform Player => _player;
+
         public void Init(Transform player)
         {
             _player = player;

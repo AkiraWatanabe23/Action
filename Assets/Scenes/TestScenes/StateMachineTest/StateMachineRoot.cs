@@ -37,13 +37,11 @@ namespace StateMachine
         public DeathState Death => _death;
         #endregion
 
-        private Transform _player = default;
-
-        public void Init()
+        public void Init(Transform player)
         {
             //ここで必要な値の初期化を行う
             _idle.Init();
-            _move.Init(_player);
+            _move.Init(player);
             _conduct.Init();
 
             //初期ステートの設定
