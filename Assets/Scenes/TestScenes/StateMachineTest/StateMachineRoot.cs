@@ -37,11 +37,11 @@ namespace StateMachine
         public DeathState Death => _death;
         #endregion
 
-        public void Init(Transform player)
+        public void Init(EnemyData enemyData, WanderingRange wandering, Transform player, Transform enemy, float sqrDistance)
         {
             //ここで必要な値の初期化を行う
             _idle.Init();
-            _move.Init(player);
+            _move.Init(enemyData, wandering, player, enemy, sqrDistance);
             _conduct.Init();
 
             //初期ステートの設定
