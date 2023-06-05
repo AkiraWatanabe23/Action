@@ -25,7 +25,7 @@ namespace StateMachine
             if (Wandering.IsMove)
             {
                 Search(owner);
-                Movement(owner);
+                Movement();
             }
         }
 
@@ -56,7 +56,7 @@ namespace StateMachine
         }
 
         /// <summary> 移動 </summary>
-        private void Movement(StateMachineRoot owner)
+        private void Movement()
         {
             if (Anim)
             {
@@ -69,21 +69,21 @@ namespace StateMachine
             if (sqrMag < _stopping * _stopping)
             {
                 //目的地に到着したら次の目的地を設定
-                _posIndex = SetDestinationIndex(owner);
+                _posIndex = SetDestinationIndex();
                 Debug.Log("Change Destination");
             }
             Agent.SetDestination(Wandering.WanderingPos[_posIndex].position);
         }
 
         /// <summary> 次の目的地のインデックスを取得 </summary>
-        private int SetDestinationIndex(StateMachineRoot owner)
+        private int SetDestinationIndex()
         {
             int index = Random.Range(0, Wandering.WanderingPos.Length);
 
             if (index == _posIndex)
             {
                 //同じ場所を選んだら、選び直し
-                return SetDestinationIndex(owner);
+                return SetDestinationIndex();
             }
 
             return index;
