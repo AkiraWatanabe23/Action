@@ -2,6 +2,7 @@
 
 namespace StateMachine
 {
+    [System.Serializable]
     public class EscapeState : MoveBaseState, IState
     {
         public void OnEnter(StateMachineRoot owner)

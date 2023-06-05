@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 namespace StateMachine
 {
+    [System.Serializable]
     public class StateMachineRoot
     {
         private IState _currentState = default;
@@ -9,9 +11,9 @@ namespace StateMachine
         public IState CurrentState => _currentState;
 
         #region 各親ステート
-        private IdleState _idle = new();
-        private MoveBaseState _move = new();
-        private ConductBaseState _conduct = new();
+        [SerializeField] private IdleState _idle = new();
+        [SerializeField] private MoveBaseState _move = new();
+        [SerializeField] private ConductBaseState _conduct = new();
 
         public IdleState Idle => _idle;
         public MoveBaseState Move => _move;
@@ -19,29 +21,31 @@ namespace StateMachine
         #endregion
 
         #region 各子ステート
-        private SearchState _search = new();
-        private ChaseState _chase = new();
-        private EscapeState _escape = new();
+        [SerializeField] private SearchState _search = new();
+        [SerializeField] private ChaseState _chase = new();
+        [SerializeField] private EscapeState _escape = new();
 
         public SearchState Search => _search;
         public ChaseState Chase => _chase;
         public EscapeState Escape => _escape;
 
 
-        private AttackState _attack = new();
-        private DamageState _damage = new();
-        private DeathState _death = new();
+        [SerializeField] private AttackState _attack = new();
+        [SerializeField] private DamageState _damage = new();
+        [SerializeField] private DeathState _death = new();
 
         public AttackState Attack => _attack;
         public DamageState Damage => _damage;
         public DeathState Death => _death;
         #endregion
 
-        public void Init(EnemyData enemyData, WanderingRange wandering, Transform player, Transform enemy, float sqrDistance)
+        public void Init(EnemyData enemyData, WanderingRange wandering, NavMeshAgent agent,
+                         Transform player, Transform enemy, float distance,
+                         Animator anim)
         {
             //ここで必要な値の初期化を行う
             _idle.Init();
-            _move.Init(enemyData, wandering, player, enemy, sqrDistance);
+            _move.Init(enemyData, wandering, agent, player, enemy, distance, anim);
             _conduct.Init();
 
             //初期ステートの設定

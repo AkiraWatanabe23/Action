@@ -24,11 +24,11 @@ public class EnemyRange : MonoBehaviour
             {
                 if (enemy == null) continue;
 
-                var current = enemy.Root.CurrentState;
+                var current = enemy.StateMachine.CurrentState;
 
-                if (current == enemy.Root.Idle)
+                if (current == enemy.StateMachine.Idle)
                 {
-                    enemy.Root.Idle.TransitionFromIdle();
+                    enemy.StateMachine.Idle.TransitionFromIdle();
                 }
             }
         }
@@ -43,11 +43,11 @@ public class EnemyRange : MonoBehaviour
             {
                 if (enemy == null) continue;
 
-                var current = enemy.Root.CurrentState;
+                var current = enemy.StateMachine.CurrentState;
 
-                if (current != enemy.Root.Idle)
+                if (current != enemy.StateMachine.Idle)
                 {
-                    enemy.Root.ChangeState(StateMachine.StateMachineRoot.BaseState.Idle);
+                    enemy.StateMachine.ChangeState(StateMachine.StateMachineRoot.BaseState.Idle);
                 }
             }
         }
