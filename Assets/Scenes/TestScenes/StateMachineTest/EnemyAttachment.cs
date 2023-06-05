@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class EnemyAttachment : MonoBehaviour
+public class EnemyAttachment : MonoBehaviour, IDamage
 {
     [SerializeField] private EnemyData _enemyData = default;
     [SerializeField] private StateMachineRoot _stateMachine = new();
@@ -35,5 +35,11 @@ public class EnemyAttachment : MonoBehaviour
     private void Update()
     {
         _stateMachine.Update();
+    }
+
+    public void ReceiveDamege(int value)
+    {
+        _hp -= value;
+        _stateMachine.ChangeState(StateMachineRoot.SubState.Damage);
     }
 }
