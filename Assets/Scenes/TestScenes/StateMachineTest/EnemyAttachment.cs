@@ -40,6 +40,18 @@ public class EnemyAttachment : MonoBehaviour, IDamage
     public void ReceiveDamege(int value)
     {
         _hp -= value;
-        _stateMachine.ChangeState(StateMachineRoot.SubState.Damage);
+        //HPの残り具合で遷移するステートを変更
+        if (_hp <= 0)
+        {
+            _stateMachine.ChangeState(StateMachineRoot.SubState.Death);
+        }
+        else if (_hp <= (int)(_hp * 0.4f))
+        {
+            _stateMachine.ChangeState(StateMachineRoot.SubState.Escape);
+        }
+        else
+        {
+            _stateMachine.ChangeState(StateMachineRoot.SubState.Damage);
+        }
     }
 }
