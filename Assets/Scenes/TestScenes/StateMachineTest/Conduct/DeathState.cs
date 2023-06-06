@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace StateMachine
 {
+    [System.Serializable]
     public class DeathState : ConductBaseState, IState
     {
         public void OnEnter(StateMachineRoot owner)
@@ -11,7 +12,10 @@ namespace StateMachine
 
         public void OnUpdate(StateMachineRoot owner)
         {
-            throw new System.NotImplementedException();
+            if (Anim)
+            {
+
+            }
         }
 
         public void OnExit(StateMachineRoot owner)

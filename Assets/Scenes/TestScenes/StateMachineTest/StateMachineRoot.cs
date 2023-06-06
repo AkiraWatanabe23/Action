@@ -46,7 +46,7 @@ namespace StateMachine
             //ここで必要な値の初期化を行う
             _idle.Init();
             _move.Init(enemyData, wandering, agent, player, enemy, distance, anim);
-            _conduct.Init();
+            _conduct.Init(enemyData, enemy, anim);
 
             //初期ステートの設定
             _currentState = _idle;

@@ -45,7 +45,7 @@ public class EnemyAttachment : MonoBehaviour, IDamage
         {
             _stateMachine.ChangeState(StateMachineRoot.SubState.Death);
         }
-        else if (_hp <= (int)(_hp * 0.4f))
+        else if (_hp <= (int)(_enemyData.MaxHP * 0.4f))
         {
             _stateMachine.ChangeState(StateMachineRoot.SubState.Escape);
         }
