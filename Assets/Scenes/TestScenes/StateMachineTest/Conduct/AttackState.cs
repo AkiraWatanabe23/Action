@@ -27,6 +27,7 @@ public class AttackState : ConductBaseState, IState
             {
                 player.Health.ReceiveDamege(EnemyData.AttackValue);
             }
+            owner.ChangeState(StateMachineRoot.SubState.Search);
         }
     }
 
