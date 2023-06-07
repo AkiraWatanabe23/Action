@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace StateMachine
 {
@@ -13,7 +14,7 @@ namespace StateMachine
         public void OnEnter(StateMachineRoot owner)
         {
             //ステート開始時の目的地を設定
-            _posIndex = SetDestinationIndex(owner);
+            _posIndex = SetDestinationIndex();
             Agent.SetDestination(Wandering.WanderingPos[_posIndex].position);
             Agent.stoppingDistance = _stopping;
 
