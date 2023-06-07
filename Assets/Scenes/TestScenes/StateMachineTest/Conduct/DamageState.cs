@@ -1,26 +1,32 @@
+using StateMachine;
 using UnityEngine;
 
-namespace StateMachine
+[System.Serializable]
+public class DamageState : ConductBaseState, IState
 {
-    [System.Serializable]
-    public class DamageState : ConductBaseState, IState
+    [Range(0f, 100f)]
+    [Tooltip("ëÃóÕÇ™âΩäÑà»â∫Ç…Ç»Ç¡ÇΩÇÁPlayerÇ©ÇÁì¶Ç∞ÇÈÇ©(%)")]
+    [SerializeField] private float _escapeValue = 40f;
+
+    public float EscapeValue => _escapeValue * 0.01f;
+
+    public void OnEnter(StateMachineRoot owner)
     {
-        public void OnEnter(StateMachineRoot owner)
-        {
-            Debug.Log("Enter Damage State");
-        }
+        Debug.Log("Enter Damage State");
+    }
 
-        public void OnUpdate(StateMachineRoot owner)
+    public void OnUpdate(StateMachineRoot owner)
+    {
+        //Animationçƒê∂å„Ç…úpújÇ…ñﬂÇÈ
+        if (Anim)
         {
-            if (Anim)
-            {
-
-            }
+            //Animationçƒê∂
         }
+        owner.ChangeState(StateMachineRoot.SubState.Search);
+    }
 
-        public void OnExit(StateMachineRoot owner)
-        {
-            Debug.Log("Exit Damage State");
-        }
+    public void OnExit(StateMachineRoot owner)
+    {
+        Debug.Log("Exit Damage State");
     }
 }

@@ -1,37 +1,37 @@
+using StateMachine;
 using UnityEngine;
 
-namespace StateMachine
+[System.Serializable]
+public class AttackState : ConductBaseState, IState
 {
-    [System.Serializable]
-    public class AttackState : ConductBaseState, IState
+    [Range(1f, 10f)]
+    [Tooltip("çUåÇÇÇ∑ÇÈãóó£")]
+    [SerializeField] private float _attackDiatance = 1f;
+
+    public void OnEnter(StateMachineRoot owner)
     {
-        [SerializeField] private float _attackDiatance = 1f;
+        Debug.Log("Enter Attack State");
+    }
 
-        public void OnEnter(StateMachineRoot owner)
+    public void OnUpdate(StateMachineRoot owner)
+    {
+        if (Anim)
         {
-            Debug.Log("Enter Attack State");
+
         }
 
-        public void OnUpdate(StateMachineRoot owner)
+        //à»â∫âº
+        if (Physics.Raycast(Enemy.transform.position, Enemy.transform.forward, out RaycastHit hit, _attackDiatance))
         {
-            if (Anim)
+            if (hit.collider.gameObject.TryGetComponent(out PlayerController player))
             {
-
-            }
-
-            //à»â∫âº
-            if (Physics.Raycast(Enemy.transform.position, Enemy.transform.forward, out RaycastHit hit, _attackDiatance))
-            {
-                if (hit.collider.gameObject.TryGetComponent(out PlayerController player))
-                {
-                    player.Health.ReceiveDamege(EnemyData.AttackValue);
-                }
+                player.Health.ReceiveDamege(EnemyData.AttackValue);
             }
         }
+    }
 
-        public void OnExit(StateMachineRoot owner)
-        {
-            Debug.Log("Exit Attack State");
-        }
+    public void OnExit(StateMachineRoot owner)
+    {
+        Debug.Log("Exit Attack State");
     }
 }

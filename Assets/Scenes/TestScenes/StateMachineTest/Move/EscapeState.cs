@@ -1,45 +1,44 @@
-﻿using UnityEngine;
+﻿using StateMachine;
+using UnityEngine;
 
-namespace StateMachine
+[System.Serializable]
+public class EscapeState : MoveBaseState, IState
 {
-    [System.Serializable]
-    public class EscapeState : MoveBaseState, IState
+    [Range(0f, 5f)]
+    [Tooltip("何秒おきに計測するか")]
+    [SerializeField] private float _checkInterval = 1f;
+
+    private float _checkTimer = 0f;
+
+    public void OnEnter(StateMachineRoot owner)
     {
-        [Tooltip("何秒おきに計測するか")]
-        [SerializeField] private float _checkInterval = 1f;
+        Debug.Log("Enter Escape State");
+    }
 
-        private float _checkTimer = 0f;
+    public void OnUpdate(StateMachineRoot owner)
+    {
+        Movement();
+    }
 
-        public void OnEnter(StateMachineRoot owner)
+    public void OnExit(StateMachineRoot owner)
+    {
+        Debug.Log("Exit Escape State");
+    }
+
+    /// <summary> Playerから逃げる動き
+    ///           （EnemyとPlayerとの逆ベクトルを取得し、その方向に移動）</summary>
+    private void Movement()
+    {
+        _checkTimer += Time.deltaTime;
+
+        if (_checkTimer >= _checkInterval)
         {
-            Debug.Log("Enter Escape State");
+            Vector3 direction = Enemy.position - Player.position;
+            Vector3 targetPos = Enemy.position + direction;
+
+            Agent.SetDestination(targetPos);
+            _checkTimer = 0f;
         }
 
-        public void OnUpdate(StateMachineRoot owner)
-        {
-            Movement();
-        }
-
-        public void OnExit(StateMachineRoot owner)
-        {
-            Debug.Log("Exit Escape State");
-        }
-
-        /// <summary> Playerから逃げる動き
-        ///           （EnemyとPlayerとの逆ベクトルを取得し、その方向に移動）</summary>
-        private void Movement()
-        {
-            _checkTimer += Time.deltaTime;
-
-            if (_checkTimer >= _checkInterval)
-            {
-                Vector3 direction = Enemy.position - Player.position;
-                Vector3 targetPos = Enemy.position + direction;
-
-                Agent.SetDestination(targetPos);
-                _checkTimer = 0f;
-            }
-
-        }
     }
 }
