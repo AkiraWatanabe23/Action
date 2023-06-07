@@ -33,7 +33,7 @@ public class IdleState : IState
         Debug.Log("Exit Idle State");
     }
 
-    public void TransitionFromIdle()
+    public void ExitIdle()
     {
         _isChangeState = true;
     }

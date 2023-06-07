@@ -16,6 +16,7 @@ public class EscapeState : MoveBaseState, IState
     public void OnEnter(StateMachineRoot owner)
     {
         Debug.Log("Enter Escape State");
+        _checkTimer = 0f;
     }
 
     public void OnUpdate(StateMachineRoot owner)
@@ -40,10 +41,12 @@ public class EscapeState : MoveBaseState, IState
 
             if (Vector3.SqrMagnitude(direction) > _returnDist * _returnDist)
             {
+                //ある程度離れたら徘徊に戻る
                 owner.ChangeState(StateMachineRoot.SubState.Search);
             }
             else
             {
+                //まだ近かったら新たに場所を決めて逃げる
                 Vector3 targetPos = Enemy.position + direction;
 
                 Agent.SetDestination(targetPos);

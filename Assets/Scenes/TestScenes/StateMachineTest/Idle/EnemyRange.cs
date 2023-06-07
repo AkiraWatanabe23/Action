@@ -28,7 +28,7 @@ public class EnemyRange : MonoBehaviour
 
                 if (current == enemy.StateMachine.Idle)
                 {
-                    enemy.StateMachine.Idle.TransitionFromIdle();
+                    enemy.StateMachine.Idle.ExitIdle();
                 }
             }
         }
