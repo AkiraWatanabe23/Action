@@ -211,6 +211,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6804852681147797980, guid: 4aaf9b39d4f6e5f478c69ffd9ed42f30, type: 3}
+      propertyPath: _enemyData
+      value: 
+      objectReference: {fileID: 11400000, guid: fef1e2989c510064086ffd3aded5517a, type: 2}
     - target: {fileID: 7473643842628360320, guid: 4aaf9b39d4f6e5f478c69ffd9ed42f30, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -263,40 +267,8 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7473643842628360327, guid: 4aaf9b39d4f6e5f478c69ffd9ed42f30, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4aaf9b39d4f6e5f478c69ffd9ed42f30, type: 3}
---- !u!1 &539048035 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7473643842628360332, guid: 4aaf9b39d4f6e5f478c69ffd9ed42f30, type: 3}
-  m_PrefabInstance: {fileID: 539048034}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &539048036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 539048035}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75797353a15c1f944a02e94d9f169773, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyData: {fileID: 11400000, guid: fef1e2989c510064086ffd3aded5517a, type: 2}
-  _stateMachine:
-    _search:
-      _stopping: 1
-    _chase:
-      _attackDist: 1
-      _returnDist: 1
-    _escape:
-      _checkInterval: 1
-      _returnDist: 1
-    _attack:
-      _attackDiatance: 1
-    _damage:
-      _escapeValue: 40
 --- !u!1 &646199076
 GameObject:
   m_ObjectHideFlags: 0
