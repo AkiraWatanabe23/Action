@@ -6,9 +6,9 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour, IDamage
 {
     [SerializeField] private EnemyData _enemyData = default;
+    [SerializeField] private WanderingRange _wandering = default;
     [SerializeField] private StateMachineRoot _stateMachine = new();
 
-    private WanderingRange _wandering = default;
     private NavMeshAgent _agent = default;
     private Animator _anim = default;
 

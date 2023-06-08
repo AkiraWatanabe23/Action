@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    [Range(1, 30)]
+    [Tooltip("1ユニットあたりの敵の数")]
+    [SerializeField] private int _members = 1;
     [SerializeField] private List<EnemyController> _enemies = new();
 
     [Tooltip("徘徊位置の親オブジェクト")]
@@ -15,6 +18,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private float _searchInterval = 0.5f;
 
     private float _timer = 0f;
+    private WanderingRange[] _wanders = default;
 
     private void Awake()
     {
@@ -41,18 +45,31 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    /// <summary> 敵の生成 </summary>
+    /// <summary> 敵の生成
+    ///           （徘徊範囲内のランダムな場所に生成する）</summary>
     private void EnemySpawn()
     {
-        for (int i = 0; i < _wanderingPositions.childCount; i++)
+        int unitCount = _wanderingPositions.childCount;
+        _wanders = new WanderingRange[unitCount];
+
+        for (int i = 0; i < unitCount; i++)
         {
-            var go = Instantiate(_enemyPrefab, _wanderingPositions.GetChild(i).position, Quaternion.identity);
+            _wanders[i] = _wanderingPositions.GetChild(i).GetComponent<WanderingRange>();
+            var wander = _wanders[i];
 
-            go.transform.SetParent(transform);
-
-            if (go.TryGetComponent(out EnemyController enemy1))
+            for (int j = 0; j < _members; j++)
             {
-                _enemies.Add(enemy1);
+                var circlePos = wander.Radius * Random.insideUnitCircle;
+                var spawnPos = new Vector3(circlePos.x, 0, circlePos.y) + wander.gameObject.transform.position;
+
+                var go = Instantiate(_enemyPrefab, spawnPos, Quaternion.identity);
+                go.transform.SetParent(transform);
+
+                if (go.TryGetComponent(out EnemyController enemy))
+                {
+                    _enemies.Add(enemy);
+                    enemy.Wandering = wander;
+                }
             }
         }
     }

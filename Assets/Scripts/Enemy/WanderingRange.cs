@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.WSA;
 
 /// <summary> 指定した半径の円内のランダムな位置にオブジェクトを生成する </summary>
 public class WanderingRange : MonoBehaviour
@@ -19,6 +20,7 @@ public class WanderingRange : MonoBehaviour
 
     private Transform[] _wanderingPos = default;
 
+    public float Radius => _radius;
     public bool IsMove { get => _isMove; set => _isMove = value; }
     public Transform[] WanderingPos => _wanderingPos;
 

@@ -50,6 +50,7 @@ namespace StateMachine
 
             //初期ステートの設定
             _currentState = _idle;
+            _currentState.OnEnter(this);
         }
 
         public void Update()
