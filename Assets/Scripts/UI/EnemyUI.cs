@@ -24,7 +24,7 @@ public class EnemyUI : MonoBehaviour
     {
         //Sliderの初期設定
         _hpSlider.minValue = 0;
-        _hpSlider.maxValue = _enemy.Data.MaxHP;
+        _hpSlider.maxValue = _enemy.EnemyData.MaxHP;
         _hpSlider.value = _enemy.HP;
     }
 

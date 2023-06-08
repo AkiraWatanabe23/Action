@@ -6,14 +6,14 @@ public class PlayerHealth : IDamage
     [SerializeField] private int _hp = 100;
 
     private int _maxHp = 100;
-    private PlayerAnimation _animation = default;
+    private PlayerAnimation _anim = default;
 
     public int HP { get => _hp; set => _hp = value; }
     public int MaxHp { get => _maxHp; protected set => _maxHp = value; }
 
-    public void Init(PlayerAnimation animation)
+    public void Init(PlayerAnimation anim)
     {
-        //_animation = animation;
+        //_anim = anim;
     }
 
     public void ReceiveDamege(int value)

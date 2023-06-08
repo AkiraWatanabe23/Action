@@ -1,5 +1,4 @@
-﻿using Constants;
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class PlayerAttack

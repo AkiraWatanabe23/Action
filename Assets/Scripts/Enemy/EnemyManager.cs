@@ -50,10 +50,9 @@ public class EnemyManager : MonoBehaviour
 
             go.transform.SetParent(transform);
 
-            if (go.TryGetComponent(out EnemyController enemy))
+            if (go.TryGetComponent(out EnemyController enemy1))
             {
-                enemy.Wandering = _wanderingPositions.GetChild(i).GetComponent<WanderingRange>();
-                _enemies.Add(enemy);
+                _enemies.Add(enemy1);
             }
         }
     }

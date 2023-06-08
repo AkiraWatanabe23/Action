@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class EnemyAttachment : MonoBehaviour, IDamage
+public class EnemyController : MonoBehaviour, IDamage
 {
     [SerializeField] private EnemyData _enemyData = default;
     [SerializeField] private StateMachineRoot _stateMachine = new();
@@ -16,6 +16,7 @@ public class EnemyAttachment : MonoBehaviour, IDamage
     private float _sqrDistance = 1f;
     private Transform _player = default;
 
+    public EnemyData EnemyData => _enemyData;
     public StateMachineRoot StateMachine => _stateMachine;
     public WanderingRange Wandering { get => _wandering; set => _wandering = value; }
     public int HP { get => _hp; set => _hp = value; }
