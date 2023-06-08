@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary> 指定した半径の円内のランダムな位置にオブジェクトを生成する </summary>
 public class WanderingRange : MonoBehaviour
@@ -42,7 +41,7 @@ public class WanderingRange : MonoBehaviour
             //xz平面(円内)
             for (int i = 0; i < _posCount; i++)
             {
-                var circlePos = _radius * UnityEngine.Random.insideUnitCircle;
+                var circlePos = _radius * Random.insideUnitCircle;
                 var spawnPos = new Vector3(circlePos.x, 0, circlePos.y) + centerPos.position;
 
                 var pos = Instantiate(_wanderPrefab, spawnPos, Quaternion.identity);
@@ -55,7 +54,7 @@ public class WanderingRange : MonoBehaviour
             //3D空間(球内)
             for (int i = 0; i < _posCount; i++)
             {
-                var spawnPos = _radius * UnityEngine.Random.insideUnitSphere + centerPos.position;
+                var spawnPos = _radius * Random.insideUnitSphere + centerPos.position;
 
                 var pos = Instantiate(_wanderPrefab, spawnPos, Quaternion.identity);
                 _wanderingPos[i] = pos.transform;
