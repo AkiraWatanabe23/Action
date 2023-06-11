@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.WSA;
 
 /// <summary> 指定した半径の円内のランダムな位置にオブジェクトを生成する </summary>
 public class WanderingRange : MonoBehaviour
