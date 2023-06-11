@@ -15,7 +15,8 @@ public class GameStart : MonoBehaviour
         _titlePanel.enabled = true;
         _startButton.onClick.AddListener(() =>
         {
-            _titlePanel.enabled = false;
+            Debug.Log("start");
+            _titlePanel.gameObject.SetActive(false);
             _isGameStart = true;
         });
     }
