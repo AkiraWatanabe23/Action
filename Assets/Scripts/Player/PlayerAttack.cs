@@ -44,7 +44,7 @@ public class PlayerAttack
                 }
             }
 
-            _animation.ChangeAnimToMove();
+            _animation.ChangeAnimToIdle();
         }
     }
 

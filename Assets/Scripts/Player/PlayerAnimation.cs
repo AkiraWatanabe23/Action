@@ -47,15 +47,22 @@ public class PlayerAnimation
             }
 
             _anim.SetFloat("MoveValue", _currentSurfaceSpeed / _maxSurfaceSpeed);
-            return;
+            if (_currentSurfaceSpeed / _maxSurfaceSpeed >= 0.3f)
+            {
+                return;
+            }
         }
-
+        else
+        {
+            _anim.SetBool(_animName, false);
+        }
         _animName = Consts.ANIM_IDLE;
+        _anim.SetBool(_animName, true);
     }
 
     public void ChangeAnimToMove()
     {
-        _currentSurfaceSpeed = _move.CurrentSuefaceSpeed;
+        _currentSurfaceSpeed = _move.CurrentSurfaceSpeed;
 
         //_animName = Consts.ANIM_MOVE;
         _anim.SetFloat("MoveValue", _currentSurfaceSpeed / _maxSurfaceSpeed);

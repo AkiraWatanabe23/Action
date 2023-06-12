@@ -32,7 +32,7 @@ public class PlayerMove
 
     public float MaxSurfaceSpeed => _maxSurfaceSpeed;
     public Overlaps Overlap => _overlap;
-    public float CurrentSuefaceSpeed => _currentSurfaceSpeed;
+    public float CurrentSurfaceSpeed => _currentSurfaceSpeed;
 
     public void Init(CharacterController con, Transform transform, PlayerAnimation animation)
     {
@@ -63,6 +63,8 @@ public class PlayerMove
         // 接地している かつ ジャンプ入力があればジャンプする。
         else if (Input.GetKeyDown(KeyCode.Space))
         {
+            return;
+
             Debug.Log("jump");
 
             _currentDimensionalSpeed = _jumpPower;

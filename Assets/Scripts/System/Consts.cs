@@ -20,7 +20,7 @@ namespace Constants
         public const string ANIM_LAND = "Land";
         public const string ANIM_ATTACK = "Attack";
         public const string ANIM_DAMAGE = "Damage";
-        public const string ANIM_DEAD = "Dead";
+        public const string ANIM_DEAD = "Death";
     }
 
     public enum SceneNames
