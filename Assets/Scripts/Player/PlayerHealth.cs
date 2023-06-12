@@ -13,16 +13,18 @@ public class PlayerHealth : IDamage
 
     public void Init(PlayerAnimation anim)
     {
-        //_anim = anim;
+        _anim = anim;
     }
 
     public void ReceiveDamege(int value)
     {
         _hp -= value;
+        _anim.ChangeAnimToDamage();
 
         if (_hp <= 0)
         {
             //‚â‚ç‚ê‚½
+            _anim.ChangeAnimToDeath();
             return;
         }
     }

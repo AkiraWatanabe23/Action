@@ -83,4 +83,20 @@ public class PlayerAnimation
         _animName = Consts.ANIM_ATTACK;
         _anim.SetBool(_animName, true);
     }
+
+    public void ChangeAnimToDamage()
+    {
+        if (_animName != Consts.ANIM_MOVE)
+        {
+            _anim.SetBool(_animName, false);
+        }
+        _animName = Consts.ANIM_DAMAGE;
+        _anim.SetBool(_animName, true);
+    }
+
+    public void ChangeAnimToDeath()
+    {
+        _animName = Consts.ANIM_DEATH;
+        _anim.SetBool(_animName, true);
+    }
 }
