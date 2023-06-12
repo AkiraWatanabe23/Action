@@ -102,10 +102,7 @@ public class PlayerMove
             _targetRotation.z = 0f;
             _transform.rotation = Quaternion.RotateTowards(_transform.rotation, _targetRotation, _rotateSpeed * Time.deltaTime);
 
-            if (_animation != null)
-            {
-                _animation.ChangeAnimToMove();
-            }
+            _animation.ChangeAnimToMove();
         }
         // 入力がなければ減速する
         else
@@ -117,11 +114,7 @@ public class PlayerMove
             {
                 _currentSurfaceSpeed = 0f;
             }
-
-            if (_animation != null)
-            {
-                _animation.ChangeAnimToMove();
-            }
+            _animation.ChangeAnimToIdle();
         }
         // 結果の割り当て
         Vector3 moveSpeed = _moveDir.normalized * _currentSurfaceSpeed * Time.deltaTime;

@@ -28,7 +28,7 @@ public class PlayerAttack
 
     public void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             _animation.ChangeAnimToAttack();
 

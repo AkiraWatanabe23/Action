@@ -5,8 +5,6 @@ using UnityEngine;
 [Serializable]
 public class PlayerAnimation
 {
-    [SerializeField] private AnimationClip[] _clips = default;
-
     private string _animName = "";
     //各Animationを関数にまとめる
     private Animator _anim = default;
@@ -16,6 +14,8 @@ public class PlayerAnimation
     private float _currentSurfaceSpeed = 0f;
     private float _maxSurfaceSpeed = 0f;
 
+    private string _currentAnimation = "";
+
     public void Init(Animator anim, PlayerMove move)
     {
         _anim = anim;
@@ -23,31 +23,20 @@ public class PlayerAnimation
 
         _maxSurfaceSpeed = move.MaxSurfaceSpeed;
 
-        //Animationの各ステート名を取得
-        _clips = _anim.runtimeAnimatorController.animationClips;
-        //Array.ForEach(_clips, clip => Debug.Log(clip.name));
-
-        Setup();
-    }
-
-    private void Setup()
-    {
-        Array.ForEach(_clips, clip => _anim.SetBool(clip.name, false));
-
+        _currentAnimation = Consts.ANIM_IDLE;
         _animName = Consts.ANIM_IDLE;
+        _anim.SetBool(_animName, true);
     }
 
     public void ChangeAnimToIdle()
     {
-        if (_animName == Consts.ANIM_MOVE)
+        if (_currentAnimation == Consts.ANIM_MOVE)
         {
-            if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
-            {
+            _currentSurfaceSpeed = _move.CurrentSurfaceSpeed;
+            var speed = _currentSurfaceSpeed / _maxSurfaceSpeed;
 
-            }
-
-            _anim.SetFloat("MoveValue", _currentSurfaceSpeed / _maxSurfaceSpeed);
-            if (_currentSurfaceSpeed / _maxSurfaceSpeed >= 0.3f)
+            _anim.SetFloat("MoveValue", speed);
+            if (speed >= 0.4f)
             {
                 return;
             }
@@ -56,6 +45,8 @@ public class PlayerAnimation
         {
             _anim.SetBool(_animName, false);
         }
+        _currentAnimation = Consts.ANIM_IDLE;
+
         _animName = Consts.ANIM_IDLE;
         _anim.SetBool(_animName, true);
     }
@@ -63,14 +54,16 @@ public class PlayerAnimation
     public void ChangeAnimToMove()
     {
         _currentSurfaceSpeed = _move.CurrentSurfaceSpeed;
+        _currentAnimation = Consts.ANIM_MOVE;
 
-        //_animName = Consts.ANIM_MOVE;
+        _anim.SetBool(_animName, false);
         _anim.SetFloat("MoveValue", _currentSurfaceSpeed / _maxSurfaceSpeed);
     }
 
     public void ChangeAnimToJump()
     {
         _anim.SetBool(_animName, false);
+        _currentAnimation = Consts.ANIM_JUMP;
 
         _animName = Consts.ANIM_JUMP;
         _anim.SetBool(_animName, true);
@@ -78,7 +71,10 @@ public class PlayerAnimation
 
     public void ChangeAnimToAttack()
     {
+        Debug.Log("こうげき");
+
         _anim.SetBool(_animName, false);
+        _currentAnimation = Consts.ANIM_ATTACK;
 
         _animName = Consts.ANIM_ATTACK;
         _anim.SetBool(_animName, true);
@@ -90,12 +86,16 @@ public class PlayerAnimation
         {
             _anim.SetBool(_animName, false);
         }
+        _currentAnimation = Consts.ANIM_DAMAGE;
+
         _animName = Consts.ANIM_DAMAGE;
         _anim.SetBool(_animName, true);
     }
 
     public void ChangeAnimToDeath()
     {
+        _currentAnimation = Consts.ANIM_DEATH;
+
         _animName = Consts.ANIM_DEATH;
         _anim.SetBool(_animName, true);
     }
