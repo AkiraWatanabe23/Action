@@ -36,7 +36,7 @@ public class PlayerAnimation
             var speed = _currentSurfaceSpeed / _maxSurfaceSpeed;
 
             _anim.SetFloat("MoveValue", speed);
-            if (speed >= 0.4f)
+            if (speed >= 0.1f)
             {
                 return;
             }
@@ -57,6 +57,12 @@ public class PlayerAnimation
         _currentAnimation = Consts.ANIM_MOVE;
 
         _anim.SetBool(_animName, false);
+        if (_animName == Consts.ANIM_ATTACK)
+        {
+            _animName = Consts.ANIM_IDLE;
+            _anim.SetBool(_animName, true);
+        }
+
         _anim.SetFloat("MoveValue", _currentSurfaceSpeed / _maxSurfaceSpeed);
     }
 
@@ -71,9 +77,17 @@ public class PlayerAnimation
 
     public void ChangeAnimToAttack()
     {
-        Debug.Log("こうげき");
+        if (_currentAnimation == Consts.ANIM_MOVE)
+        {
+            _currentSurfaceSpeed = _move.CurrentSurfaceSpeed;
+            var speed = _currentSurfaceSpeed / _maxSurfaceSpeed;
 
-        _anim.SetBool(_animName, false);
+            _anim.SetFloat("MoveValue", speed);
+        }
+        else
+        {
+            _anim.SetBool(_animName, false);
+        }
         _currentAnimation = Consts.ANIM_ATTACK;
 
         _animName = Consts.ANIM_ATTACK;
