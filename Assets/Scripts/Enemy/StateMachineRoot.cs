@@ -44,7 +44,7 @@ namespace StateMachine
                          Animator anim)
         {
             //ここで必要な値の初期化を行う
-            _idle.Init();
+            _idle.Init(anim);
             _move.Init(enemyData, wandering, agent, player, enemy, distance, anim);
             _conduct.Init(enemyData, enemy, anim);
 

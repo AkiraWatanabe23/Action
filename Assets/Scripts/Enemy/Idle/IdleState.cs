@@ -3,11 +3,12 @@ using UnityEngine;
 
 public class IdleState : IState
 {
+    private Animator _anim = default;
     private bool _isChangeState = false;
 
-    public void Init()
+    public void Init(Animator anim)
     {
-
+        _anim = anim;
     }
 
     public void OnEnter(StateMachineRoot owner)
@@ -19,6 +20,10 @@ public class IdleState : IState
     public void OnUpdate(StateMachineRoot owner)
     {
         //IdleState ... 基本的には何もしない
+        if (_anim)
+        {
+
+        }
 
         //Playerが敵（自分）の一定範囲内に入ってきたらMoveStateに遷移
         if (_isChangeState)
