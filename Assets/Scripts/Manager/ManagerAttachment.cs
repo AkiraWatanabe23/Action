@@ -3,7 +3,8 @@ using UnityEngine.UI;
 
 public class ManagerAttachment : MonoBehaviour
 {
-    [Header("UI一覧(Debug)")]
+    [Header("UI一覧")]
+    [SerializeField] private GameObject _menuPanel = default;
     [SerializeField] private Text _timerText = default;
     [SerializeField] private Text _countText = default;
 
@@ -18,7 +19,7 @@ public class ManagerAttachment : MonoBehaviour
         _uiManager = managers.GetComponent<UIManager>();
 
         _gameManager.SetGameStatus();
-        _uiManager.SettingUI(_timerText, _countText);
+        _uiManager.SettingUI(_menuPanel, _timerText, _countText);
     }
 
     private void Start()
