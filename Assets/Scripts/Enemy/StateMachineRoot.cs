@@ -45,6 +45,8 @@ namespace StateMachine
                          Transform player, Transform enemy, float distance,
                          Animator anim)
         {
+            _enemyAnimation.Init(anim);
+
             //ここで必要な値の初期化を行う
             _idle.Init(anim);
             _move.Init(enemyData, wandering, agent, player, enemy, distance, anim);

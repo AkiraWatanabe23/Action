@@ -19,6 +19,7 @@ public class PlayerAttack
     public AttackType Attack { get => _attack; set => _attack = value; }
     public int SkillGauge { get => _skillGauge; set => _skillGauge = value; }
     public int MaxGauge { get => _maxGauge; protected set => _maxGauge = value; }
+    public int AttackValue { get => _attackValue; set => _attackValue = value; }
 
     public void Init(Transform trans, PlayerAnimation animation)
     {

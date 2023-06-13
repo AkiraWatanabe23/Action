@@ -12,8 +12,11 @@ public class PlayerController : MonoBehaviour
     private CharacterController _controller = default;
     private Animator _anim = default;
 
+    private int _gold = 1000000;
+
     public PlayerHealth Health { get => _health; protected set => _health = value; }
     public PlayerAttack Attack { get => _attack; protected set => _attack = value; }
+    public int Gold { get => _gold; set => _gold = value; }
 
     private void Awake()
     {

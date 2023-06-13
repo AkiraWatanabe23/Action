@@ -30,7 +30,6 @@ public class EnemyController : MonoBehaviour, IDamage
         _hp = _enemyData.MaxHP;
         _sqrDistance = Mathf.Pow(_enemyData.SearchDistance, 2);
 
-        _enemyAnimation.Init(_anim);
         _stateMachine.Init(_enemyData, _wandering, _agent, _player, transform, _sqrDistance, _anim);
     }
 
