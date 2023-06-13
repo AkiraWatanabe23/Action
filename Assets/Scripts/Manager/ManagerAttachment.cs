@@ -33,5 +33,6 @@ public class ManagerAttachment : MonoBehaviour
     private void Update()
     {
         _uiManager.TimerText.text = _gameManager.Timer.ToString("F0");
+        _uiManager.CountText.text = $"{ _gameManager.KillCount }  /  { _gameManager.MaxKillCount }";
     }
 }

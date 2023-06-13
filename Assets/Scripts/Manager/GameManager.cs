@@ -6,11 +6,24 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool _isGameStart = false;
 
     private float _timer = 100f;
+    private int _enemyKillCount = 0;
+
+    private int _maxKillCount = 50;
 
     private static GameManager _instance = default;
 
     public bool IsGameStart => _isGameStart;
     public float Timer { get => _timer; set => _timer = value; }
+    public int KillCount
+    {
+        get => _enemyKillCount;
+        set
+        {
+            _enemyKillCount = value;
+            if (value >= _maxKillCount) GameClear();
+        }
+    }
+    public int MaxKillCount => _maxKillCount;
 
     public static GameManager Instance => _instance;
 
@@ -29,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
-        
+
     }
 
     private void Update()
@@ -39,14 +52,25 @@ public class GameManager : MonoBehaviour
             _timer -= Time.deltaTime;
             if (_timer < 0)
             {
-                //GameOver
+                GameOver();
             }
         }
+    }
+
+    private void GameClear()
+    {
+        //Panelとか出して、また最初から
+    }
+
+    private void GameOver()
+    {
+        //やり直し（シーンのリロードとかがいいかな）
     }
 
     public void SetGameStatus()
     {
         //ゲームの初期設定(Timer等)
+        _enemyKillCount = 0;
     }
 
     /// <summary> 指示が出た場合に呼び出し、ゲームを開始する </summary>

@@ -44,6 +44,7 @@ public class EnemyController : MonoBehaviour, IDamage
         //HPの残り具合で遷移するステートを変更
         if (_hp <= 0)
         {
+            GameManager.Instance.KillCount++;
             _stateMachine.ChangeState(StateMachineRoot.SubState.Death);
         }
         else if (_hp <= (int)(_enemyData.MaxHP * _stateMachine.Damage.EscapeValue))

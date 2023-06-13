@@ -11,10 +11,6 @@ public class DeathState : ConductBaseState, IState
 
     public void OnUpdate(StateMachineRoot owner)
     {
-        if (Anim)
-        {
-            //AniamtionÄ¶
-        }
         //ˆê’U”ñ•\¦
         Enemy.gameObject.SetActive(false);
     }
