@@ -67,9 +67,11 @@ public class GameManager : MonoBehaviour
         //やり直し（シーンのリロードとかがいいかな）
     }
 
-    public void SetGameStatus()
+    /// <summary> ゲーム開始時に呼び出す関数 </summary>
+    public void SetGameStatus(EnemyManager enemyManager)
     {
         //ゲームの初期設定(Timer等)
+        _maxKillCount = (int)(enemyManager.gameObject.transform.childCount * 0.8f);
         _enemyKillCount = 0;
     }
 

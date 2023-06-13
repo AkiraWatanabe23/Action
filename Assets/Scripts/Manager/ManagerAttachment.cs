@@ -18,7 +18,6 @@ public class ManagerAttachment : MonoBehaviour
         _gameManager = managers.GetComponent<GameManager>();
         _uiManager = managers.GetComponent<UIManager>();
 
-        _gameManager.SetGameStatus();
         _uiManager.SettingUI(_menuPanel, _timerText, _countText);
     }
 
