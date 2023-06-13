@@ -60,6 +60,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _radius: 30
   _posCount: 20
-  _wanderPrefab: {fileID: 350943434269176521, guid: 87375c500bb3ae449863d5166c065016, type: 3}
+  _wanderPrefab: {fileID: 1983783191811101988, guid: a3b9234c45187a84b954d9ae0e58b317, type: 3}
   _isCircle: 1
   _isMove: 1

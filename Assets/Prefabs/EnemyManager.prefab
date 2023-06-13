@@ -47,7 +47,7 @@ MonoBehaviour:
   _members: 5
   _enemies: []
   _wanderingPositions: {fileID: 0}
-  _enemyPrefab: {fileID: 7473643842628360332, guid: 4aaf9b39d4f6e5f478c69ffd9ed42f30, type: 3}
+  _enemyPrefab: {fileID: 3334512849910369046, guid: 4aaf9b39d4f6e5f478c69ffd9ed42f30, type: 3}
   _player: {fileID: 0}
   _sqrValue: 2
   _searchInterval: 0.5
