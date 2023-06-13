@@ -1,3 +1,4 @@
+using Constants;
 using StateMachine;
 using UnityEngine;
 
@@ -17,7 +18,7 @@ public class AttackState : ConductBaseState, IState
     {
         if (Anim)
         {
-
+            owner.EnemyAnimation.ChangeAnimation(Consts.ANIM_ATTACK);
         }
 
         //ˆÈ‰º‰¼

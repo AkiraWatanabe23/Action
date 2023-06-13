@@ -1,4 +1,5 @@
-﻿using StateMachine;
+﻿using Constants;
+using StateMachine;
 using UnityEngine;
 
 [System.Serializable]
@@ -25,7 +26,7 @@ public class SearchState : MoveBaseState, IState
         if (Wandering.IsMove)
         {
             Search(owner);
-            Movement();
+            Movement(owner);
         }
     }
 
@@ -56,11 +57,12 @@ public class SearchState : MoveBaseState, IState
     }
 
     /// <summary> 移動 </summary>
-    private void Movement()
+    private void Movement(StateMachineRoot owner)
     {
         if (Anim)
         {
             //歩行Animation
+            owner.EnemyAnimation.ChangeAnimation(Consts.ANIM_SEARCH);
         }
 
         var sqrMag

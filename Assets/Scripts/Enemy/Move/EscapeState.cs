@@ -1,4 +1,5 @@
-﻿using StateMachine;
+﻿using Constants;
+using StateMachine;
 using UnityEngine;
 
 [System.Serializable]
@@ -33,6 +34,11 @@ public class EscapeState : MoveBaseState, IState
     ///           （EnemyとPlayerとの逆ベクトルを取得し、その方向に移動）</summary>
     private void Movement(StateMachineRoot owner)
     {
+        if (Anim)
+        {
+            owner.EnemyAnimation.ChangeAnimation(Consts.ANIM_SEARCH);
+        }
+
         _checkTimer += Time.deltaTime;
 
         if (_checkTimer >= _checkInterval)

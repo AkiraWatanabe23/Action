@@ -1,3 +1,4 @@
+using Constants;
 using StateMachine;
 using UnityEngine;
 
@@ -21,6 +22,7 @@ public class DamageState : ConductBaseState, IState
         if (Anim)
         {
             //Animationçƒê∂
+            owner.EnemyAnimation.ChangeAnimation(Consts.ANIM_DAMAGE);
         }
         owner.ChangeState(StateMachineRoot.SubState.Search);
     }

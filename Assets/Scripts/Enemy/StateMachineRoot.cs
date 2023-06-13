@@ -7,8 +7,10 @@ namespace StateMachine
     public class StateMachineRoot
     {
         private IState _currentState = default;
+        private EnemyAnimation _enemyAnimation = new();
 
         public IState CurrentState => _currentState;
+        public EnemyAnimation EnemyAnimation => _enemyAnimation;
 
         #region 各親ステート
         [SerializeField] private IdleState _idle = new();

@@ -11,7 +11,6 @@ public class EnemyController : MonoBehaviour, IDamage
     private WanderingRange _wandering = default;
     private NavMeshAgent _agent = default;
     private Animator _anim = default;
-    private EnemyAnimation _enemyAnimation = new();
 
     private int _hp = 100;
     private float _sqrDistance = 1f;
@@ -20,7 +19,6 @@ public class EnemyController : MonoBehaviour, IDamage
     public EnemyData EnemyData => _enemyData;
     public StateMachineRoot StateMachine => _stateMachine;
     public WanderingRange Wandering { get => _wandering; set => _wandering = value; }
-    public EnemyAnimation EnemyAnimation => _enemyAnimation;
     public int HP { get => _hp; set => _hp = value; }
     public Transform Player { get => _player; set => _player = value; }
 

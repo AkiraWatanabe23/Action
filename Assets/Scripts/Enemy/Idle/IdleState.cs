@@ -1,5 +1,6 @@
 ﻿using StateMachine;
 using UnityEngine;
+using Constants;
 
 public class IdleState : IState
 {
@@ -22,7 +23,7 @@ public class IdleState : IState
         //IdleState ... 基本的には何もしない
         if (_anim)
         {
-
+            owner.EnemyAnimation.ChangeAnimation(Consts.ANIM_IDLE);
         }
 
         //Playerが敵（自分）の一定範囲内に入ってきたらMoveStateに遷移

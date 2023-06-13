@@ -17,6 +17,8 @@ public class EnemyAnimation
 
     public void ChangeAnimation(string nextAnim)
     {
+        if (_animName == nextAnim) return;
+
         _anim.SetBool(_animName, false);
         _anim.SetBool(nextAnim, true);
 

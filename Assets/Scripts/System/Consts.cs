@@ -21,6 +21,9 @@ namespace Constants
         public const string ANIM_ATTACK = "Attack";
         public const string ANIM_DAMAGE = "Damage";
         public const string ANIM_DEATH = "Death";
+
+        public const string ANIM_SEARCH = "Search";
+        public const string ANIM_CHASE = "Chase";
     }
 
     public enum SceneNames

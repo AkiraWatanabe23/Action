@@ -1,4 +1,5 @@
-﻿using StateMachine;
+﻿using Constants;
+using StateMachine;
 using UnityEngine;
 
 [System.Serializable]
@@ -35,6 +36,7 @@ public class ChaseState : MoveBaseState, IState
         if (Anim)
         {
             //移動Animation
+            owner.EnemyAnimation.ChangeAnimation(Consts.ANIM_CHASE);
         }
 
         Agent.SetDestination(Player.position);
