@@ -4,7 +4,7 @@
 public class WanderingRange : MonoBehaviour
 {
     [Tooltip("徘徊地点生成円の半径")]
-    [Range(10f, 40f)]
+    [Range(10f, 150f)]
     [SerializeField] private float _radius = 30f;
     [Tooltip("いくつのposを作るか")]
     [SerializeField] private int _posCount = 10;

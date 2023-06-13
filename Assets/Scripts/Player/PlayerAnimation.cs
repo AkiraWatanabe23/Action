@@ -2,11 +2,11 @@
 using System;
 using UnityEngine;
 
+/// <summary> 各Animationを関数にまとめる </summary>
 [Serializable]
 public class PlayerAnimation
 {
     private string _animName = "";
-    //各Animationを関数にまとめる
     private Animator _anim = default;
 
     private PlayerMove _move = default;

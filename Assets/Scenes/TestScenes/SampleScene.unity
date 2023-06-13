@@ -661,8 +661,6 @@ GameObject:
   - component: {fileID: 1543539020}
   - component: {fileID: 1543539019}
   - component: {fileID: 1543539024}
-  - component: {fileID: 1543539025}
-  - component: {fileID: 1543539026}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -768,44 +766,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1543539025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1543539018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdb866023031850428491530e8c4d769, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gravity: 9.8
-  _rotationSpeed: 600
-  _maxSurfaceSpeed: 10
-  _maxDimensionalSpeed: 20
-  _moveSpeed: 5
-  _jumpPower: 15
-  _decreaseSpeed: 5
---- !u!114 &1543539026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1543539018}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af1a5e596ff68e34fad263d103ac7060, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gravity: 9.8
-  _rotationSpeed: 600
-  _maxHorizontalSpeed: 10
-  _maxVerticalSpeed: 30
-  _moveSpeed: 1
-  _jumpPower: 12
-  _decreaceSpeed: 1
 --- !u!1 &1565019083
 GameObject:
   m_ObjectHideFlags: 0
