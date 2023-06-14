@@ -45,6 +45,10 @@ public class PlayerAttack
                     GaugeUp(_attackValue / 10);
                     Debug.Log("こうげき");
                 }
+                else
+                {
+                    Debug.Log(hit.collider.gameObject.name);
+                }
             }
 
             //_animation.ChangeAnimToIdle();
