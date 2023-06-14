@@ -5,15 +5,7 @@ public class EnemyRange : MonoBehaviour
 {
     [SerializeField] private List<EnemyController> _enemies = new();
 
-    public void Init()
-    {
-        //この範囲内の敵をListに格納
-        //===============ここが違う気がするので後で直す===============
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            _enemies.Add(transform.GetChild(i).GetComponent<EnemyController>());
-        }
-    }
+    public List<EnemyController> Enemies { get => _enemies; set => _enemies = value; }
 
     private void OnTriggerEnter(Collider other)
     {

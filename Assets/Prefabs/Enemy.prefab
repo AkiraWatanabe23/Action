@@ -81,7 +81,8 @@ MonoBehaviour:
       _checkInterval: 1
       _returnDist: 1
     _attack:
-      _attackDiatance: 1
+      _attackOffset: {x: 0, y: 1, z: 0}
+      _attackDistance: 1
     _damage:
       _escapeValue: 40
 --- !u!1 &5328082436027650959

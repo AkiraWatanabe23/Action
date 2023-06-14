@@ -30,9 +30,4 @@ public class ManagerAttachment : MonoBehaviour
             _gameManager.Start();
         }
     }
-
-    private void Update()
-    {
-        
-    }
 }

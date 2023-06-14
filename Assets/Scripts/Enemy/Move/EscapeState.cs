@@ -12,11 +12,13 @@ public class EscapeState : MoveBaseState, IState
     [Range(1f, 10f)]
     [SerializeField] private float _returnDist = 1f;
 
+    private MoveBaseState _moveBase = default;
     private float _checkTimer = 0f;
 
     public void OnEnter(StateMachineRoot owner)
     {
         Debug.Log("Enter Escape State");
+        _moveBase = owner.Move;
         _checkTimer = 0f;
     }
 
@@ -34,16 +36,15 @@ public class EscapeState : MoveBaseState, IState
     ///           （EnemyとPlayerとの逆ベクトルを取得し、その方向に移動）</summary>
     private void Movement(StateMachineRoot owner)
     {
-        if (Anim)
+        if (_moveBase.Anim)
         {
             owner.EnemyAnimation.ChangeAnimation(Consts.ANIM_SEARCH);
         }
 
         _checkTimer += Time.deltaTime;
-
         if (_checkTimer >= _checkInterval)
         {
-            Vector3 direction = Enemy.position - Player.position;
+            Vector3 direction = _moveBase.Enemy.position - _moveBase.Player.position;
 
             if (Vector3.SqrMagnitude(direction) > _returnDist * _returnDist)
             {
@@ -53,12 +54,11 @@ public class EscapeState : MoveBaseState, IState
             else
             {
                 //まだ近かったら新たに場所を決めて逃げる
-                Vector3 targetPos = Enemy.position + direction;
+                Vector3 targetPos = _moveBase.Enemy.position + direction;
 
-                Agent.SetDestination(targetPos);
+                _moveBase.Agent.SetDestination(targetPos);
                 _checkTimer = 0f;
             }
         }
-
     }
 }

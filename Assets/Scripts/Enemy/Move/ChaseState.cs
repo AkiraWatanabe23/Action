@@ -12,14 +12,17 @@ public class ChaseState : MoveBaseState, IState
     [Range(1f, 10f)]
     [SerializeField] private float _returnDist = 1f;
 
+    private MoveBaseState _moveBase = default;
+
     public void OnEnter(StateMachineRoot owner)
     {
         Debug.Log("Enter Chase State");
+        _moveBase = owner.Move;
     }
 
     public void OnUpdate(StateMachineRoot owner)
     {
-        if (Wandering.IsMove)
+        if (_moveBase.Wandering.IsMove)
         {
             Movement(owner);
         }
@@ -33,15 +36,15 @@ public class ChaseState : MoveBaseState, IState
     /// <summary> 移動 </summary>
     private void Movement(StateMachineRoot owner)
     {
-        if (Anim)
+        if (_moveBase.Anim)
         {
             //移動Animation
             owner.EnemyAnimation.ChangeAnimation(Consts.ANIM_CHASE);
         }
 
-        Agent.SetDestination(Player.position);
+        _moveBase.Agent.SetDestination(_moveBase.Player.position);
         var sqrMag
-            = Vector3.SqrMagnitude(Enemy.position - Player.position);
+            = Vector3.SqrMagnitude(_moveBase.Enemy.position - _moveBase.Player.position);
 
         if (sqrMag < _attackDist * _attackDist)
         {

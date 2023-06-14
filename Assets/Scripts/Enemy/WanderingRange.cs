@@ -43,7 +43,7 @@ public class WanderingRange : MonoBehaviour
             for (int i = 0; i < _posCount; i++)
             {
                 var circlePos = _radius * Random.insideUnitCircle;
-                var spawnPos = new Vector3(circlePos.x, 0, circlePos.y) + centerPos.position;
+                var spawnPos = new Vector3(circlePos.x, 3f, circlePos.y) + centerPos.position;
 
                 var pos = Instantiate(_wanderPrefab, spawnPos, Quaternion.identity);
                 _wanderingPos[i] = pos.transform;

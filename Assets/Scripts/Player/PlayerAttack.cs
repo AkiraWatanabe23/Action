@@ -3,6 +3,8 @@
 [System.Serializable]
 public class PlayerAttack
 {
+    [SerializeField] private Vector3 _offset = Vector3.zero;
+
     [Tooltip("武器の種類")]
     [SerializeField] private WeaponType _weapon = WeaponType.Sword;
     [SerializeField] private AttackType _attack = AttackType.Normal;
@@ -33,9 +35,9 @@ public class PlayerAttack
         {
             _animation.ChangeAnimToAttack();
 
-            Debug.DrawRay(_transform.position, _transform.forward, Color.green, 10f);
+            Debug.DrawRay(_transform.position + _offset, _transform.forward, Color.red, 10f);
             //攻撃(引数の値は仮)
-            if (Physics.Raycast(_transform.position, _transform.forward, out RaycastHit hit, 20f))
+            if (Physics.Raycast(_transform.position + _offset, _transform.forward, out RaycastHit hit, 20f))
             {
                 if (hit.collider.gameObject.TryGetComponent(out EnemyController enemy))
                 {

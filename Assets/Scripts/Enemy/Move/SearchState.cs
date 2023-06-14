@@ -10,20 +10,22 @@ public class SearchState : MoveBaseState, IState
     [SerializeField] private float _stopping = 1f;
 
     private int _posIndex = 0;
+    private MoveBaseState _moveBase = default;
 
     public void OnEnter(StateMachineRoot owner)
     {
+        Debug.Log("Enter Search State");
+        _moveBase = owner.Move;
+
         //ステート開始時の目的地を設定
         _posIndex = SetDestinationIndex();
-        Agent.SetDestination(Wandering.WanderingPos[_posIndex].position);
-        Agent.stoppingDistance = _stopping;
-
-        Debug.Log("Enter Search State");
+        _moveBase.Agent.SetDestination(_moveBase.Wandering.WanderingPos[_posIndex].position);
+        _moveBase.Agent.stoppingDistance = _stopping;
     }
 
     public void OnUpdate(StateMachineRoot owner)
     {
-        if (Wandering.IsMove)
+        if (_moveBase.Wandering.IsMove)
         {
             Search(owner);
             Movement(owner);
@@ -38,18 +40,18 @@ public class SearchState : MoveBaseState, IState
     /// <summary> Playerを探す </summary>
     private void Search(StateMachineRoot owner)
     {
-        var dir = Player.position - Enemy.position;
+        var dir = _moveBase.Player.position - _moveBase.Enemy.position;
         var dist = dir.sqrMagnitude;
 
         //cos(θ/2)
-        var cosHalf = Mathf.Cos(EnemyData.SearchAngle / 2 * Mathf.Deg2Rad);
+        var cosHalf = Mathf.Cos(_moveBase.EnemyData.SearchAngle / 2 * Mathf.Deg2Rad);
 
         //内積を取得する
         var innerProduct
-            = Vector3.Dot(Enemy.forward, Player.position.normalized);
+            = Vector3.Dot(_moveBase.Enemy.forward, _moveBase.Player.position.normalized);
 
         //視界に入っていて、距離が範囲内ならPlayerの追跡に切り替わる
-        if (innerProduct > cosHalf && dist < SqrDistance)
+        if (innerProduct > cosHalf && dist < _moveBase.SqrDistance)
         {
             Debug.Log("find player");
             owner.ChangeState(StateMachineRoot.SubState.Chase);
@@ -59,14 +61,14 @@ public class SearchState : MoveBaseState, IState
     /// <summary> 移動 </summary>
     private void Movement(StateMachineRoot owner)
     {
-        if (Anim)
+        if (_moveBase.Anim)
         {
             //歩行Animation
             owner.EnemyAnimation.ChangeAnimation(Consts.ANIM_SEARCH);
         }
 
         var sqrMag
-            = Vector3.SqrMagnitude(Enemy.position - Wandering.WanderingPos[_posIndex].position);
+            = Vector3.SqrMagnitude(_moveBase.Enemy.position - _moveBase.Wandering.WanderingPos[_posIndex].position);
 
         if (sqrMag < _stopping * _stopping)
         {
@@ -74,13 +76,13 @@ public class SearchState : MoveBaseState, IState
             _posIndex = SetDestinationIndex();
             Debug.Log("Change Destination");
         }
-        Agent.SetDestination(Wandering.WanderingPos[_posIndex].position);
+        _moveBase.Agent.SetDestination(_moveBase.Wandering.WanderingPos[_posIndex].position);
     }
 
     /// <summary> 次の目的地のインデックスを取得 </summary>
     private int SetDestinationIndex()
     {
-        int index = Random.Range(0, Wandering.WanderingPos.Length);
+        int index = Random.Range(0, _moveBase.Wandering.WanderingPos.Length);
 
         if (index == _posIndex)
         {

@@ -4,19 +4,15 @@
 public class ConductBaseState
 {
     #region 変数一覧
-    private EnemyData _enemyData = default;
-    private Transform _enemy = default;
-    private Animator _anim = default;
-
-    public EnemyData EnemyData => _enemyData;
-    public Transform Enemy => _enemy;
-    public Animator Anim => _anim;
+    public EnemyData EnemyData { get; private set; }
+    public Transform Enemy { get; private set; }
+    public Animator Anim { get; private set; }
     #endregion
 
     public void Init(EnemyData enemyData, Transform enemy, Animator anim)
     {
-        _enemyData = enemyData;
-        _enemy = enemy;
-        _anim = anim;
+        EnemyData = enemyData;
+        Enemy = enemy;
+        Anim = anim;
     }
 }

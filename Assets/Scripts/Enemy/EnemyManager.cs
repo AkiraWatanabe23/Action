@@ -57,10 +57,12 @@ public class EnemyManager : MonoBehaviour
             _wanders[i] = _wanderingPositions.GetChild(i).GetComponent<WanderingRange>();
             var wander = _wanders[i];
 
+            var rangeEnemies = wander.gameObject.GetComponent<EnemyRange>().Enemies;
+
             for (int j = 0; j < _members; j++)
             {
                 var circlePos = wander.Radius * Random.insideUnitCircle;
-                var spawnPos = new Vector3(circlePos.x, 0, circlePos.y) + wander.gameObject.transform.position;
+                var spawnPos = new Vector3(circlePos.x, 3f, circlePos.y) + wander.gameObject.transform.position;
 
                 var go = Instantiate(_enemyPrefab, spawnPos, Quaternion.identity);
                 go.transform.SetParent(transform);
@@ -69,6 +71,7 @@ public class EnemyManager : MonoBehaviour
                 {
                     _enemies.Add(enemy);
                     enemy.Wandering = wander;
+                    rangeEnemies.Add(enemy);
                 }
             }
         }
