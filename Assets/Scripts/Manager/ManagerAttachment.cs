@@ -14,11 +14,13 @@ public class ManagerAttachment : MonoBehaviour
     private void Awake()
     {
         var managers = GameObject.Find("Manager");
+        var enemyManager = GameObject.Find("EnemyManager").GetComponent<EnemyManager>();
 
         _gameManager = managers.GetComponent<GameManager>();
         _uiManager = managers.GetComponent<UIManager>();
 
         _uiManager.SettingUI(_menuPanel, _timerText, _countText);
+        _gameManager.SetGameStatus(_uiManager, enemyManager);
     }
 
     private void Start()
@@ -31,7 +33,6 @@ public class ManagerAttachment : MonoBehaviour
 
     private void Update()
     {
-        _uiManager.TimerText.text = _gameManager.Timer.ToString("F0");
-        _uiManager.CountText.text = $"{ _gameManager.KillCount }  /  { _gameManager.MaxKillCount }";
+        
     }
 }

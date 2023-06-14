@@ -10,16 +10,27 @@ public class GameManager : MonoBehaviour
 
     private int _maxKillCount = 50;
 
+    private UIManager _uiManager = default;
     private static GameManager _instance = default;
 
     public bool IsGameStart => _isGameStart;
-    public float Timer { get => _timer; set => _timer = value; }
+    public float Timer
+    {
+        get => _timer;
+        set
+        {
+            _timer = value;
+            _uiManager.TimerText.text = _timer.ToString("F0");
+        }
+    }
     public int KillCount
     {
         get => _enemyKillCount;
         set
         {
             _enemyKillCount = value;
+            _uiManager.CountText.text = $"{ value }  /  { _maxKillCount }";
+
             if (value >= _maxKillCount) GameClear();
         }
     }
@@ -49,7 +60,7 @@ public class GameManager : MonoBehaviour
     {
         if (_isGameStart)
         {
-            _timer -= Time.deltaTime;
+            Timer -= Time.deltaTime;
             if (_timer < 0)
             {
                 GameOver();
@@ -68,11 +79,11 @@ public class GameManager : MonoBehaviour
     }
 
     /// <summary> ゲーム開始時に呼び出す関数 </summary>
-    public void SetGameStatus(EnemyManager enemyManager)
+    public void SetGameStatus(UIManager manager, EnemyManager enemyManager)
     {
-        //ゲームの初期設定(Timer等)
+        _uiManager = manager;
         _maxKillCount = (int)(enemyManager.gameObject.transform.childCount * 0.8f);
-        _enemyKillCount = 0;
+        KillCount = 0;
     }
 
     /// <summary> 指示が出た場合に呼び出し、ゲームを開始する </summary>
