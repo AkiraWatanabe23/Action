@@ -7,6 +7,9 @@ public class ManagerAttachment : MonoBehaviour
     [SerializeField] private GameObject _menuPanel = default;
     [SerializeField] private Text _timerText = default;
     [SerializeField] private Text _countText = default;
+    [SerializeField] private GameObject _resultPrefab = default;
+
+    [SerializeField] private Text _resultText = default;
 
     private GameManager _gameManager = default;
     private UIManager _uiManager = default;
@@ -19,7 +22,7 @@ public class ManagerAttachment : MonoBehaviour
         _gameManager = managers.GetComponent<GameManager>();
         _uiManager = managers.GetComponent<UIManager>();
 
-        _uiManager.SettingUI(_menuPanel, _timerText, _countText);
+        _uiManager.SettingUI(_menuPanel, _timerText, _countText, _resultText, _resultPrefab);
         _gameManager.SetGameStatus(_uiManager, enemyManager);
     }
 

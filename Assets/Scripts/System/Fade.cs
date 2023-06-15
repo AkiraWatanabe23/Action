@@ -13,6 +13,21 @@ public class Fade : MonoBehaviour
     [SerializeField] private UnityEvent _onCompleteFadeIn = default;
     [SerializeField] private UnityEvent _onCompleteFadeOut = default;
 
+    public static Fade Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Start()
     {
         if (_fadePanel)

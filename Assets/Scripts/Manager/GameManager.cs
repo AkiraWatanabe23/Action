@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
             _enemyKillCount = value;
             _uiManager.CountText.text = $"{ value }  /  { _maxKillCount }";
 
-            if (value >= _maxKillCount) GameClear();
+            if (value >= _maxKillCount) GameFinish();
         }
     }
     public int MaxKillCount => _maxKillCount;
@@ -63,19 +63,9 @@ public class GameManager : MonoBehaviour
             Timer -= Time.deltaTime;
             if (_timer < 0)
             {
-                GameOver();
+                GameFinish();
             }
         }
-    }
-
-    private void GameClear()
-    {
-        //Panelとか出して、また最初から
-    }
-
-    private void GameOver()
-    {
-        //やり直し（シーンのリロードとかがいいかな）
     }
 
     /// <summary> ゲーム開始時に呼び出す関数 </summary>
@@ -90,5 +80,11 @@ public class GameManager : MonoBehaviour
     public void GameStart()
     {
         _isGameStart = true;
+    }
+
+    private void GameFinish()
+    {
+        _uiManager.ResultPrefab.SetActive(true);
+        _uiManager.ResultText.text = _uiManager.CountText.text = $"{ _enemyKillCount }  /  { _maxKillCount }";
     }
 }
