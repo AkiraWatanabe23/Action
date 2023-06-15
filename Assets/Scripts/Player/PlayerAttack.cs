@@ -48,22 +48,6 @@ public class PlayerAttack
                 }
             }
 
-            //Debug.DrawRay(_transform.position + _offset, _transform.forward, Color.red, 10f);
-            ////攻撃(引数の値は仮)
-            //if (Physics.Raycast(_transform.position + _offset, _transform.forward, out RaycastHit hit, 20f))
-            //{
-            //    if (hit.collider.transform.parent.gameObject.TryGetComponent(out EnemyController enemy))
-            //    {
-            //        enemy.ReceiveDamege(_attackValue);
-            //        GaugeUp(_attackValue / 10);
-            //        Debug.Log("こうげき");
-            //    }
-            //    else
-            //    {
-            //        Debug.Log(hit.collider.gameObject.name);
-            //    }
-            //}
-
             //_animation.ChangeAnimToIdle();
         }
     }

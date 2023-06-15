@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private bool _isGameStart = false;
 
-    private float _timer = 100f;
+    private float _timer = 300f;
     private int _enemyKillCount = 0;
 
     private int _maxKillCount = 50;

@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class GameStart : MonoBehaviour
 {
-    [SerializeField] private KeyCode _startKey = KeyCode.Return;
     [SerializeField] private Image _explainPanel = default;
     [SerializeField] private Text _countDownText = default;
 
@@ -13,15 +12,7 @@ public class GameStart : MonoBehaviour
 
     private void Start()
     {
-
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(_startKey))
-        {
-            ViewPanel();
-        }
+        ViewPanel();
     }
 
     public void ViewPanel()
@@ -34,7 +25,7 @@ public class GameStart : MonoBehaviour
     {
         _countDownText.text = "";
 
-        for (int i = 5; i >= 0; i--)
+        for (int i = 6; i >= 0; i--)
         {
             if (i > 0) _countDownText.text = i.ToString();
             else _countDownText.text = "Start!!";

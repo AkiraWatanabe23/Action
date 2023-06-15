@@ -600,11 +600,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movement:
-    _moveSpeed: 10
+    _moveSpeed: 5
     _jumpPower: 5
     _rotateSpeed: 600
     _gravity: 9.8
-    _maxSurfaceSpeed: 15
+    _maxSurfaceSpeed: 10
     _maxDimensionalSpeed: 5
     _decreaseSpeed: 5
     _overlap:
@@ -620,6 +620,7 @@ MonoBehaviour:
     _hp: 100
   _attack:
     _offset: {x: 0, y: 1, z: 2}
+    _halfExtents: {x: 0.5, y: 0.5, z: 0.5}
     _weapon: 0
     _attack: 0
 --- !u!1 &8051242866197528290
