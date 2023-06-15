@@ -5,9 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class SearchState : MoveBaseState, IState
 {
-    [Range(1f, 10f)]
+    [Range(0.1f, 1f)]
     [Tooltip("NavMeshAgent.stoppingDistance")]
-    [SerializeField] private float _stopping = 1f;
+    [SerializeField] private float _stopping = 0.5f;
 
     private int _posIndex = 0;
     private MoveBaseState _moveBase = default;
@@ -21,8 +21,6 @@ public class SearchState : MoveBaseState, IState
         _posIndex = SetDestinationIndex();
         _moveBase.Agent.SetDestination(_moveBase.Wandering.WanderingPos[_posIndex].position);
         _moveBase.Agent.stoppingDistance = _stopping;
-
-        Debug.Log(_moveBase.Agent.stoppingDistance);
     }
 
     public void OnUpdate(StateMachineRoot owner)
@@ -69,16 +67,19 @@ public class SearchState : MoveBaseState, IState
     /// <summary> 移動 </summary>
     private void Movement()
     {
-        var sqrMag
-            = Vector3.SqrMagnitude(_moveBase.Enemy.position - _moveBase.Wandering.WanderingPos[_posIndex].position);
+        //var sqrMag
+        //    = Vector3.SqrMagnitude(_moveBase.Enemy.position - _moveBase.Wandering.WanderingPos[_posIndex].position);
+        var sqrDistance = Mathf.Pow(_moveBase.Agent.remainingDistance, 2);
+        var sqrStopping = Mathf.Pow(_moveBase.Agent.stoppingDistance, 2);
 
-        if (sqrMag < _stopping * _stopping)
+
+        if (sqrDistance <= sqrStopping)
         {
             //目的地に到着したら次の目的地を設定
             _posIndex = SetDestinationIndex();
             Debug.Log("Change Destination");
+            _moveBase.Agent.SetDestination(_moveBase.Wandering.WanderingPos[_posIndex].position);
         }
-        _moveBase.Agent.SetDestination(_moveBase.Wandering.WanderingPos[_posIndex].position);
     }
 
     /// <summary> 次の目的地のインデックスを取得 </summary>

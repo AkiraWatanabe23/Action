@@ -45,7 +45,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 100
+  m_Radius: 50
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1847666704158691874
 MonoBehaviour:
@@ -59,8 +59,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad121a736eee2bd44917ea789ffc3f42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 100
-  _posCount: 50
+  _radius: 50
+  _posCount: 10
   _wanderPrefab: {fileID: 1983783191811101988, guid: a3b9234c45187a84b954d9ae0e58b317, type: 3}
   _isCircle: 1
   _isMove: 1

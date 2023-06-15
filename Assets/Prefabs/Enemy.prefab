@@ -73,7 +73,7 @@ MonoBehaviour:
   _enemyData: {fileID: 11400000, guid: fef1e2989c510064086ffd3aded5517a, type: 2}
   _stateMachine:
     _search:
-      _stopping: 5
+      _stopping: 0.5
     _chase:
       _attackDist: 1
       _returnDist: 1

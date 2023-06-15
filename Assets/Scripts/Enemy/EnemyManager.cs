@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    [Range(1, 30)]
+    [Range(1, 10)]
     [Tooltip("1ユニットあたりの敵の数")]
     [SerializeField] private int _members = 1;
     [SerializeField] private List<EnemyController> _enemies = new();
