@@ -2,24 +2,22 @@
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Debug")]
-    [SerializeField] private bool _isGameStart = false;
+    private bool _isGameStart = false;
 
-    private float _timer = 300f;
+    private float _timer = 500f;
     private int _enemyKillCount = 0;
 
     private int _maxKillCount = 50;
 
     private UIManager _uiManager = default;
-    private static GameManager _instance = default;
 
-    public bool IsGameStart => _isGameStart;
     public float Timer
     {
         get => _timer;
         set
         {
             _timer = value;
+            //値の更新があった時のみUIを更新
             _uiManager.TimerText.text = _timer.ToString("F0");
         }
     }
@@ -34,26 +32,20 @@ public class GameManager : MonoBehaviour
             if (value >= _maxKillCount) GameFinish();
         }
     }
-    public int MaxKillCount => _maxKillCount;
 
-    public static GameManager Instance => _instance;
+    public static GameManager Instance { get; private set; }
 
     private void Awake()
     {
-        if (_instance == null)
+        if (Instance == null)
         {
-            _instance = this;
+            Instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
-    }
-
-    public void Start()
-    {
-
     }
 
     private void Update()

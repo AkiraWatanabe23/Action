@@ -25,12 +25,4 @@ public class ManagerAttachment : MonoBehaviour
         _uiManager.SettingUI(_menuPanel, _timerText, _countText, _resultText, _resultPrefab);
         _gameManager.SetGameStatus(_uiManager, enemyManager);
     }
-
-    private void Start()
-    {
-        if (_gameManager.IsGameStart)
-        {
-            _gameManager.Start();
-        }
-    }
 }
