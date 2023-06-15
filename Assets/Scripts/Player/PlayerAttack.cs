@@ -4,6 +4,7 @@
 public class PlayerAttack
 {
     [SerializeField] private Vector3 _offset = Vector3.zero;
+    [SerializeField] private Vector3 _halfExtents = Vector3.zero;
 
     [Tooltip("武器の種類")]
     [SerializeField] private WeaponType _weapon = WeaponType.Sword;
@@ -34,22 +35,34 @@ public class PlayerAttack
         if (Input.GetMouseButtonDown(1))
         {
             _animation.ChangeAnimToAttack();
-
-            Debug.DrawRay(_transform.position + _offset, _transform.forward, Color.red, 10f);
-            //攻撃(引数の値は仮)
-            if (Physics.Raycast(_transform.position + _offset, _transform.forward, out RaycastHit hit, 20f))
+            
+            if (Physics.BoxCast(
+                _transform.position + _offset, _halfExtents, _transform.forward,
+                out RaycastHit hit, Quaternion.identity, 20f))
             {
-                if (hit.collider.gameObject.TryGetComponent(out EnemyController enemy))
+                if (hit.collider.transform.parent.gameObject.TryGetComponent(out EnemyController enemy))
                 {
                     enemy.ReceiveDamege(_attackValue);
                     GaugeUp(_attackValue / 10);
                     Debug.Log("こうげき");
                 }
-                else
-                {
-                    Debug.Log(hit.collider.gameObject.name);
-                }
             }
+
+            //Debug.DrawRay(_transform.position + _offset, _transform.forward, Color.red, 10f);
+            ////攻撃(引数の値は仮)
+            //if (Physics.Raycast(_transform.position + _offset, _transform.forward, out RaycastHit hit, 20f))
+            //{
+            //    if (hit.collider.transform.parent.gameObject.TryGetComponent(out EnemyController enemy))
+            //    {
+            //        enemy.ReceiveDamege(_attackValue);
+            //        GaugeUp(_attackValue / 10);
+            //        Debug.Log("こうげき");
+            //    }
+            //    else
+            //    {
+            //        Debug.Log(hit.collider.gameObject.name);
+            //    }
+            //}
 
             //_animation.ChangeAnimToIdle();
         }

@@ -600,11 +600,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movement:
-    _moveSpeed: 5
+    _moveSpeed: 10
     _jumpPower: 5
     _rotateSpeed: 600
     _gravity: 9.8
-    _maxSurfaceSpeed: 5
+    _maxSurfaceSpeed: 15
     _maxDimensionalSpeed: 5
     _decreaseSpeed: 5
     _overlap:
@@ -619,6 +619,7 @@ MonoBehaviour:
   _health:
     _hp: 100
   _attack:
+    _offset: {x: 0, y: 1, z: 2}
     _weapon: 0
     _attack: 0
 --- !u!1 &8051242866197528290
@@ -968,7 +969,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 3012d7f0f18ad194f8a1a42619523446, type: 3}
     m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
@@ -1048,7 +1049,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 3012d7f0f18ad194f8a1a42619523446, type: 3}
     m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
@@ -1097,7 +1098,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 60, y: -60}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 116.25, y: 100.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8051242866855061416
 CanvasRenderer:
@@ -1127,7 +1128,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 753a450a6d00b2b4895a30cd21eaf132, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
