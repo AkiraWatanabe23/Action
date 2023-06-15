@@ -20,17 +20,18 @@ public class AttackState : ConductBaseState, IState
 
     public void OnUpdate(StateMachineRoot owner)
     {
-        if (Anim)
+        if (_conductBase.Anim)
         {
             owner.EnemyAnimation.ChangeAnimation(Consts.ANIM_ATTACK);
         }
 
         //ˆÈ‰º‰¼
-        if (Physics.Raycast(Enemy.transform.position + _attackOffset, Enemy.transform.forward, out RaycastHit hit, _attackDistance))
+        if (Physics.Raycast(_conductBase.Enemy.transform.position + _attackOffset, _conductBase.Enemy.transform.forward,
+                            out RaycastHit hit, _attackDistance))
         {
             if (hit.collider.gameObject.TryGetComponent(out PlayerController player))
             {
-                player.Health.ReceiveDamege(EnemyData.AttackValue);
+                player.Health.ReceiveDamege(_conductBase.EnemyData.AttackValue);
             }
             owner.ChangeState(StateMachineRoot.SubState.Search);
         }

@@ -46,18 +46,8 @@ public class SearchState : MoveBaseState, IState
             owner.EnemyAnimation.ChangeAnimation(Consts.ANIM_SEARCH);
         }
 
-        var dir = _moveBase.Player.position - _moveBase.Enemy.position;
-        var dist = dir.sqrMagnitude;
-
-        //cos(θ/2)
-        var cosHalf = Mathf.Cos(_moveBase.EnemyData.SearchAngle / 2 * Mathf.Deg2Rad);
-
-        //内積を取得する
-        var innerProduct
-            = Vector3.Dot(_moveBase.Enemy.forward, _moveBase.Player.position.normalized);
-
         //視界に入っていて、距離が範囲内ならPlayerの追跡に切り替わる
-        if (innerProduct > cosHalf && dist < _moveBase.SqrDistance)
+        if (PlayerVisible())
         {
             Debug.Log("find player");
             owner.ChangeState(StateMachineRoot.SubState.Chase);
@@ -67,11 +57,8 @@ public class SearchState : MoveBaseState, IState
     /// <summary> 移動 </summary>
     private void Movement()
     {
-        //var sqrMag
-        //    = Vector3.SqrMagnitude(_moveBase.Enemy.position - _moveBase.Wandering.WanderingPos[_posIndex].position);
         var sqrDistance = Mathf.Pow(_moveBase.Agent.remainingDistance, 2);
         var sqrStopping = Mathf.Pow(_moveBase.Agent.stoppingDistance, 2);
-
 
         if (sqrDistance <= sqrStopping)
         {
@@ -93,7 +80,25 @@ public class SearchState : MoveBaseState, IState
             Debug.Log("選び直し");
             return SetDestinationIndex();
         }
-
         return index;
+    }
+
+    /// <summary> 視界判定 </summary>
+    private bool PlayerVisible()
+    {
+        var myPos = _moveBase.Enemy.position;
+        var target = _moveBase.Player.position;
+
+        var dir = target - myPos;
+        var dist = dir.sqrMagnitude;
+
+        //cos(θ/2)
+        var cosHalf = Mathf.Cos(_moveBase.EnemyData.SearchAngle / 2 * Mathf.Deg2Rad);
+
+        //内積を取得する
+        var innerProduct
+            = Vector3.Dot(_moveBase.Enemy.forward, target.normalized);
+
+        return innerProduct > cosHalf && dist < _moveBase.SqrDistance;
     }
 }
