@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68f39d3dc3f5f244698ca6770add287d, type: 3}
   m_Name: powerUpItem
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 0}
-  _type: 0
-  _cost: 0
-  _description: 
+  _prefab: {fileID: 5492938, guid: 7b505e3d23f1b4249af6c7ad29cb81ef, type: 3}
+  _type: 2
+  _cost: 100
+  _description: "\u660E\u3089\u304B\u306B\u602A\u3057\u3044\u8449\u3063\u3071\u3002\n\u5642\u306B\u3088\u308B\u3068\u3001\u4F7F\u3046\u3068\n\u529B\u304C\u6F32\u308B\u3089\u3057\u3044\u3002\n"
   _itemName: "\u602A\u3057\u3044\u8349"
   _itemcount: 0
   _powerUpOffencivePower: 5

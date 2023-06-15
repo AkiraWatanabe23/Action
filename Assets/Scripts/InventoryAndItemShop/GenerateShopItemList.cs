@@ -27,7 +27,7 @@ public class GenerateShopItemList : MonoBehaviour
             Text str = tmpitem.GetComponentInChildren<Text>();
             str.text = _dataBase._itemObjs[i].ItemName;
             _sb = tmpitem.GetComponent<ShopButton>();
-            _sb._shopDataBase = _dataBase;
+            _sb._dataBase = _dataBase;
             _sb._id = i;            
             _sb._cost = _dataBase._itemObjs[i]._cost;
             _sb._gsl = this;

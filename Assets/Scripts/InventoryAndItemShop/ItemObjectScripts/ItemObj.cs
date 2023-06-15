@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class ItemObj : ScriptableObject
 {
     //アイテムすべてに必要な変数を列挙各アイテム毎に必要な変数は継承先に記載する
-    [Header("アイテムのプレハブ"),SerializeField] public GameObject _prefab;
+    [Header("アイテムのプレハブ"),SerializeField] public Sprite _prefab;
     [Header("アイテムのタイプ")] public ItemType _type;
     [Header("値段")] public int _cost;
     [TextArea(10, 10)] public string _description;

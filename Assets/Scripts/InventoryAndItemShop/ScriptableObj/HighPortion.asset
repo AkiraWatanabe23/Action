@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc89bcf8fc2250745b627be9f27d7bdc, type: 3}
-  m_Name: heaiitem
+  m_Name: HighPortion
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 0}
+  _prefab: {fileID: 2038325840, guid: d3923a9bc8d8aa743b205a626267403d, type: 3}
   _type: 1
-  _cost: 200
-  _description: 
-  _itemName: "\u30DD\u30FC\u30B7\u30E7\u30F3"
+  _cost: 1000
+  _description: "\u3042\u307E\u308A\u58F2\u308A\u51FA\u3055\u308C\u308B\u3053\u3068\n\u306E\u306A\u3044\u9AD8\u7D1A\u30DD\u30FC\u30B7\u30E7\u30F3\u3002\nHP\u309250\u56DE\u5FA9\u3059\u308B\u3002"
+  _itemName: "\u9AD8\u7D1A\u30DD\u30FC\u30B7\u30E7\u30F3"
   _itemcount: 1
-  _healValue: 5
+  _healValue: 50

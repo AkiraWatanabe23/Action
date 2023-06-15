@@ -1,7 +1,8 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventoryButton : MonoBehaviour
+public class InventoryButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public ShopDataBase _dataBase;
     public Inventory _inventory;
@@ -20,5 +21,18 @@ public class InventoryButton : MonoBehaviour
         }
         Text str = GetComponentInChildren<Text>();
         str.text = _item.ItemName + "Å~" + _item._itemcount;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        _dataBase.Discription.text = _dataBase._itemObjs[_id]._description;
+        _dataBase.Image.enabled = true;
+        _dataBase.Image.sprite = _dataBase._itemObjs[_id]._prefab;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        _dataBase.Discription.text = "";
+        _dataBase.Image.enabled = false;
     }
 }
