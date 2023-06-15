@@ -21,6 +21,8 @@ public class SearchState : MoveBaseState, IState
         _posIndex = SetDestinationIndex();
         _moveBase.Agent.SetDestination(_moveBase.Wandering.WanderingPos[_posIndex].position);
         _moveBase.Agent.stoppingDistance = _stopping;
+
+        Debug.Log(_moveBase.Agent.stoppingDistance);
     }
 
     public void OnUpdate(StateMachineRoot owner)
@@ -28,7 +30,7 @@ public class SearchState : MoveBaseState, IState
         if (_moveBase.Wandering.IsMove)
         {
             Search(owner);
-            Movement(owner);
+            Movement();
         }
     }
 
@@ -40,6 +42,12 @@ public class SearchState : MoveBaseState, IState
     /// <summary> Playerを探す </summary>
     private void Search(StateMachineRoot owner)
     {
+        if (_moveBase.Anim)
+        {
+            //歩行Animation
+            owner.EnemyAnimation.ChangeAnimation(Consts.ANIM_SEARCH);
+        }
+
         var dir = _moveBase.Player.position - _moveBase.Enemy.position;
         var dist = dir.sqrMagnitude;
 
@@ -59,14 +67,8 @@ public class SearchState : MoveBaseState, IState
     }
 
     /// <summary> 移動 </summary>
-    private void Movement(StateMachineRoot owner)
+    private void Movement()
     {
-        if (_moveBase.Anim)
-        {
-            //歩行Animation
-            owner.EnemyAnimation.ChangeAnimation(Consts.ANIM_SEARCH);
-        }
-
         var sqrMag
             = Vector3.SqrMagnitude(_moveBase.Enemy.position - _moveBase.Wandering.WanderingPos[_posIndex].position);
 
@@ -87,6 +89,7 @@ public class SearchState : MoveBaseState, IState
         if (index == _posIndex)
         {
             //同じ場所を選んだら、選び直し
+            Debug.Log("選び直し");
             return SetDestinationIndex();
         }
 
