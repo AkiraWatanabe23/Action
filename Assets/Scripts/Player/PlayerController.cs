@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[RequireComponent (typeof(CharacterController))]
+[RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
     [Header("Player Status")]
@@ -42,6 +42,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        //_movement.Overlap.OnDrawGizmos(transform);
+        _movement.Overlap.OnDrawGizmos(transform);
     }
 }

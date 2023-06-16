@@ -25,7 +25,6 @@ public class AttackState : ConductBaseState, IState
             owner.EnemyAnimation.ChangeAnimation(Consts.ANIM_ATTACK);
         }
 
-        //ˆÈ‰º‰¼
         if (Physics.Raycast(_conductBase.Enemy.transform.position + _attackOffset, _conductBase.Enemy.transform.forward,
                             out RaycastHit hit, _attackDistance))
         {

@@ -18,7 +18,7 @@ public class SearchState : MoveBaseState, IState
         _moveBase = owner.Move;
 
         //ステート開始時の目的地を設定
-        _posIndex = SetDestinationIndex();
+        _posIndex = GetDestinationIndex();
         _moveBase.Agent.SetDestination(_moveBase.Wandering.WanderingPos[_posIndex].position);
         _moveBase.Agent.stoppingDistance = _stopping;
     }
@@ -42,11 +42,10 @@ public class SearchState : MoveBaseState, IState
     {
         if (_moveBase.Anim)
         {
-            //歩行Animation
             owner.EnemyAnimation.ChangeAnimation(Consts.ANIM_SEARCH);
         }
 
-        //視界に入っていて、距離が範囲内ならPlayerの追跡に切り替わる
+        //Playerが視界に入っていたら追跡に切り替わる
         if (PlayerVisible())
         {
             Debug.Log("find player");
@@ -54,7 +53,6 @@ public class SearchState : MoveBaseState, IState
         }
     }
 
-    /// <summary> 移動 </summary>
     private void Movement()
     {
         var sqrDistance = Mathf.Pow(_moveBase.Agent.remainingDistance, 2);
@@ -63,22 +61,21 @@ public class SearchState : MoveBaseState, IState
         if (sqrDistance <= sqrStopping)
         {
             //目的地に到着したら次の目的地を設定
-            _posIndex = SetDestinationIndex();
-            Debug.Log("Change Destination");
+            _posIndex = GetDestinationIndex();
             _moveBase.Agent.SetDestination(_moveBase.Wandering.WanderingPos[_posIndex].position);
+            Debug.Log("Change Destination");
         }
     }
 
     /// <summary> 次の目的地のインデックスを取得 </summary>
-    private int SetDestinationIndex()
+    private int GetDestinationIndex()
     {
         int index = Random.Range(0, _moveBase.Wandering.WanderingPos.Length);
 
         if (index == _posIndex)
         {
-            //同じ場所を選んだら、選び直し
-            Debug.Log("選び直し");
-            return SetDestinationIndex();
+            Debug.Log("徘徊地点選び直し");
+            return GetDestinationIndex();
         }
         return index;
     }
@@ -90,15 +87,15 @@ public class SearchState : MoveBaseState, IState
         var target = _moveBase.Player.position;
 
         var dir = target - myPos;
-        var dist = dir.sqrMagnitude;
+        var sqrDist = dir.sqrMagnitude;
 
-        //cos(θ/2)
+        //cos(θ/ 2 )
         var cosHalf = Mathf.Cos(_moveBase.EnemyData.SearchAngle / 2 * Mathf.Deg2Rad);
 
         //内積を取得する
         var innerProduct
             = Vector3.Dot(_moveBase.Enemy.forward, target.normalized);
 
-        return innerProduct > cosHalf && dist < _moveBase.SqrDistance;
+        return innerProduct > cosHalf && sqrDist < _moveBase.SqrDistance;
     }
 }

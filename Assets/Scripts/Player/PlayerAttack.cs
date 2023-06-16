@@ -15,13 +15,10 @@ public class PlayerAttack
 
     private int _skillGauge = 0;
     private int _maxGauge = 50;
-    /// <summary> 攻撃力 </summary>
     private int _attackValue = 10;
 
-    public WeaponType Weapon { get => _weapon; set => _weapon = value; }
-    public AttackType Attack { get => _attack; set => _attack = value; }
-    public int SkillGauge { get => _skillGauge; set => _skillGauge = value; }
-    public int MaxGauge { get => _maxGauge; protected set => _maxGauge = value; }
+    public int SkillGauge => _skillGauge;
+    public int MaxGauge => _maxGauge;
     public int AttackValue { get => _attackValue; set => _attackValue = value; }
 
     public void Init(Transform trans, PlayerAnimation animation)
@@ -40,14 +37,13 @@ public class PlayerAttack
                 _transform.position + _offset, _halfExtents, _transform.forward,
                 out RaycastHit hit, Quaternion.identity, 20f))
             {
-                if (hit.collider/*.transform.parent*/.gameObject.TryGetComponent(out EnemyController enemy))
+                if (hit.collider./*transform.parent.*/gameObject.TryGetComponent(out EnemyController enemy))
                 {
                     enemy.ReceiveDamege(_attackValue);
                     GaugeUp(_attackValue / 10);
                     Debug.Log("こうげき");
                 }
             }
-
             //_animation.ChangeAnimToIdle();
         }
     }
@@ -57,7 +53,6 @@ public class PlayerAttack
     {
         var attack = _weapon;
 
-        //パラメータの変更
         if (attack == WeaponType.Sword)
         {
             _weapon = WeaponType.Gun;

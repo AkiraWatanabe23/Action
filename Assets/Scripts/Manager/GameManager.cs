@@ -2,6 +2,8 @@
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private SoundHolder _sounds = new();
+
     private bool _isGameStart = false;
 
     private float _timer = 500f;

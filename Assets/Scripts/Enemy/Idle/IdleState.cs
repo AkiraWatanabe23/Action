@@ -26,7 +26,6 @@ public class IdleState : IState
             owner.EnemyAnimation.ChangeAnimation(Consts.ANIM_IDLE);
         }
 
-        //Playerが敵（自分）の一定範囲内に入ってきたらMoveStateに遷移
         if (_isChangeState)
         {
             Debug.Log("Playerが範囲内に侵入しました");

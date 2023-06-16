@@ -14,7 +14,9 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private Transform _player = default;
 
     [Header("Enemyが探索を行う際の値")]
+    [Tooltip("Playerとの距離の2乗")]
     [SerializeField] private float _sqrValue = 2f;
+    [Tooltip("探索時間の間隔")]
     [SerializeField] private float _searchInterval = 0.5f;
 
     private float _timer = 0f;
