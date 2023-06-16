@@ -40,7 +40,7 @@ public class PlayerAttack
                 _transform.position + _offset, _halfExtents, _transform.forward,
                 out RaycastHit hit, Quaternion.identity, 20f))
             {
-                if (hit.collider.transform.parent.gameObject.TryGetComponent(out EnemyController enemy))
+                if (hit.collider/*.transform.parent*/.gameObject.TryGetComponent(out EnemyController enemy))
                 {
                     enemy.ReceiveDamege(_attackValue);
                     GaugeUp(_attackValue / 10);

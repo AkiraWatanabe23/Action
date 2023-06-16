@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3334512849910369049}
   - component: {fileID: 3334512849910369051}
   - component: {fileID: 3334512849910369048}
+  - component: {fileID: 438711649}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -85,6 +86,20 @@ MonoBehaviour:
       _attackDistance: 1
     _damage:
       _escapeValue: 40
+--- !u!136 &438711649
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3334512849910369046}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.2083919
+  m_Height: 1.1666331
+  m_Direction: 1
+  m_Center: {x: 0.019093513, y: 0.56585956, z: -0.019093275}
 --- !u!1 &5328082436027650959
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,7 +698,9 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 25901200661331522, guid: aaf0bae1b4fe202469a91f418e19fa04, type: 3}
+    - {fileID: 25901200661331523, guid: aaf0bae1b4fe202469a91f418e19fa04, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: aaf0bae1b4fe202469a91f418e19fa04, type: 3}
 --- !u!4 &3322131246720160154 stripped
 Transform:

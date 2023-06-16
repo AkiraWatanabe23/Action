@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private CharacterController _controller = default;
     private Animator _anim = default;
 
-    private int _gold = 1000000;
+    private int _gold = 100000;
 
     public PlayerHealth Health { get => _health; protected set => _health = value; }
     public PlayerAttack Attack { get => _attack; protected set => _attack = value; }
@@ -42,6 +42,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        _movement.Overlap.OnDrawGizmos(transform);
+        //_movement.Overlap.OnDrawGizmos(transform);
     }
 }
