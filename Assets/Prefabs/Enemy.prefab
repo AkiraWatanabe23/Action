@@ -76,14 +76,14 @@ MonoBehaviour:
     _search:
       _stopping: 0.5
     _chase:
-      _attackDist: 1
-      _returnDist: 1
+      _attackDist: 5
+      _returnDist: 10
     _escape:
       _checkInterval: 1
-      _returnDist: 1
+      _returnDist: 7
     _attack:
       _attackOffset: {x: 0, y: 1, z: 0}
-      _attackDistance: 1
+      _attackDistance: 3
     _damage:
       _escapeValue: 40
 --- !u!136 &438711649

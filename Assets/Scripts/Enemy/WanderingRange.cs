@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-/// <summary> 指定した半径の円内のランダムな位置にオブジェクトを生成する </summary>
+/// <summary> 指定した半径の円内のランダムな位置に徘徊地点を生成する </summary>
 public class WanderingRange : MonoBehaviour
 {
     [Tooltip("徘徊地点生成円の半径")]
@@ -9,7 +9,7 @@ public class WanderingRange : MonoBehaviour
     [Tooltip("いくつのposを作るか")]
     [SerializeField] private int _posCount = 10;
     [Tooltip("徘徊する地点のプレハブ")]
-    [SerializeField] private GameObject _wanderPrefab = default;
+    [SerializeField] private GameObject _pointPrefab = default;
 
     [Header("Debug")]
     [Tooltip("true...円内、false...球内")]
@@ -45,7 +45,7 @@ public class WanderingRange : MonoBehaviour
                 var circlePos = _radius * Random.insideUnitCircle;
                 var spawnPos = new Vector3(circlePos.x, 3f, circlePos.y) + centerPos.position;
 
-                var pos = Instantiate(_wanderPrefab, spawnPos, Quaternion.identity);
+                var pos = Instantiate(_pointPrefab, spawnPos, Quaternion.identity);
                 _wanderingPos[i] = pos.transform;
                 pos.transform.SetParent(posCollider.transform);
             }
@@ -57,7 +57,7 @@ public class WanderingRange : MonoBehaviour
             {
                 var spawnPos = _radius * Random.insideUnitSphere + centerPos.position;
 
-                var pos = Instantiate(_wanderPrefab, spawnPos, Quaternion.identity);
+                var pos = Instantiate(_pointPrefab, spawnPos, Quaternion.identity);
                 _wanderingPos[i] = pos.transform;
                 pos.transform.SetParent(posCollider.transform);
             }

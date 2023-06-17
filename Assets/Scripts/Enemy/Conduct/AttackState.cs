@@ -7,8 +7,8 @@ public class AttackState : ConductBaseState, IState
 {
     [SerializeField] private Vector3 _attackOffset = Vector3.zero;
     [Range(1f, 10f)]
-    [Tooltip("UŒ‚‚ğ‚·‚é‹——£(Raycast)")]
-    [SerializeField] private float _attackDistance = 1f;
+    [Tooltip("UŒ‚‚ğ‚·‚é‹——£(Raycast.maxDistance)")]
+    [SerializeField] private float _attackDistance = 3f;
 
     private ConductBaseState _conductBase = default;
 

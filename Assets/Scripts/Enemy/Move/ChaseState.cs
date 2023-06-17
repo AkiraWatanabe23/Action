@@ -7,10 +7,10 @@ public class ChaseState : MoveBaseState, IState
 {
     [Tooltip("Playerに攻撃をする距離")]
     [Range(1f, 10f)]
-    [SerializeField] private float _attackDist = 1f;
+    [SerializeField] private float _attackDist = 5f;
     [Tooltip("追跡から徘徊に戻る距離")]
     [Range(1f, 10f)]
-    [SerializeField] private float _returnDist = 1f;
+    [SerializeField] private float _returnDist = 10f;
 
     private MoveBaseState _moveBase = default;
 
@@ -44,7 +44,7 @@ public class ChaseState : MoveBaseState, IState
 
         _moveBase.Agent.SetDestination(_moveBase.Player.position);
         var sqrMag
-            = Vector3.SqrMagnitude(_moveBase.Enemy.position - _moveBase.Player.position);
+            = Vector3.SqrMagnitude(_moveBase.Player.position - _moveBase.Enemy.position);
 
         if (sqrMag < _attackDist * _attackDist)
         {

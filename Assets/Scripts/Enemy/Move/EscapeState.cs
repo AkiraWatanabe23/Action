@@ -5,12 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public class EscapeState : MoveBaseState, IState
 {
-    [Range(0f, 5f)]
+    [Range(0.1f, 5f)]
     [Tooltip("何秒おきに計測するか")]
     [SerializeField] private float _checkInterval = 1f;
     [Tooltip("逃走から徘徊に戻る距離")]
     [Range(1f, 10f)]
-    [SerializeField] private float _returnDist = 1f;
+    [SerializeField] private float _returnDist = 7f;
 
     private MoveBaseState _moveBase = default;
     private float _checkTimer = 0f;

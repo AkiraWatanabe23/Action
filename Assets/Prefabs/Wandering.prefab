@@ -61,7 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _radius: 50
   _posCount: 10
-  _wanderPrefab: {fileID: 1983783191811101988, guid: a3b9234c45187a84b954d9ae0e58b317, type: 3}
+  _pointPrefab: {fileID: 1983783191811101988, guid: a3b9234c45187a84b954d9ae0e58b317, type: 3}
   _isCircle: 1
   _isMove: 1
 --- !u!114 &2014484235

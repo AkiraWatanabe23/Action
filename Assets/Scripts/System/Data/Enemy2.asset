@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80e83e3e2946370478c7de995a68842e, type: 3}
   m_Name: Enemy2
   m_EditorClassIdentifier: 
-  SearchAngle: 0
-  SearchDistance: 0
-  _wanderingPos: []
+  SearchAngle: 150
+  SearchDistance: 8
+  MaxHP: 150
+  MoveSpeed: 7
+  AttackValue: 30

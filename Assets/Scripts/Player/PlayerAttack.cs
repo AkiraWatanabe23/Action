@@ -6,10 +6,6 @@ public class PlayerAttack
     [SerializeField] private Vector3 _offset = Vector3.zero;
     [SerializeField] private Vector3 _halfExtents = Vector3.zero;
 
-    [Tooltip("武器の種類")]
-    [SerializeField] private WeaponType _weapon = WeaponType.Sword;
-    [SerializeField] private AttackType _attack = AttackType.Normal;
-
     private Transform _transform = default;
     private PlayerAnimation _animation = default;
 
@@ -48,21 +44,6 @@ public class PlayerAttack
         }
     }
 
-    /// <summary> 武器の切り替え </summary>
-    public void SwitchWeapon()
-    {
-        var attack = _weapon;
-
-        if (attack == WeaponType.Sword)
-        {
-            _weapon = WeaponType.Gun;
-        }
-        else if (attack == WeaponType.Gun)
-        {
-            _weapon = WeaponType.Sword;
-        }
-    }
-
     /// <summary> 自分の攻撃が当たった時に呼び出す </summary>
     private void GaugeUp(int value)
     {
@@ -79,18 +60,4 @@ public class PlayerAttack
             Debug.Log("ゲージは最大です");
         }
     }
-}
-
-/// <summary> 武器の種類 </summary>
-public enum WeaponType
-{
-    Sword,
-    Gun,
-}
-
-/// <summary> 攻撃の形式(通常か、スキルを使うか) </summary>
-public enum AttackType
-{
-    Normal,
-    Skill,
 }

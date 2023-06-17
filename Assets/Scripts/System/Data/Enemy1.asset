@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Enemy1
   m_EditorClassIdentifier: 
   SearchAngle: 120
-  SearchDistance: 5
+  SearchDistance: 6
   MaxHP: 100
   MoveSpeed: 5
   AttackValue: 20

@@ -12,7 +12,8 @@ public class GameStart : MonoBehaviour
 
     private void Start()
     {
-        ViewPanel();
+        //ViewPanel();
+        _onGameStart?.Invoke();
     }
 
     public void ViewPanel()
